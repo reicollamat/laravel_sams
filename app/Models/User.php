@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use \Backpack\CRUD\app\Models\Traits\CrudTrait;
 
-class User extends Authenticatable
+class User extends Authenticatable  
 {
     use HasApiTokens, HasFactory, Notifiable;
     use CrudTrait;
@@ -54,4 +54,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function users() {
+        return $this->belongsToMany(User::class, 'users');
+    }
+
+    public function isAdministrator() {
+        return $this->users()->where('is_admin', 1)->exists();
+     }
 }
+
