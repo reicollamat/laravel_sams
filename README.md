@@ -24,7 +24,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ## Prerequisites
 
 // Breeze
-<p align="center"><img src="/art/logo.svg" alt="Logo Laravel Breeze"></p>
+<p align="center"><img src="https://github.com/laravel/breeze/blob/1.x/art/logo.svg" alt="Logo Laravel Breeze"></p>
 
 <p align="center">
     <a href="https://packagist.org/packages/laravel/breeze">
