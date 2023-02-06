@@ -23,7 +23,13 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Prerequisites
 
-// Breeze
+# Installation Requirement
+- Nodejs (Preferably lts version)
+- Composer 
+- Php (8.1^)
+
+
+# Breeze
 <p align="center"><img src="https://github.com/laravel/breeze/blob/1.x/art/logo.svg" alt="Logo Laravel Breeze"></p>
 
 <p align="center">
@@ -56,7 +62,7 @@ Laravel Breeze is powered by Blade and Tailwind. If you're looking for a more ro
 <h3 align="center">Quickly build an admin panel for your Eloquent models, then customize every little detail.</h3>
 
 
-// Backpack
+# Backpack
 <p align="center">
     <br>
     <a href="https://packagist.org/packages/backpack/crud" title="Latest Version on Packagist"><img src="https://img.shields.io/packagist/v/backpack/crud.svg?style=flat-square"></a>
