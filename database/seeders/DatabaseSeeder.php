@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'user',
             'email' => 'user@gmail.com',
             'password' => '$2y$10$.cXui1Zs9auOhefgociwBu14poQHUbM6GawWj60ABoaYSPAevH/eS',
-            'is_admin'=> 1,
+            'is_admin'=> 0,
             'first_name'=>'richmons',
             'last_name'=>'billones',
             'phone_number'=> 321,
