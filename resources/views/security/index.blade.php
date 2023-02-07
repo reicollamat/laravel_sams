@@ -25,8 +25,9 @@
             alert("{{ Session::get('message') }}");
         </script>
     @endif
-    
-    <p class="text-white">hello</p>
+    {{-- get content --}}
+    @yield('security-content')
+
     {{-- js script --}}
     <script src="{{ URL::asset('bootstrap/js/bootstrap.bundle.min.js') }}" async></script>
     <script src="{{ URL::asset('js/main.js') }}" async></script>
