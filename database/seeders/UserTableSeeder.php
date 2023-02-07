@@ -16,6 +16,33 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create();
+        //create 2 default user for development
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => '$2y$10$.cXui1Zs9auOhefgociwBu14poQHUbM6GawWj60ABoaYSPAevH/eS',
+            'is_admin'=> 1,
+            'first_name'=>'ray',
+            'last_name'=>'collamat',
+            'phone_number'=> 123,
+            'organiztion_address'=>'address',
+            'organiztion_name'=>'orgname',
+            'sex'=>'M',
+            'position'=>'president'
+        ]);
+
+        User::factory()->create([
+            'name' => 'user',
+            'email' => 'user@gmail.com',
+            'password' => '$2y$10$.cXui1Zs9auOhefgociwBu14poQHUbM6GawWj60ABoaYSPAevH/eS',
+            'is_admin'=> 0,
+            'first_name'=>'richmond',
+            'last_name'=>'billones',
+            'phone_number'=> 321,
+            'organiztion_address'=>'address',
+            'organiztion_name'=>'orgname',
+            'sex'=>'M',
+            'position'=>'superpresident'
+        ]);
     }
 }
