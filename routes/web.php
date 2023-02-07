@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 // Welcome/Home View
 Route::get('/', function () {
-    return view('security.navbar');
+    return view('security.index');
 });
 // signed in user view
 Route::get('/dashboard', function () {

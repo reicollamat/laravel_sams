@@ -2,7 +2,9 @@
 	box-sizing: border-box;
 	--bs-body-font-family: var(--bs-font-sans-serif);
 }
-
+p{
+	
+}
 body {
 	margin: 0;
 	padding: 0;

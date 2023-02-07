@@ -1,4 +1,3 @@
-@extends('security.index')
 <!-- General navbar -->
 @section('security-content')
 <header>
@@ -16,10 +15,6 @@
 				<ul class="navbar-nav mb-2 ps-4">
 					{{-- <!-- Main page navigator section -->
 					<!-- it is needed, for highlighting current page --> --}}
-					{{-- {% url 'landing' as landing %}
-					{% url 'login' as login %}
-					{% url 'signup' as signup %}
-					{% url 'services' as services %} --}}
 					<li class="nav-item ">
 						<a class="nav-link" aria-current="page" href="{{ '/' }}">Home</a>
 					</li>
