@@ -19,8 +19,9 @@ class Authenticate extends Middleware
         if (!$request->expectsJson()) {
             // logouts the current user signed in
             Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+            // $request->session()->invalidate();
+            // $request->session()->regenerateToken();
+            session()->flash('message', 'Exceeded an inactivity period of over 15 mins. Kindly re-login to continue'); 
             return '/';
         }
     }
