@@ -21,8 +21,10 @@ return new class extends Migration
             $table->integer('validity');
             $table->string('link')->nullable();
             $table->tinyInteger('is_finished');
-            $table->foreign('locations_id')->references('locations_id')->on('locations')->onDelete('cascade');
+            $table->unsignedBigInteger('locations_id');
             $table->timestamps();
+
+            $table->foreign('locations_id')->references('locations_id')->on('locations')->onDelete('cascade');
         });
     }
 
