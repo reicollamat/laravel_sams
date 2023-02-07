@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('designations', function (Blueprint $table) {
+        Schema::create('firearm', function (Blueprint $table) {
             $table->id();
-            $table->integer('designation_type');
-            $table->integer('day_off_day');
-            $table->integer('ddo_id');
-            $table->integer('guard_id');
+            $table->string('type');
+            $table->string('owner_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('designations');
+        Schema::dropIfExists('firearm');
     }
 };
