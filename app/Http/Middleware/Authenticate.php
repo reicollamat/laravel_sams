@@ -17,10 +17,12 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             // logouts the current user signed in
+            // dd($request);
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return route('login');
+            return '/admin/logout';
+            
         }
     }
 }
