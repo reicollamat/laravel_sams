@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserCrudRequest;
+use App\Http\Requests\ContractRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class UserCrudController
+ * Class ContractCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class UserCrudController extends CrudController
+class ContractCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class UserCrudController extends CrudController
      */
     public function setup()
     {
-        $this->crud->setModel("App\Models\User");
-        $this->crud->setRoute("admin/user");
-        $this->crud->setEntityNameStrings('user', 'users');
+        $this->crud->setModel(\App\Models\Contract::class);
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/contract');
+        $this->crud->setEntityNameStrings('contract', 'contracts');
     }
 
     /**
@@ -39,22 +39,16 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->setColumns([
-            'name',
-            'email',
-            'password',
-            'is_admin',
-            'first_name',
-            'last_name',
-            'phone_number',
-            'birth_date',
-            'organiztion_address',
-            'organiztion_name',
-            'sex',
-            'position',
-            'date_joined',
-            'last_login'
-        ]);
+        $this->crud->column('id');
+        $this->crud->column('start_date');
+        $this->crud->column('years');
+        $this->crud->column('months');
+        $this->crud->column('is_finished');
+        $this->crud->column('link');
+        $this->crud->column('users_id');
+        $this->crud->column('issued_date');
+        $this->crud->column('daily_wage');
+        $this->crud->column('status');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -71,22 +65,16 @@ class UserCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        $this->crud->setValidation(UserCrudRequest::class);
-        $this->crud->addField([
-            'name' => 'name',
-            'type' => 'text',
-            'label' => 'User name'
-          ]);
-        $this->crud->addField([
-            'name' => 'email',
-            'type' => 'Email Address',
-            'label' => 'email'
-            ]);
-        $this->crud->addField([
-            'name' => 'password',
-            'type' => 'password',
-            'label' => 'password'
-          ]);
+        $this->crud->field('contracts_id');
+        $this->crud->field('start_date');
+        $this->crud->field('years');
+        $this->crud->field('months');
+        $this->crud->field('is_finished');
+        $this->crud->field('link');
+        $this->crud->field('users_id');
+        $this->crud->field('issued_date');
+        $this->crud->field('daily_wage');
+        $this->crud->field('status');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('locations', function (Blueprint $table) {
-            $table->id('locations_id');
+            $table->id();
             $table->string('locations_name')->nullable();
             $table->string('address')->unique()->nullable();
             $table->tinyInteger('include');

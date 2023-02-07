@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id('posts_id');
+            $table->id('id');
             $table->string('place')->nullable();
             $table->string('remarks')->nullable();
             $table->tinyInteger('is_armed');
             $table->unsignedBigInteger('locations_id');
             $table->timestamps();
 
-            $table->foreign('locations_id')->references('locations_id')->on('locations')->onDelete('cascade');
+            $table->foreign('locations_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 

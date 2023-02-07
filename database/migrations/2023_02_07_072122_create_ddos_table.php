@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ddos', function (Blueprint $table) {
-            $table->id('ddos_id');
+            $table->id();
             $table->dateTime('date_issued')->nullable();
             $table->date('start_date')->nullable();
             $table->string('operations_manager');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('locations_id');
             $table->timestamps();
 
-            $table->foreign('locations_id')->references('locations_id')->on('locations')->onDelete('cascade');
+            $table->foreign('locations_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 

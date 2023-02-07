@@ -39,22 +39,7 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->setColumns([
-            'name',
-            'email',
-            'password',
-            'is_admin',
-            'first_name',
-            'last_name',
-            'phone_number',
-            'birth_date',
-            'organiztion_address',
-            'organiztion_name',
-            'sex',
-            'position',
-            'date_joined',
-            'last_login'
-        ]);
+        $this->crud->setColumns(['name', 'email', 'password']);
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
