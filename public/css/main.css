@@ -8,7 +8,7 @@ p{
 body {
 	margin: 0;
 	padding: 0;
-	background: var(--bs-body-color);
+	background: #111827;
 	min-width: 390px;
 	min-height: 720px;
 	overflow-y: scroll;
@@ -143,7 +143,7 @@ section {
 }
 
 .sec-1 {
-	background-image: url('/static/img/bg1.jpg');
+	background-image: url('/img/bg1.jpg');
 	background-attachment: fixed;
 	background-size: cover;
 	background-repeat: no-repeat;

@@ -5,7 +5,7 @@
 				<!-- gif display -->
 				<div class="col-md-5 text-center d-none d-md-block ">
 					<video muted autoplay width="100%" height="100%" loop >
-						<source autoplay src="{% static 'img/protectionicon.webm' %} ">
+						<source autoplay src="{{ asset('img/protectionicon.webm') }} ">
 					</video>
 					<!-- <img class="img-fluid" src="{% static 'img/protectionicon.gif' %}" alt=""> -->
 				</div>
@@ -39,7 +39,7 @@
 				{{-- <!-- gif display --> --}}
 				<div class="col-md-5 text-center d-none d-md-block">
 					<video muted autoplay width="100%" height="100%" loop>
-						<source autoplay src="{% static 'img/contract.webm' %} ">
+						<source autoplay src="{{ asset('img/contract.webm') }}">
 					</video>
 
 				</div>
