@@ -14,9 +14,9 @@ class ContractController extends Controller
      */
     public function index()
     {
-        $tabcontractrequests = Contract::paginate();
+        $tabactivecontracts = Contract::paginate();
 
-        return view('tabcontractrequest\index', compact('tabcontractrequests'));
+        return view('tabactivecontract\index', compact('tabactivecontracts'));
     }
 
     /**

@@ -5,8 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    <a class="navbar-brand" href="{{ '/' }}">
+                        <img src="{{ URL::asset('img/icon.svg') }}" alt="logo" width="40" height="40" class="d-inline-block align-top" />
+                        SAMS
                     </a>
                 </div>
 
@@ -15,8 +16,17 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tabcontractrequests.index')" :active="request()->routeIs('tabcontractrequests.index')">
-                        {{ __('Contract Requests') }}
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs()">
+                        {{ __('Job Requests') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('tabactivecontracts.index')" :active="request()->routeIs('tabactivecontracts.index')">
+                        {{ __('Active Contracts') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs()">
+                        {{ __('Add Security Guards') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs()">
+                        {{ __('Issue DDO') }}
                     </x-nav-link>
                 </div>
             </div>
