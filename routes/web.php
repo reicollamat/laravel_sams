@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\GuardController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('security.index');
+    // return dd(auth()->user()->position);
 });
 
 // for testing

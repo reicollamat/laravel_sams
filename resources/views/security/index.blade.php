@@ -20,11 +20,11 @@
 </head>
 
 <body class="antialiased">
-    @if(Session::has('message'))
+    {{-- @if(Session::has('message'))
     <script>
         alert("{{ Session::get('message') }}");
     </script>
-    @endif
+    @endif --}}
     <!-- General navbar -->
     <header>
         <!-- Navigation bar -->
@@ -44,20 +44,31 @@
                     <ul class="navbar-nav mb-0 ps-4">
                         <!-- Main page navigator section -->
                         @if (Route::has('login'))
-                            @auth
-                            <li class="nav-item ">
-                                <a class="nav-link fs-6" aria-current="page" href="{{ url('/dashboard') }}">Dashboard</a>
-                            </li>
+                        @auth
+                        @if (auth()->user()->is_admin)
+                        <li class="nav-item ">
+                            <a class="nav-link fs-6" aria-current="page"
+                                href="{{ url('/admindashboard') }}">Dashboard</a>
+                        </li>
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link fs-6" href="{{ route('login') }}">Login</a>
-                            </li>
-                            @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link fs-6" href="{{ route('register') }}">Register</a>
-                            </li>
-                            @endif
-                            @endauth
+
+                        <li class="nav-item ">
+
+                            <a class="nav-link fs-6" aria-current="page"
+                                href="{{ url('/userdashboard') }}">Dashboard</a>
+                        </li>
+
+                        @endif
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link fs-6" href="{{ route('login') }}">Login</a>
+                        </li>
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link fs-6" href="{{ route('register') }}">Register</a>
+                        </li>
+                        @endif
+                        @endauth
                         @endif
                     </ul>
                 </div>

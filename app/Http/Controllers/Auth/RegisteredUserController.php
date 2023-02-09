@@ -37,8 +37,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()->min(2)], //for dev purpose do not change min(2)
             // 'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'organiztion_name' => ['required', 'string', 'max:255'],
-            'organiztion_address' => ['required', 'string', 'max:255'],
+            'organization_name' => ['required', 'string', 'max:255'],
+            'organization_address' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'date'],
             'phone_number' => ['required', 'string', 'max:11'],
             'sex' => ['required', 'string', Rule::in(['M','F']),'max:1'],
@@ -56,8 +56,8 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone_number,
             'sex' => $request->sex,
             'position' => $request->position,
-            'organiztion_name' => $request->organiztion_name,
-            'organiztion_address' => $request->organiztion_address,
+            'organization_name' => $request->organization_name,
+            'organization_address' => $request->organization_address,
             'birth_date' => $request->birth_date,
         ]);
 

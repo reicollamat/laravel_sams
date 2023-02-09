@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('phone_number')->unique()->nullable();
             $table->date('birth_date')->nullable();
-            $table->string('organiztion_address')->nullable();
-            $table->string('organiztion_name')->nullable();
+            $table->string('organization_address')->nullable();
+            $table->string('organization_name')->nullable();
             $table->string('sex',1)->nullable()->check;
             $table->string('position')->nullable();
             $table->rememberToken();
