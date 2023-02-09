@@ -19,7 +19,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs()">
                         {{ __('Job Requests') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tabactivecontracts.index')" :active="request()->routeIs('tabactivecontracts.index')">
+                    <x-nav-link :href="route('activecontracts.index')" :active="request()->routeIs('activecontracts.index')">
                         {{ __('Active Contracts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs()">

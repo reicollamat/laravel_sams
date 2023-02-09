@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\GuardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +43,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('tabactivecontracts', ContractController::class);
+    Route::resource('activecontracts', ContractController::class);
 });
 
 require __DIR__.'/auth.php';

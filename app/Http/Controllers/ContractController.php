@@ -10,9 +10,9 @@ class ContractController extends Controller
 
     public function index()
     {
-        $tabactivecontracts = Contract::paginate();
+        $activecontracts = Contract::paginate();
 
-        return view('tabactivecontract.index', compact('tabactivecontracts'));
+        return view('tab.activecontract.index', compact('activecontracts'));
     }
 
 }
