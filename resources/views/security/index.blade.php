@@ -15,7 +15,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::asset('bootstrap/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}" type="text/css">
+    @vite(['public/css/main.css','public/js/main.js'])
     <link rel="stylesheet" href="{{ URL::asset('fontawesome-6-2-1/all.min.css') }}" type="text/css">
 </head>
 
@@ -40,55 +40,25 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-evenly" id="navbarNavDropdown">
-                    <ul class="navbar-nav mb-2 ps-4">
-                        {{--
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="navbar-nav mb-0 ps-4">
                         <!-- Main page navigator section -->
-                        <!-- it is needed, for highlighting current page --> --}}
-                        <li class="nav-item ">
-                            <a class="nav-link" aria-current="page" href="{{ '/' }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-
-                        <!-- Account navigator section -->
-
-                        <li class="nav-item dropdown right-edge ">
-                            @if (Route::has('login'))
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false" aria-current="page">
-                                <p>Account</p>
-                            </a>
-
-                            <ul class="dropdown-menu text-center"
-                                style="background-color:rgba(0, 0, 0, 0.200)!important">
-                                @auth
-                                <li><a class="dropdown-item" href="{{ url('/dashboard') }}">Dashboard</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                @else
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                @if (Route::has('register'))
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('register') }}">Register</a>
-                                </li>
-                                @endif
-                                @endauth
-                            </ul>
-                        </li>
+                        @if (Route::has('login'))
+                            @auth
+                            <li class="nav-item ">
+                                <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Dashboard</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+                            @endif
+                            @endauth
                         @endif
-                    </ul>
                 </div>
             </div>
         </nav>
@@ -100,9 +70,8 @@
                 <!-- gif display -->
                 <div class="col-md-5 text-center d-none d-md-block ">
                     <video muted autoplay width="100%" height="100%" loop>
-                        <source autoplay src="{{ asset('img/protectionicon.webm') }} ">
+                        <source autoplay src="../../img/protectionicon.webm">
                     </video>
-                    <!-- <img class="img-fluid" src="{% static 'img/protectionicon.gif' %}" alt=""> -->
                 </div>
                 <!-- text display -->
                 <div class="col-md-7 text-center text-md-start">
@@ -268,7 +237,6 @@
 
     {{-- js script --}}
     <script src="{{ URL::asset('bootstrap/js/bootstrap.bundle.min.js') }}" async></script>
-    <script src="{{ URL::asset('js/main.js') }}" async></script>
 
 </body>
 
