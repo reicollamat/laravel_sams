@@ -55,14 +55,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean'
     ];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'users');
-    }
-
-    public function isAdministrator()
-    {
-        return $this->users()->where('is_admin', 1)->exists();
-    }
 }
