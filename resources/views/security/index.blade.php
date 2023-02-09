@@ -146,7 +146,7 @@
     <!-- Footer -->
     <footer class="border-top border-white">
         <!-- Container-->
-        <div class="container-lg">
+        <div class="container-expand-lg">
             <!-- Section: Social media -->
             <section class="no-section d-flex justify-content-between p-4 bg-dark">
                 <!-- Left -->
