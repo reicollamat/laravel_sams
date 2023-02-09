@@ -21,8 +21,8 @@ class Authenticate extends Middleware
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            session()->flash('message', 'You are not an Admin User!'); 
-            return '/';
+            // session()->flash('message', 'You are not an Admin User!'); 
+            return abort(403);
         }
     }
 }
