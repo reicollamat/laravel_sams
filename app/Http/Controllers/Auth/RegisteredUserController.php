@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -40,7 +41,7 @@ class RegisteredUserController extends Controller
             'organiztion_address' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'date'],
             'phone_number' => ['required', 'string', 'max:11'],
-            'sex' => ['required', 'string', 'max:1'],
+            'sex' => ['required', 'string', Rule::in(['M','F']),'max:1'],
             'position' => ['required', 'string', 'max:255'],
             
         

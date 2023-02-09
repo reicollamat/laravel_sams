@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -20,17 +21,18 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_admin')->default(false);
-            $table->string('first_name')->nullable();
+            // $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone_number')->unique()->nullable();
             $table->date('birth_date')->nullable();
             $table->string('organiztion_address')->nullable();
             $table->string('organiztion_name')->nullable();
-            $table->string('sex',1)->nullable();
+            $table->string('sex',1)->nullable()->check;
             $table->string('position')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
+        // DB::statement('ALT')
     }
 
     /**
