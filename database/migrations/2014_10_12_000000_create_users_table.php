@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_admin')->default(false);
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->integer('phone_number')->unique()->nullable();
+            $table->string('phone_number')->unique()->nullable();
             $table->date('birth_date')->nullable();
             $table->string('organiztion_address')->nullable();
             $table->string('organiztion_name')->nullable();

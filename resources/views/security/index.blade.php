@@ -46,19 +46,20 @@
                         @if (Route::has('login'))
                             @auth
                             <li class="nav-item ">
-                                <a class="nav-link" aria-current="page" href="{{ url('/dashboard') }}">Dashboard</a>
+                                <a class="nav-link fs-6" aria-current="page" href="{{ url('/dashboard') }}">Dashboard</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                <a class="nav-link fs-6" href="{{ route('login') }}">Login</a>
                             </li>
                             @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                <a class="nav-link fs-6" href="{{ route('register') }}">Register</a>
                             </li>
                             @endif
                             @endauth
                         @endif
+                    </ul>
                 </div>
             </div>
         </nav>
