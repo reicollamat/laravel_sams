@@ -22,11 +22,18 @@
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                autocomplete="username" />
+                autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- birth_date -->
+        <div class="mt-4">
+            <x-input-label for="birth_date" :value="__('Birth Date')" />
+            <x-text-input id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" :value="old('birth_date')" required
+                autocomplete="name" />
+            <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+        </div>
+
         <div class="mt-4 ">
             <div class="flex flex-wrap">
                 <div class="w-full md:w-1/3 px-1 md:mb-0">
@@ -34,8 +41,8 @@
                     <x-input-label for="phone_number" :value="__('Phone Number')" />
                     <input
                         class="appearance-none block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 "
-                        id="phone_number" type="text" name="phone_number" placeholder="09*********" :value="old('phone_number')" required
-                        autocomplete="username"/>
+                        id="phone_number" type="text" name="phone_number" placeholder="09*********"
+                        :value="old('phone_number')" required autocomplete="username" />
                     <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                 </div>
                 <div class="w-full md:w-1/3 px-1 md:mb-0">
@@ -45,8 +52,7 @@
                     <div class="relative">
                         <select
                             class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
-                            id="sex" name="sex" :value="old('phone_number')" required
-                            autocomplete="username">
+                            id="sex" name="sex" :value="old('phone_number')" required autocomplete="username">
                             <option>M</option>
                             <option>F</option>
                         </select>
@@ -54,14 +60,15 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/3 px-1 md:mb-0">
-                    <label class="block uppercase tracking-wide font-medium text-sm text-gray-700 dark:text-gray-300" for="position">
+                    <label class="block uppercase tracking-wide font-medium text-sm text-gray-700 dark:text-gray-300"
+                        for="position">
                         Position
                     </label>
                     <input
                         class="appearance-none block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 "
-                        id="position-zip" type="text" name="position" placeholder="HR" :value="old('phone_number')" required
-                        autocomplete="username"/>
-                        <x-input-error :messages="$errors->get('position')" class="mt-2" />
+                        id="position-zip" type="text" name="position" placeholder="HR" :value="old('phone_number')"
+                        required autocomplete="username" />
+                    <x-input-error :messages="$errors->get('position')" class="mt-2" />
                 </div>
             </div>
         </div>

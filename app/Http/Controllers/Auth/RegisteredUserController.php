@@ -38,9 +38,11 @@ class RegisteredUserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'organiztion_name' => ['required', 'string', 'max:255'],
             'organiztion_address' => ['required', 'string', 'max:255'],
-            // 'phone_number' => ['required', 'string', 'max:11'],
-            // 'sex' => ['required', 'string', 'max:1'],
-            // 'position' => ['required', 'string', 'max:255'],
+            'birth_date' => ['required', 'date'],
+            'phone_number' => ['required', 'string', 'max:11'],
+            'sex' => ['required', 'string', 'max:1'],
+            'position' => ['required', 'string', 'max:255'],
+            
         
         ]);
 
@@ -50,11 +52,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             // 'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            // 'phone_number' => $request->phone_number,
-            // 'sex' => $request->sex,
-            // 'position' => $request->position,
+            'phone_number' => $request->phone_number,
+            'sex' => $request->sex,
+            'position' => $request->position,
             'organiztion_name' => $request->organiztion_name,
             'organiztion_address' => $request->organiztion_address,
+            'birth_date' => $request->birth_date,
         ]);
 
         event(new Registered($user));
