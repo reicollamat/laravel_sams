@@ -3,7 +3,7 @@
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             {{-- temporary dashboard welcome & timeline --}}
             <h1 class="text-lg font-semibold text-gray-900 dark:text-white">Welcome {{ Auth::user()->name }}!</h1>
-            <h2>You are Admin Staff!</h2>
+            <h2>You are Admin Staff!!</h2>
             <hr class="my-2 text-gray-600">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ad vel fugiat a amet, id, dolores saepe assumenda tempore illum accusantium rem ullam eos totam temporibus quia quis consequatur itaque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi fuga ad qui quia quam eaque nulla sed cum labore numquam, voluptas natus? Commodi adipisci dolorum ducimus quas voluptate, earum nam!</p>
             <p>Here is a sample timeline template for the project</p>
