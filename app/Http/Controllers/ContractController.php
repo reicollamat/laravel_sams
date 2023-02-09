@@ -12,7 +12,7 @@ class ContractController extends Controller
     {
         $activecontracts = Contract::paginate();
 
-        return view('tab.activecontract.index', compact('activecontracts'));
+        return view('admintab.activecontract.index', compact('activecontracts'));
     }
 
 }

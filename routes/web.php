@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\GuardController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +21,9 @@ Route::get('/', function () {
     return view('security.index');
 });
 
+// for testing
+Route::get('/sampleguard',[GuardController::class, 'index']);
+
 //old dashboard routing
 /*
 Route::get('/dashboard', function () {
@@ -35,10 +39,30 @@ Route::middleware('auth')->group(function () {
 
 // new
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
 
+    // separates STAFF to USER dashboard
+    // Route::get('/dashboard', 'dashboard')->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+
+    Route::get("/redirectAuthenticatedUsers", [RedirectAuthenticatedUsersController::class, "home"]);
+
+    Route::group(['middleware' => 'checkIs_admin:1'], function() {
+        // Route::get('/adminDashboard', 'admindashboard')->name('admindashboard');
+        Route::get('/admindashboard', function () {
+            return view('admindashboard');
+        })->name('admindashboard');
+    });
+    Route::group(['middleware' => 'checkIs_admin:0'], function() {
+        // Route::get('/userDashboard', 'userdashboard')->name('userdashboard');
+        Route::get('/userdashboard', function () {
+            return view('userdashboard');
+        })->name('userdashboard');
+    });
+
+
+    // profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
