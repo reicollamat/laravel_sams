@@ -56,6 +56,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admindashboard', function () {
             return view('admindashboard');
         })->name('admindashboard');
+        //add security guard
+        Route::get("/securityguard",
+            [GuardController::class, 'index']
+        )->name('addsecurityguard');
     });
     Route::group(['middleware' => 'checkIs_admin:0'], function () {
         // Route::get('/userDashboard', 'userdashboard')->name('userdashboard');

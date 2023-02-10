@@ -12,9 +12,14 @@ class GuardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request, Guard $guard)
+    {   
+        // dd($request->user()->id);
+        // dd($guard->all());
+        return view('adminaddguard', [
+            'guards' => $guard->all(),
+            
+        ]);
     }
 
     /**
