@@ -24,6 +24,5 @@ class LoginController extends Controller
                 return $this->redirectTo;
         }
     }
-         
         // return $next($request);
 }
