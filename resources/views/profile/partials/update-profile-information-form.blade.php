@@ -84,10 +84,10 @@
                     <div class="relative">
                         <select
                             class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
-                            id="sex" name="sex" :value="" required autocomplete="username">
-                            <option value="Select">Select</option>
-                            <option value="M" selected='{{  $user->sex ==='M' ? '' : 'selected' }}'>M</option>
-                            <option value="F" selected='{{  $user->sex ==='F' ? '' : 'selected' }}'>F</option>
+                            id="sex" name="sex" :value="Select" placeholder="Select" required autocomplete="username">
+                            <option value="" disabled selected>Select Option</option>
+                            <option value="M" {{ ($user->sex === 'M') ? 'selected' : '' }} >M</option>
+                            <option value="F" {{ ($user->sex === 'F') ? 'selected' : '' }} >F</option>
                         </select>
                         <x-input-error :messages="$errors->get('sex')" class="mt-2" />
                     </div>
