@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 // for testing
-Route::get('/sampleguard',[GuardController::class, 'index']);
+Route::get('/sampleguard', [GuardController::class, 'index']);
 
 //old dashboard routing
 /*
@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 */
 
 // new
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
 
     // separates STAFF to USER dashboard
     // Route::get('/dashboard', 'dashboard')->name('dashboard');
@@ -51,23 +51,23 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get("/redirectAuthenticatedUsers", [RedirectAuthenticatedUsersController::class, "home"]);
 
-    Route::group(['middleware' => 'checkIs_admin:1'], function() {
+    Route::group(['middleware' => 'checkIs_admin:1'], function () {
         // Route::get('/adminDashboard', 'admindashboard')->name('admindashboard');
         Route::get('/admindashboard', function () {
             return view('admindashboard');
         })->name('admindashboard');
     });
-    Route::group(['middleware' => 'checkIs_admin:0'], function() {
+    Route::group(['middleware' => 'checkIs_admin:0'], function () {
         // Route::get('/userDashboard', 'userdashboard')->name('userdashboard');
         Route::get('/userdashboard', function () {
             return view('userdashboard');
         })->name('userdashboard');
-        Route::get('/cr8jobrequest/index', [JobRequestsController::class, 'index'])
-                ->name('cr8jobrequest.index');
-        Route::get('/cr8jobrequest/create', [JobRequestsController::class, 'create'])
-                ->name('cr8jobrequest.create');
-        Route::post('/cr8jobrequest/create', [JobRequestsController::class, 'store'])
-                ->name('cr8jobrequest.post');
+        Route::get('/jobrequest/index', [JobRequestsController::class, 'index'])
+            ->name('jobrequest.index');
+        Route::get('/jobrequest/create', [JobRequestsController::class, 'create'])
+            ->name('jobrequest.create');
+        Route::post('/jobrequest/create', [JobRequestsController::class, 'store'])
+            ->name('jobrequest.post');
     });
 
 
@@ -79,4 +79,4 @@ Route::group(['middleware' => 'auth'], function() {
     // Route::resource('activecontracts', ContractController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

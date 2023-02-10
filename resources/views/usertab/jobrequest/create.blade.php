@@ -14,7 +14,7 @@
             <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique doloribus expedita hic nam dolorem, cum perspiciatis consectetur magnam quia inventore sequi.</p>
         </caption>
         <hr class="pt-10">
-        <form method="POST" action="{{ route('cr8jobrequest.post') }}">
+        <form method="POST" action="{{ route('jobrequest.post') }}">
             @csrf
             <div class="relative z-0 w-full mb-6 group">
                 <input type="text" name="locations_name" id="locations_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
