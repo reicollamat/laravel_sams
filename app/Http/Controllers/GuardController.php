@@ -46,15 +46,36 @@ class GuardController extends Controller
     {
         
         $request->validate([
-            'locations_name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255', 'unique:'.Location::class],
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'birthdate'=> ['required', 'string', 'max:255'],
+            'sex'=> ['required', 'string', 'max:1'],
+            'address'=> ['required', 'string', 'max:191'],
+            'nbi_clearnace_id'=> ['required', 'string', 'max:21'],
+            'phone_number'=> ['required', 'string', 'max:11'],
+            'educational_attainment'=> ['required', 'string', 'max:255'],
+            'lesp_id' => ['required', 'string', 'max:255'],
+            'sss' => ['required', 'string', 'max:14'],
+            'agency_affiliation_date' => ['required', 'string', 'max:255'],
+            'nbi_issued_date' => ['required', 'string', 'max:255'],
         
         ]);
 
         Guard::create([
-            'locations_name' => $request->locations_name,
-            'address' => $request->address,
-            'users_id' => 1 // for testing purposes
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'birthdate'=> $request->birthdate,
+            'sex'=> $request->sex,
+            'address'=> $request->address,
+            'nbi_clearnace_id'=> $request->nbi_clearnace_id,
+            'phone_number'=> $request->phone_number,
+            'educational_attainment'=> $request->educational_attainment,
+            'lesp_id' => $request->lesp_id,
+            'sss' => $request->sss,
+            'agency_affiliation_date' => $request->agency_affiliation_date,
+            'nbi_issued_date' => $request->nbi_issued_date,
         ]);
 
         $status = 'Guards Added!';
