@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id('id');
+            $table->id();
             $table->string('place')->nullable();
             $table->string('remarks')->nullable();
             $table->tinyInteger('is_armed');

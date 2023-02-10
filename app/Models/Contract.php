@@ -12,7 +12,6 @@ class Contract extends Model
     use CrudTrait;
 
     protected $fillable = [
-        'contracts_id',
         'start_date',
         'years',
         'months',
