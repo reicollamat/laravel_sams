@@ -3,20 +3,25 @@
         @csrf
 
         <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('First Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
 
-        <!-- last_name -->
-        <div class="mt-4">
-            <x-input-label for="last_name" :value="__('Last Name')" />
-            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
-                :value="old('last_name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+        <div class="columns-1 md:columns-2">
+            <div>
+                <x-input-label for="name" :value="__('First Name')" />
+                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                    autofocus autocomplete="name" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
+    
+            <!-- last_name -->
+            <div class="mt-4">
+                <x-input-label for="last_name" :value="__('Last Name')" />
+                <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"
+                    :value="old('last_name')" required autofocus autocomplete="name" />
+                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+            </div>
+
         </div>
+        
 
         <!-- Email Address -->
         <div class="mt-4">
@@ -33,10 +38,9 @@
                 autocomplete="name" />
             <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
         </div>
-
         <div class="mt-4 ">
             <div class="flex flex-wrap">
-                <div class="w-full md:w-1/3 px-1 md:mb-0">
+                <div class="w-full md:w-1/3 md:mb-0">
                     <!-- phone_num -->
                     <x-input-label for="phone_number" :value="__('Phone Number')" />
                     <input
@@ -53,14 +57,14 @@
                         <select
                             class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
                             id="sex" name="sex" :value="old('phone_number')" required autocomplete="username">
-                            <option value="" disabled selected>Select Option</option>
+                            <option value="" disabled selected>Select</option>
                             <option value="M">M</option>
                             <option value="F">F</option>
                         </select>
                         <x-input-error :messages="$errors->get('sex')" class="mt-2" />
                     </div>
                 </div>
-                <div class="w-full md:w-1/3 px-1 md:mb-0">
+                <div class="w-full md:w-1/3 md:mb-0">
                     <label class="block uppercase tracking-wide font-medium text-sm text-gray-700 dark:text-gray-300"
                         for="position">
                         Position

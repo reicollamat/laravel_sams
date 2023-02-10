@@ -2,9 +2,7 @@
 	box-sizing: border-box;
 	--bs-body-font-family: var(--bs-font-sans-serif);
 }
-p{
-	
-}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -143,7 +141,7 @@ section {
 }
 
 .sec-1 {
-	background-image: url('/img/bg1.jpg');
+	background-image: '../../public/img/bg.jpg';
 	background-attachment: fixed;
 	background-size: cover;
 	background-repeat: no-repeat;
