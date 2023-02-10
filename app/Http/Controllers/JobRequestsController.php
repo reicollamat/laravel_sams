@@ -9,9 +9,14 @@ use Illuminate\View\View;
 
 class JobRequestsController extends Controller
 {
-    public function create(): View
+    public function index(): View
     {
         return view('usertab.cr8jobrequest.index');
+    }
+
+    public function create(): View
+    {
+        return view('usertab.cr8jobrequest.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -30,7 +35,7 @@ class JobRequestsController extends Controller
 
         $status = 'Location Added!';
 
-        return redirect('cr8jobrequest')->with('status',$status);
+        return redirect('/cr8jobrequest/create')->with('status',$status);
 
         // event(new Registered($user));
 
