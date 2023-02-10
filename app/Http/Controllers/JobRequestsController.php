@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -14,12 +15,13 @@ class JobRequestsController extends Controller
         return view('usertab.jobrequest.index');
     }
 
-    public function create(): View
+    // location page
+    public function location(): View
     {
         return view('usertab.jobrequest.location');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function storelocation(Request $request): RedirectResponse
     {
         $request->validate([
             'locations_name' => ['required', 'string', 'max:255'],
@@ -35,13 +37,33 @@ class JobRequestsController extends Controller
 
         $status = 'Location Added!';
 
+        return redirect('/jobrequest/post')->with('status',$status);
+    }
+
+
+    // post page
+    public function post(): View
+    {
+        return view('usertab.jobrequest.post');
+    }
+
+    public function storepost(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'place' => ['required', 'string', 'max:255'],
+            // 'is_armed' => ['required', 'tinyInteger'],
+        
+        ]);
+
+        Post::create([
+            'place' => $request->place,
+            // 'is_armed' => $request->is_armed,
+            'locations_id' => 1 // for testing purposes
+        ]);
+
+        $status = 'Post Added!';
+
         return redirect('/jobrequest/location')->with('status',$status);
-
-        // event(new Registered($user));
-
-        // Auth::login($user);
-
-        // return redirect(RouteServiceProvider::HOME);
     }
     
 }

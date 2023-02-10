@@ -57,7 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
             return view('admindashboard');
         })->name('admindashboard');
         //add security guard
-        Route::get("/securityguard",
+        Route::get(
+            "/securityguard",
             [GuardController::class, 'index']
         )->name('addsecurityguard');
     });
@@ -66,12 +67,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/userdashboard', function () {
             return view('userdashboard');
         })->name('userdashboard');
+
+        // routes for "Create Job Request" tab
         Route::get('/jobrequest/index', [JobRequestsController::class, 'index'])
             ->name('jobrequest.index');
-        Route::get('/jobrequest/location', [JobRequestsController::class, 'create'])
+        // Location
+        Route::get('/jobrequest/location', [JobRequestsController::class, 'location'])
             ->name('jobrequest.location');
-        Route::post('/jobrequest/location', [JobRequestsController::class, 'store'])
+        Route::post('/jobrequest/storelocation', [JobRequestsController::class, 'storelocation'])
+            ->name('jobrequest.storelocation');
+            
+        // Post
+        Route::get('/jobrequest/post', [JobRequestsController::class, 'post'])
             ->name('jobrequest.post');
+        Route::post('/jobrequest/storepost', [JobRequestsController::class, 'storepost'])
+            ->name('jobrequest.storepost');
     });
 
 

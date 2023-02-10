@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('place')->nullable();
             $table->string('remarks')->nullable();
-            $table->tinyInteger('is_armed');
+            $table->tinyInteger('is_armed')->default(0);
             $table->unsignedBigInteger('locations_id');
             $table->timestamps();
 
