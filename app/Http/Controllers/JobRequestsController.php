@@ -16,7 +16,7 @@ class JobRequestsController extends Controller
 
     public function create(): View
     {
-        return view('usertab.jobrequest.create');
+        return view('usertab.jobrequest.location');
     }
 
     public function store(Request $request): RedirectResponse
@@ -35,7 +35,7 @@ class JobRequestsController extends Controller
 
         $status = 'Location Added!';
 
-        return redirect('/jobrequest/create')->with('status',$status);
+        return redirect('/jobrequest/location')->with('status',$status);
 
         // event(new Registered($user));
 

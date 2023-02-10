@@ -64,9 +64,9 @@ Route::group(['middleware' => 'auth'], function () {
         })->name('userdashboard');
         Route::get('/jobrequest/index', [JobRequestsController::class, 'index'])
             ->name('jobrequest.index');
-        Route::get('/jobrequest/create', [JobRequestsController::class, 'create'])
-            ->name('jobrequest.create');
-        Route::post('/jobrequest/create', [JobRequestsController::class, 'store'])
+        Route::get('/jobrequest/location', [JobRequestsController::class, 'create'])
+            ->name('jobrequest.location');
+        Route::post('/jobrequest/location', [JobRequestsController::class, 'store'])
             ->name('jobrequest.post');
     });
 
