@@ -1,4 +1,4 @@
-@extends('layouts.userapp')
+@extends('layouts.masterapp')
 @section('content')
     
     <div class="p-4 sm:ml-64">
