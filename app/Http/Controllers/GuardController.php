@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class GuardController extends Controller
 {
@@ -41,9 +42,24 @@ class GuardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        
+        $request->validate([
+            'locations_name' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255', 'unique:'.Location::class],
+        
+        ]);
+
+        Guard::create([
+            'locations_name' => $request->locations_name,
+            'address' => $request->address,
+            'users_id' => 1 // for testing purposes
+        ]);
+
+        $status = 'Guards Added!';
+
+        return redirect('/securityguard/add')->with('status',$status);
     }
 
     /**

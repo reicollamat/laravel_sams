@@ -64,6 +64,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get("/securityguard/add",
             [GuardController::class, 'create']
         )->name('addsecurityguard');
+        //save created guard
+        Route::post("/securityguard/add/",
+        [GuardController::class, 'store']
+        )->name('addsecurityguard');
         
     });
     Route::group(['middleware' => 'checkIs_admin:0'], function () {
