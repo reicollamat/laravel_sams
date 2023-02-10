@@ -16,19 +16,19 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Contract ID
+                                Location Name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Number of Locations
+                                Location Address
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Number of Guards
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Status
+                                Edit Post
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                <span class="sr-only">View</span>
+                                <span class="sr-only">Remove</span>
                             </th>
                         </tr>
                     </thead>
@@ -105,7 +105,7 @@
         
             <hr class="pt-8">
 
-            <form method="POST" action="{{ route('jobrequest.post') }}">
+            <form method="POST" action="{{ route('jobrequest.storelocation') }}">
                 @csrf
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name="locations_name" id="locations_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
