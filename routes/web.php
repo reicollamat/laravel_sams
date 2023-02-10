@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\GuardController;
+use App\Http\Controllers\JobRequestsController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/userdashboard', function () {
             return view('userdashboard');
         })->name('userdashboard');
+        Route::get('cr8jobrequest', [JobRequestsController::class, 'create'])
+                ->name('cr8jobrequest');
+        Route::post('cr8jobrequest', [JobRequestsController::class, 'store']);
     });
 
 
@@ -69,7 +73,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('activecontracts', ContractController::class);
+    // Route::resource('activecontracts', ContractController::class);
 });
 
 require __DIR__.'/auth.php';

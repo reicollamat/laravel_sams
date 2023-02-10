@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('locations_name')->nullable();
             $table->string('address')->unique()->nullable();
-            $table->tinyInteger('include');
+            $table->tinyInteger('include')->default(0);
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
 
