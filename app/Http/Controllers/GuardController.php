@@ -16,7 +16,7 @@ class GuardController extends Controller
     {   
         // dd($request->user()->id);
         // dd($guard->all());
-        return view('adminaddguard', [
+        return view('admintab/addsecurity/index', [
             'guards' => $guard->all(),
             
         ]);
@@ -27,9 +27,12 @@ class GuardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Guard $guard)
     {
-        //
+        return view('admintab/addsecurity/addguard', [
+            'guards' => $guard->all(),
+            
+        ]);
     }
 
     /**
