@@ -141,7 +141,7 @@ section {
 }
 
 .sec-1 {
-	background-image: '../../public/img/bg.jpg';
+	background-image: url('../img/bg1.jpg');
 	background-attachment: fixed;
 	background-size: cover;
 	background-repeat: no-repeat;
