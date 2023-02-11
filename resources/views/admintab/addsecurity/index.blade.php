@@ -2,7 +2,7 @@
 @section('content')
     <div class="p-4 sm:ml-64 mt-14">
 
-        <x-custom-button href="/securityguard/add" >
+        <x-custom-button href="/securityguard/add">
             {{ __('Add Security Guard') }}
             <x-slot name="heading" class="">
                 {{ __('This is the heading') }}
@@ -33,7 +33,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach ($guards as $guard)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row"

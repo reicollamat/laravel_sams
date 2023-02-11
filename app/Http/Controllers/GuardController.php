@@ -31,7 +31,7 @@ class GuardController extends Controller
     public function create(Guard $guard)
     {
         return view('admintab/addsecurity/addguard', [
-            'guards' => $guard->all(),
+            'guards' => $guard::all(),
 
         ]);
     }
@@ -39,7 +39,7 @@ class GuardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request): RedirectResponse
@@ -49,12 +49,12 @@ class GuardController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'birthdate'=> ['required', 'string', 'max:255'],
-            'sex'=> ['required', 'string', 'max:1'],
-            'address'=> ['required', 'string', 'max:191'],
-            'nbi_clearance_id'=> ['required', 'string', 'max:21'],
-            'phone_number'=> ['required', 'string', 'max:11'],
-            'educational_attainment'=> ['required', 'string', 'max:255'],
+            'birthdate' => ['required', 'string', 'max:255'],
+            'sex' => ['required', 'string', 'max:1'],
+            'address' => ['required', 'string', 'max:191'],
+            'nbi_clearance_id' => ['required', 'string', 'max:21'],
+            'phone_number' => ['required', 'string', 'max:11'],
+            'educational_attainment' => ['required', 'string', 'max:255'],
             'lesp_id' => ['required', 'string', 'max:255'],
             'sss' => ['required', 'string', 'max:14'],
             'agency_affiliation_date' => ['required', 'string', 'max:255'],
@@ -66,12 +66,12 @@ class GuardController extends Controller
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
-            'birthdate'=> $request->birthdate,
-            'sex'=> $request->sex,
-            'address'=> $request->address,
-            'nbi_clearance_id'=> $request->nbi_clearance_id,
-            'phone_number'=> $request->phone_number,
-            'educational_attainment'=> $request->educational_attainment,
+            'birthdate' => $request->birthdate,
+            'sex' => $request->sex,
+            'address' => $request->address,
+            'nbi_clearance_id' => $request->nbi_clearance_id,
+            'phone_number' => $request->phone_number,
+            'educational_attainment' => $request->educational_attainment,
             'lesp_id' => $request->lesp_id,
             'sss' => $request->sss,
             'agency_affiliation_date' => $request->agency_affiliation_date,
@@ -80,20 +80,23 @@ class GuardController extends Controller
 
         $status = 'Guards Added!';
 
-        return redirect('/securityguard/add')->with('status',$status);
+        return redirect('/securityguard/add')->with('status', $status);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Guard  $guard
+     * @param \App\Models\Guard $guard
      * @return \Illuminate\Http\Response
      */
     public function show(Guard $guard, $guard_id)
     {
-        //
+        $guards = Guard::find($guard_id);
+//        dd($guards->birthdate);
+
         return view('admintab/addsecurity/viewguard', [
-            'guards' => $guard->find($guard_id)->get(),
+
+            'guards' => compact('guards'),
 
         ]);
     }
@@ -101,7 +104,7 @@ class GuardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Guard  $guard
+     * @param \App\Models\Guard $guard
      * @return \Illuminate\Http\Response
      */
     public function edit(Guard $guard, $guard_id)
@@ -112,8 +115,8 @@ class GuardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Guard  $guard
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Guard $guard
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Guard $guard)
@@ -124,7 +127,7 @@ class GuardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Guard  $guard
+     * @param \App\Models\Guard $guard
      * @return \Illuminate\Http\Response
      */
     public function destroy(Guard $guard)
