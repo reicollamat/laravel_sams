@@ -88,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Post
         Route::get('/jobrequest/post', [JobRequestsController::class, 'post'])
             ->name('jobrequest.post');
-        Route::post('/jobrequest/storepost', [JobRequestsController::class, 'storepostt'])
+        Route::post('/jobrequest/storepost', [JobRequestsController::class, 'storepost'])
             ->name('jobrequest.storepost');
     });
 

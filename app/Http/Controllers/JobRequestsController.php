@@ -60,7 +60,7 @@ class JobRequestsController extends Controller
         return view('usertab.jobrequest.post');
     }
 
-    public function storepostt(Request $request): RedirectResponse
+    public function storepost(Request $request): RedirectResponse
     {
         $request->validate([
             'place' => ['required', 'string', 'max:255'],
