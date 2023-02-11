@@ -68,7 +68,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post("/securityguard/add/",
         [GuardController::class, 'store']
         )->name('addsecurityguard');
-        
+        //add security guard
+        Route::get("/securityguard/view/{guard_id}",
+            [GuardController::class, 'show']
+        )->name('viewsecurityguard');
+
     });
     Route::group(['middleware' => 'checkIs_admin:0'], function () {
         // Route::get('/userDashboard', 'userdashboard')->name('userdashboard');
@@ -84,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
             ->name('jobrequest.location');
         Route::post('/jobrequest/storelocation', [JobRequestsController::class, 'storelocation'])
             ->name('jobrequest.storelocation');
-            
+
         // Post
         Route::get('/jobrequest/post', [JobRequestsController::class, 'post'])
             ->name('jobrequest.post');

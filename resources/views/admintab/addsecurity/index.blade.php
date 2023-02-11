@@ -47,7 +47,7 @@
                                     {{ $guard->birthdate }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a class="text-blue-600" href="/securityguard/view/{{$guard->id}}">View / Edit</a>
+                                    <a class="text-blue-600" href="/securityguard/view/{{ $guard->id }}">View / Edit</a>
                                 </td>
                             </tr>
                         </tbody>
