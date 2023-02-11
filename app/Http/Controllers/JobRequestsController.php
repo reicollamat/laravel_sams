@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contract;
 use App\Models\Location;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class JobRequestsController extends Controller
@@ -29,10 +32,14 @@ class JobRequestsController extends Controller
         
         ]);
 
+        // storing foreign id
+        $user_id = Auth::user()->id;
+
+
         Location::create([
             'locations_name' => $request->locations_name,
             'address' => $request->address,
-            'users_id' => 1 // for testing purposes
+            'users_id' => $user_id // for testing purposes
         ]);
 
         $status = 'Location Added!';
