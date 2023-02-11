@@ -194,10 +194,10 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    <x-primary-button class="ml-4">
+                <div class="flex items-center justify-center mt-4">
+                    <x-custom-primary-button class="ml-4">
                         {{ __('Save') }}
-                    </x-primary-button>
+                    </x-custom-primary-button>
                 </div>
             </form>
         </div>
