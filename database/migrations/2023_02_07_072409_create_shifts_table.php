@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('address',150);
             $table->string('include');
             $table->integer('contract_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

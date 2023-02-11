@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('day_off_day');
             $table->integer('ddo_id');
             $table->integer('guard_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

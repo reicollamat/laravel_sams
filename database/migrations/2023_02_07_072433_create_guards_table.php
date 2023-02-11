@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('sss', 14);
             $table->date('agency_affiliation_date');
             $table->date('nbi_issued_date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

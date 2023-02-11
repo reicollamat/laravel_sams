@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use CrudTrait;
+    use HasApiTokens, HasFactory, Notifiable, CrudTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +36,9 @@ class User extends Authenticatable
         'last_login'
     ];
 
+    // Soft Delete
+    protected $dates = ['deleted_at'];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -55,4 +58,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean'
     ];
+
+
 }

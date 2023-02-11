@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('number_of_guards');
             $table->integer('post_id');
             $table->integer('shift_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

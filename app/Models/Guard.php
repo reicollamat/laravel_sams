@@ -5,11 +5,11 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Guard extends Model
 {
-    use HasFactory;
-    use CrudTrait;
+    use HasFactory, CrudTrait, SoftDeletes;
 
     protected $fillable = [
         'first_name',
@@ -26,4 +26,7 @@ class Guard extends Model
         'agency_affiliation_date',
         'nbi_issued_date',
     ];
+
+    protected $dates = ['deleted_at'];
+
 }

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('issued_date');
             $table->double('daily_wage',15,2)->nullable();
             $table->integer('status');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');

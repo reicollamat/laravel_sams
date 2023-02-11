@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('sex',1)->nullable()->check;
             $table->string('position')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
         // DB::statement('ALT')

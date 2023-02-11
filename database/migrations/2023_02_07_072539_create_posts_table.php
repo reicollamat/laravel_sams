@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('remarks')->nullable();
             $table->tinyInteger('is_armed')->default(0);
             $table->unsignedBigInteger('locations_id');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('locations_id')->references('id')->on('locations')->onDelete('cascade');
