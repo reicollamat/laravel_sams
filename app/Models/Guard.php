@@ -18,7 +18,7 @@ class Guard extends Model
         'birthdate',
         'sex',
         'address',
-        'nbi_clearnace_id',
+        'nbi_clearance_id',
         'phone_number',
         'educational_attainment',
         'lesp_id',

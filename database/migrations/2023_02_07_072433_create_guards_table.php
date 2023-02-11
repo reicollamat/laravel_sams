@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('birthdate')->nullable();
             $table->string('sex', 1)->nullable();
             $table->string('address', 150);
-            $table->string('nbi_clearnace_id', 21);
+            $table->string('nbi_clearance_id', 21);
             $table->string('phone_number', 11);
             $table->integer('educational_attainment');
             $table->string('lesp_id');

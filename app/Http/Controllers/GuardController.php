@@ -14,12 +14,12 @@ class GuardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, Guard $guard)
-    {   
+    {
         // dd($request->user()->id);
         // dd($guard->all());
         return view('admintab/addsecurity/index', [
             'guards' => $guard->all(),
-            
+
         ]);
     }
 
@@ -32,7 +32,7 @@ class GuardController extends Controller
     {
         return view('admintab/addsecurity/addguard', [
             'guards' => $guard->all(),
-            
+
         ]);
     }
 
@@ -44,7 +44,7 @@ class GuardController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
+
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
@@ -52,14 +52,14 @@ class GuardController extends Controller
             'birthdate'=> ['required', 'string', 'max:255'],
             'sex'=> ['required', 'string', 'max:1'],
             'address'=> ['required', 'string', 'max:191'],
-            'nbi_clearnace_id'=> ['required', 'string', 'max:21'],
+            'nbi_clearance_id'=> ['required', 'string', 'max:21'],
             'phone_number'=> ['required', 'string', 'max:11'],
             'educational_attainment'=> ['required', 'string', 'max:255'],
             'lesp_id' => ['required', 'string', 'max:255'],
             'sss' => ['required', 'string', 'max:14'],
             'agency_affiliation_date' => ['required', 'string', 'max:255'],
             'nbi_issued_date' => ['required', 'string', 'max:255'],
-        
+
         ]);
 
         Guard::create([
@@ -69,7 +69,7 @@ class GuardController extends Controller
             'birthdate'=> $request->birthdate,
             'sex'=> $request->sex,
             'address'=> $request->address,
-            'nbi_clearnace_id'=> $request->nbi_clearnace_id,
+            'nbi_clearance_id'=> $request->nbi_clearance_id,
             'phone_number'=> $request->phone_number,
             'educational_attainment'=> $request->educational_attainment,
             'lesp_id' => $request->lesp_id,
