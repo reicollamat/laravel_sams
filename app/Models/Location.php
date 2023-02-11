@@ -21,7 +21,7 @@ class Location extends Model
         'locations_name',
         'address',
         'include',
-        'users_id',
+        'contracts_id',
     ];
 
     protected $dates = ['deleted_at'];

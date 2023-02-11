@@ -32,14 +32,20 @@ class JobRequestsController extends Controller
         
         ]);
 
-        // storing foreign id
-        $user_id = Auth::user()->id;
+        // get user id 
+        $users_id = Auth::user()->id;
+        $currentdate = now();
 
+        $contract = Contract::create([
+            'users_id' => $users_id,
+            'issued_date' => $currentdate,
+            'status' => 1,
+        ]);
 
         Location::create([
             'locations_name' => $request->locations_name,
             'address' => $request->address,
-            'users_id' => $user_id // for testing purposes
+            'contracts_id' => $contract->id, // for testing purposes
         ]);
 
         $status = 'Location Added!';
@@ -54,23 +60,25 @@ class JobRequestsController extends Controller
         return view('usertab.jobrequest.post');
     }
 
-    public function storepost(Request $request): RedirectResponse
+    public function storepostt(Request $request): RedirectResponse
     {
         $request->validate([
             'place' => ['required', 'string', 'max:255'],
-            // 'is_armed' => ['required', 'tinyInteger'],
+            'is_armed' => ['required', 'string'],
         
         ]);
 
+        $location = Location::all();
+
         Post::create([
             'place' => $request->place,
-            // 'is_armed' => $request->is_armed,
-            'locations_id' => 1 // for testing purposes
+            'is_armed' => $request->is_armed,
+            'locations_id' => $location->id // for testing purposes
         ]);
 
         $status = 'Post Added!';
 
-        return redirect('/jobrequest/location')->with('status',$status);
+        return redirect('/jobrequest/post')->with('status',$status);
     }
     
 }
