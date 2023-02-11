@@ -89,9 +89,13 @@ class GuardController extends Controller
      * @param  \App\Models\Guard  $guard
      * @return \Illuminate\Http\Response
      */
-    public function show(Guard $guard)
+    public function show(Guard $guard, $guard_id)
     {
         //
+        return view('admintab/addsecurity/viewguard', [
+            'guards' => $guard->find($guard_id)->get(),
+
+        ]);
     }
 
     /**
@@ -100,9 +104,9 @@ class GuardController extends Controller
      * @param  \App\Models\Guard  $guard
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guard $guard)
+    public function edit(Guard $guard, $guard_id)
     {
-        //
+
     }
 
     /**
