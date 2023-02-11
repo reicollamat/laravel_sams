@@ -14,6 +14,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, CrudTrait, SoftDeletes;
 
+    // relationship to contract
+    public function contract()
+    {
+        return $this->hasMany(Contract::class);
+    }
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -38,6 +45,8 @@ class User extends Authenticatable
 
     // Soft Delete
     protected $dates = ['deleted_at'];
+
+    // protected $primaryKey = 'guid';
 
     /**
      * The attributes that should be hidden for serialization.
