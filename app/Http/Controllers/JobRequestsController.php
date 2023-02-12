@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class JobRequestsController extends Controller
@@ -26,21 +27,31 @@ class JobRequestsController extends Controller
 
     public function storelocation(Request $request): RedirectResponse
     {
+        // checks if last contract is finished
+        $check = Contract::get()->last();
+        if ( $check->is_finished == 1) 
+        {
+            // get user id 
+            $users_id = Auth::user()->id;
+            $currentdate = now();
+
+            Contract::create([
+                'is_finished' => 0,
+                'users_id' => $users_id,
+                'issued_date' => $currentdate,
+                'status' => 1,
+            ]);
+        }
+
         $request->validate([
             'locations_name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255', 'unique:'.Location::class],
         
         ]);
 
-        // get user id 
         $users_id = Auth::user()->id;
-        $currentdate = now();
 
-        $contract = Contract::create([
-            'users_id' => $users_id,
-            'issued_date' => $currentdate,
-            'status' => 1,
-        ]);
+        $contract = Contract::where('id','=',$users_id)->first();
 
         Location::create([
             'locations_name' => $request->locations_name,
@@ -63,8 +74,8 @@ class JobRequestsController extends Controller
     public function storepost(Request $request): RedirectResponse
     {
         $request->validate([
-            'place' => ['required', 'string', 'max:255'],
-            'is_armed' => ['required', 'string'],
+            'place' => ['required', 'string', 'max:255','unique:'.Post::class],
+            'is_armed' => ['required', 'string', 'max:1'],
         
         ]);
 

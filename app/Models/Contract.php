@@ -11,13 +11,13 @@ class Contract extends Model
 {
     use HasFactory, CrudTrait, SoftDeletes;
 
-    // relationship to user
+    // relationship with user
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // relationship to location
+    // relationship with location
     public function location()
     {
         return $this->hasManyThrough(Location::class, Ddo::class);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->integer('years')->nullable();
             $table->integer('months')->nullable();
-            $table->tinyInteger('is_finished')->default(0);
+            $table->tinyInteger('is_finished');
             $table->string('link')->nullable();
             $table->unsignedBigInteger('users_id');
             $table->date('issued_date');

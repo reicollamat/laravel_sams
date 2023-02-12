@@ -11,6 +11,12 @@ class Post extends Model
 {
     use HasFactory, CrudTrait, SoftDeletes;
 
+    // relationship with location
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
     protected $fillable = [
         'place',
         'remarks',

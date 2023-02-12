@@ -4,7 +4,13 @@
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
          {{-- temporary table display --}}
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><a href="{{ route('jobrequest.location') }}">Back</a></button>
+                
+                <form action="{{ route('jobrequest.location') }}">
+                    <x-custom-primary-button>
+                        Back
+                    </x-custom-primary-button>
+                </form>
+                
                 <hr class="pt-8">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <caption
@@ -142,7 +148,9 @@
                     <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company (Ex. Google)</label>
                 </div> --}}
                 <br>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Post</button>
+                <x-custom-primary-button>
+                    Add Post
+                </x-custom-primary-button>
             </form>
   
 

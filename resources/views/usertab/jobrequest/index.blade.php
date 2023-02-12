@@ -91,30 +91,16 @@
 </div>
 
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-2">
-        {{-- temporary table display --}}
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead
-                    class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    <tr>
-                        <th>
-                            <button type="button"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 m-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><a
-                                    href="{{ route('jobrequest.location') }}">+Create</a></button>
-                        </th>
-                        <th>
-                            Create Job Request
-                            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit
-                                amet consectetur, adipisicing elit. Nesciunt autem quisquam voluptatum culpa dolor.</p>
-                        </th>
-                    </tr>
-                </thead>
+    <x-custom-button href="{{ route('jobrequest.location') }}">
+        +Create
+        <x-slot name="heading" class="">
+            Create Job Request
+            <x-slot name="body" class="">
+                Click "+Create" button to continue
+            </x-slot>
+        </x-slot>
+    </x-custom-button>
 
-            </table>
-        </div>
-
-    </div>
 </div>
 @endsection
