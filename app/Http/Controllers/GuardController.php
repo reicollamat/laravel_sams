@@ -109,7 +109,7 @@ class GuardController extends Controller
      */
     public function edit(Guard $guard, $guard_id)
     {
-
+        return abort(403);
     }
 
     /**
@@ -122,6 +122,7 @@ class GuardController extends Controller
     public function update(Request $request, Guard $guard)
     {
         //
+        return abort(403);
     }
 
     /**
@@ -133,5 +134,6 @@ class GuardController extends Controller
     public function destroy(Guard $guard)
     {
         //
+        return abort(403);
     }
 }

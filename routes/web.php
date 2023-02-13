@@ -5,7 +5,8 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\GuardController;
 use App\Http\Controllers\JobRequestsController;
 use App\Http\Controllers\ProfileController;
-use GuzzleHttp\Psr7\Request;
+// use App\Models\Guard;
+// use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,22 +57,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admindashboard', function () {
             return view('admindashboard');
         })->name('admindashboard');
+
         //show security guard
         Route::get("/securityguard",
             [GuardController::class, 'index']
         )->name('showsecurityguard');
+
         //add security guard
-        Route::get("/securityguard/add",
+        Route::get("/securityguard/create",
             [GuardController::class, 'create']
-        )->name('addsecurityguard');
+        )->name('createsecurityguard');
+
         //save created guard
-        Route::post("/securityguard/add/",
+        Route::post("/securityguard",
         [GuardController::class, 'store']
         )->name('addsecurityguard');
-        //add security guard
-        Route::get("/securityguard/view/{guard_id}",
+
+        //view security guard
+        Route::get("/securityguard/{guard_id}/show",
             [GuardController::class, 'show']
         )->name('viewsecurityguard');
+
+        // Route::resource('guards',GuardController::class);
 
     });
     Route::group(['middleware' => 'checkIs_admin:0'], function () {

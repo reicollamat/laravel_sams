@@ -2,7 +2,7 @@
 @section('content')
     <div class="p-4 sm:ml-64 mt-14">
 
-        <x-custom-button href="/securityguard/add">
+        <x-custom-button href="{{ route('createsecurityguard') }}">
             {{ __('Add Security Guard') }}
             <x-slot name="heading" class="">
                 {{ __('This is the heading') }}
@@ -46,7 +46,7 @@
                                     {{ $guard->birthdate }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a class="text-blue-600" href="/securityguard/view/{{ $guard->id }}">View / Edit</a>
+                                    <a class="text-blue-600" href="/securityguard/{{ $guard->id }}/show">View Information</a>
                                 </td>
                             </tr>
                         </tbody>
