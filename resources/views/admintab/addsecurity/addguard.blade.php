@@ -32,6 +32,8 @@
         </div>
         @endforeach
 
+        
+
         <form method="POST" action="/securityguard/add/">
             @csrf
             <!-- First Name -->
@@ -151,6 +153,9 @@
             </div>
 
             <div class="flex items-center justify-center mt-4">
+                <x-custom-back-button href="{{ url()->previous() }}">
+                    {{ __('Back') }}
+                </x-custom-back-button>
                 <x-custom-primary-button class="ml-4">
                     {{ __('Save') }}
                 </x-custom-primary-button>
