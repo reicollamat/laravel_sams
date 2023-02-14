@@ -20,11 +20,6 @@
 </head>
 
 <body class="antialiased">
-    {{-- @if(Session::has('message'))
-    <script>
-        alert("{{ Session::get('message') }}");
-    </script>
-    @endif --}}
     <!-- General navbar -->
     <header>
         <!-- Navigation bar -->
@@ -35,6 +30,10 @@
                         class="d-inline-block align-top" />
                     SAMS
                 </a>
+                <?php
+                use Carbon\Carbon;
+                ?>
+                <p class="m-0 text-white fs-6 ">{{ $current = Carbon::now('GMT+8')->format('g:i A') ." ". Date('Y/m/d') }}</p>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -48,14 +47,14 @@
                         @if (auth()->user()->is_admin)
                         <li class="nav-item ">
                             <a class="nav-link fs-6" aria-current="page"
-                                href="{{ url('/admindashboard') }}">Dashboard</a>
+                                href="{{ url('/admindashboard') }}">Admin Dashboard</a>
                         </li>
                         @else
 
                         <li class="nav-item ">
 
                             <a class="nav-link fs-6" aria-current="page"
-                                href="{{ url('/userdashboard') }}">Dashboard</a>
+                                href="{{ url('/userdashboard') }}">User Dashboard</a>
                         </li>
 
                         @endif
