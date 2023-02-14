@@ -18,7 +18,7 @@ class GuardController extends Controller
         // dd($request->user()->id);
         // dd($guard->all());
         return view('admintab/addsecurity/index', [
-            'guards' => $guard::paginate(5),
+            'guards' => $guard::paginate(10),
 
         ]);
     }

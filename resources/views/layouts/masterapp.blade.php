@@ -25,18 +25,19 @@
         {{-- @php
             echo (Auth::user()->is_admin == True) ? 'hello' : 'hi'
         @endphp --}}
-        @if (Auth::user()->is_admin == True)
+        @if (Auth::user()->is_admin == true)
             @include('layouts.adminsidebar')
         @else
             @include('layouts.usersidebar')
         @endif
+
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="bg-white dark:bg-gray-800 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
         @endif
 
 
@@ -46,15 +47,6 @@
             @yield('content')
         </main>
     </div>
-
-
-    {{-- flowbite javascript --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script> --}}
-    {{-- <script type="text/javascript">
-        @if (count($errors) > 0)
-            $('#defaultModal').modal('show');
-        @endif
-    </script> --}}
 </body>
 
 </html>
