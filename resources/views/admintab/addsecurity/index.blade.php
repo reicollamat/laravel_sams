@@ -2,6 +2,9 @@
 @section('content')
     <div class="p-4 sm:ml-64 mt-14">
 
+        <div x-data="{ 'showModal': false }">
+
+        </div>
 
         <x-custom-button href="{{ route('createsecurityguard') }}">
             {{ __('Add Security Guard') }}
@@ -12,7 +15,7 @@
                 </x-slot>
             </x-slot>
         </x-custom-button>
-        <x-search-bar action="{{ route('searchsecurityguard') }} " method="GET">
+        <x-search-bar action="{{ route('searchsecurityguard') }}" method="GET">
             <x-slot name="anchor" href="{{ route('showsecurityguard') }}">
 
             </x-slot>

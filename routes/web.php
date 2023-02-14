@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         //save created guard
         Route::post("/securityguard",
         [GuardController::class, 'store']
-        )->name('addsecurityguard');
+        )->name('storesecurityguard');
 
         //view security guard
         Route::get("/securityguard/{guard_id}/show",
