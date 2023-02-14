@@ -4,3 +4,4 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('user') }}"><i class="nav-icon la la-question"></i> Users</a></li>
 
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('contract') }}"><i class="nav-icon la la-question"></i> Contracts</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('guard') }}"><i class="nav-icon la la-question"></i> Guards</a></li>
