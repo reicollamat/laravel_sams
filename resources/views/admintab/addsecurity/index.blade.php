@@ -2,19 +2,16 @@
 @section('content')
     <div class="p-4 sm:ml-64 mt-14">
 
-        <div x-data="{ 'showModal': false }">
-
-        </div>
-
         <x-custom-button href="{{ route('createsecurityguard') }}">
-            {{ __('Add Security Guard') }}
+            {{ __('+ Security Guard') }}
             <x-slot name="heading" class="">
-                {{ __('This is the heading') }}
+                {{ __('Add to Security Guard') }}
                 <x-slot name="body" class="">
-                    {{ __('I\'m the body bitch') }}
+                    {{ __('Let\'s you add providing some basic information') }}
                 </x-slot>
             </x-slot>
         </x-custom-button>
+
         <x-search-bar action="{{ route('searchsecurityguard') }}" method="GET">
             <x-slot name="anchor" href="{{ route('showsecurityguard') }}">
 
@@ -116,7 +113,8 @@
                         </tbody>
                     @else
                         @if (count($s_guards) > 0)
-                        <h1 class="w-full py-2 text-xl text-center text-gray-500 dark:text-gray-400">Found {{ count($s_guards) . " Results"}}</h1>
+                            <h1 class="w-full py-2 text-xl text-center text-gray-500 dark:text-gray-400">Found
+                                {{ count($s_guards) . ' Results' }}</h1>
                         @else
                             <h1 class="w-full py-7 text-2xl text-center text-gray-500 dark:text-gray-400">No Guards
                                 Found!</h1>
