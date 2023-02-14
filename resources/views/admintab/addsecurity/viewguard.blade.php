@@ -38,7 +38,7 @@
                                 Middle Name
                             </p>
                             <p
-                                class="w-full xl:text-right font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800 ">
+                                class="w-full font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800 ">
                                 {{ $guard->middle_name }}
                             </p>
                         </div>

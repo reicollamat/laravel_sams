@@ -64,6 +64,12 @@ Route::group(['middleware' => 'auth'], function () {
             [GuardController::class, 'index']
         )->name('showsecurityguard');
 
+        //search guard
+        //show security guard
+        Route::get("/securityguard/search/",
+        [GuardController::class, 'search']
+        )->name('searchsecurityguard');
+
         //add security guard
         Route::get("/securityguard/create",
             [GuardController::class, 'create']

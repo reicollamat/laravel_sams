@@ -18,7 +18,8 @@ class GuardController extends Controller
         // dd($request->user()->id);
         // dd($guard->all());
         return view('admintab/addsecurity/index', [
-            'guards' => $guard::paginate(5),
+            'guards' => $guard::paginate(10),
+            's_guards' => array(),
 
         ]);
     }
@@ -135,5 +136,22 @@ class GuardController extends Controller
     {
         //
         return abort(403);
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        $guards = array();
+    
+        // Search in the title and body columns from the posts table
+        $s_guards = Guard::query()
+            ->where('first_name', 'LIKE', "%{$search}%")
+            ->orWhere('middle_name', 'LIKE', "%{$search}%")
+            ->orWhere('last_name', 'LIKE', "%{$search}%")
+            ->get();
+        
+        // Return the search view with the resluts compacted
+        return view('admintab/addsecurity/index', compact('s_guards','guards'));
     }
 }
