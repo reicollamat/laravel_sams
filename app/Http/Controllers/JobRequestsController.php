@@ -22,19 +22,13 @@ class JobRequestsController extends Controller
     // location page
     public function location(): View
     {
-        return view('usertab.jobrequest.location');
-    }
+        // get user id 
+        $users_id = Auth::user()->id;
+        $currentdate = now();
 
-    public function storelocation(Request $request): RedirectResponse
-    {
-        // checks if last contract is finished
-        $check = Contract::get()->last();
-        if ( $check->is_finished == 1) 
-        {
-            // get user id 
-            $users_id = Auth::user()->id;
-            $currentdate = now();
+        $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
 
+        if ($contract === null || $contract->is_finished == 1){
             Contract::create([
                 'is_finished' => 0,
                 'users_id' => $users_id,
@@ -42,16 +36,24 @@ class JobRequestsController extends Controller
                 'status' => 1,
             ]);
         }
+        
 
+        return view('usertab.jobrequest.location');
+    }
+
+    public function storelocation(Request $request): RedirectResponse
+    {
         $request->validate([
             'locations_name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255', 'unique:'.Location::class],
         
         ]);
 
+        // get user id 
         $users_id = Auth::user()->id;
 
-        $contract = Contract::where('id','=',$users_id)->first();
+        $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
+        
 
         Location::create([
             'locations_name' => $request->locations_name,
@@ -74,12 +76,17 @@ class JobRequestsController extends Controller
     public function storepost(Request $request): RedirectResponse
     {
         $request->validate([
-            'place' => ['required', 'string', 'max:255','unique:'.Post::class],
+            'place' => ['required', 'string', 'max:255'],
             'is_armed' => ['required', 'string', 'max:1'],
         
         ]);
 
-        $location = Location::all();
+        // get user id 
+        $users_id = Auth::user()->id;
+
+        $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
+
+        $location = Location::where('contracts_id','=',$contract->id)->first();
 
         Post::create([
             'place' => $request->place,
