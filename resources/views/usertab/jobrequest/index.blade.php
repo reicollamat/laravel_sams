@@ -1,8 +1,21 @@
 @extends('layouts.masterapp')
 @section('content')
 
-<div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+<div class="p-4 sm:ml-64 mt-14">
+
+
+        <x-custom-button href="{{ route('jobrequest.location') }}">
+            +Create
+            <x-slot name="heading" class="">
+                Create Job Request
+                <x-slot name="body" class="">
+                    Click "+Create" button to continue
+                </x-slot>
+            </x-slot>
+        </x-custom-button>
+    
+
+    <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
         {{-- temporary table display --}}
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -90,17 +103,4 @@
     </div>
 </div>
 
-<div class="p-4 sm:ml-64">
-
-    <x-custom-button href="{{ route('jobrequest.location') }}">
-        +Create
-        <x-slot name="heading" class="">
-            Create Job Request
-            <x-slot name="body" class="">
-                Click "+Create" button to continue
-            </x-slot>
-        </x-slot>
-    </x-custom-button>
-
-</div>
 @endsection
