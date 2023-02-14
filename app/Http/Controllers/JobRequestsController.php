@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contract;
 use App\Models\Location;
 use App\Models\Post;
+use App\Models\Shift;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,9 +37,10 @@ class JobRequestsController extends Controller
                 'status' => 1,
             ]);
         }
-        
 
-        return view('usertab.jobrequest.location');
+        $location_data = Location::all();
+
+        return view('usertab.jobrequest.location', ['locations'=> $location_data]);
     }
 
     public function storelocation(Request $request): RedirectResponse
@@ -70,7 +72,8 @@ class JobRequestsController extends Controller
     // post page
     public function post(): View
     {
-        return view('usertab.jobrequest.post');
+        $post_data = Post::all();
+        return view('usertab.jobrequest.post',['posts'=>$post_data]);
     }
 
     public function storepost(Request $request): RedirectResponse
@@ -81,12 +84,14 @@ class JobRequestsController extends Controller
         
         ]);
 
+        dd($request);
+
         // get user id 
         $users_id = Auth::user()->id;
 
         $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
 
-        $location = Location::where('contracts_id','=',$contract->id)->first();
+        $location = Location::where('contracts_id','=',$contract->id)->latest('id')->first();
 
         Post::create([
             'place' => $request->place,
@@ -96,7 +101,19 @@ class JobRequestsController extends Controller
 
         $status = 'Post Added!';
 
-        return redirect('/jobrequest/post')->with('status',$status);
+        return redirect('/jobrequest/shift')->with('status',$status);
+    }
+
+    // Shift page
+    public function shift()
+    {
+        $shift_data = Shift::all();
+        return view('usertab.jobrequest.shift',['shifts'=>$shift_data]);
     }
     
+    public function storeshift()
+    {
+        return redirect('/jobrequest/shift');
+    }
+
 }

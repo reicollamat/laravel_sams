@@ -10,7 +10,7 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption
                     class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    Locations Table
+                    Schedule
                     <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet
                         consectetur, adipisicing elit. Nesciunt autem quisquam voluptatum culpa dolor.</p>
                 </caption>
@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($locations as $location)
+                    {{-- @foreach ($locations as $location)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $location['locations_name'] }}
@@ -52,7 +52,7 @@
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
                         </td>
                     </tr>      
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -76,7 +76,7 @@
 
         <hr class="pt-8">
 
-        <form method="POST" action="{{ route('jobrequest.storelocation') }}">
+        <form method="POST" action="{{ route('jobrequest.storeshift') }}">
             @csrf
             <div class="relative z-0 w-full mb-6 group">
                 <input type="text" name="locations_name" id="locations_name"
