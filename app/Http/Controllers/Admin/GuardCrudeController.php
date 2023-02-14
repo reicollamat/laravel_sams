@@ -11,7 +11,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class GuardCrudeControllerCrudController extends CrudController
+class GuardCrudeController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -39,7 +39,21 @@ class GuardCrudeControllerCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        
+        $this->crud->column('first_name');
+        $this->crud->column('middle_name');
+        $this->crud->column('last_name');
+        // $this->crud->addField('birthdate');
+        // $this->crud->addField('sex');
+        // $this->crud->addField('address');
+        // $this->crud->addField('nbi_clearance_id');
+        // $this->crud->addField('phone_number');
+        // $this->crud->addField('educational_attainment');
+        // $this->crud->addField('lesp_id');
+        // $this->crud->addField('sss');
+        // $this->crud->addField('agency_affiliation_date');
+        // $this->crud->addField('nbi_issued_date');
+
+
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -56,7 +70,19 @@ class GuardCrudeControllerCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        
+        $this->crud->addField('first_name');
+        $this->crud->addField('middle_name');
+        $this->crud->addField('last_name');
+        $this->crud->addField('birthdate');
+        $this->crud->addField('sex');
+        $this->crud->addField('address');
+        $this->crud->addField('nbi_clearance_id');
+        $this->crud->addField('phone_number');
+        $this->crud->addField('educational_attainment');
+        $this->crud->addField('lesp_id');
+        $this->crud->addField('sss');
+        $this->crud->addField('agency_affiliation_date');
+        $this->crud->addField('nbi_issued_date');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

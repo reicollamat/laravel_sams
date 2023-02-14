@@ -11,8 +11,11 @@
                 </x-slot>
             </x-slot>
         </x-custom-button>
-        <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
+        <x-search-bar>
 
+        </x-search-bar>
+        <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-4">
+            {{ $guards->links() }}
             <div class="relative overflow-x-auto">
                 @if (count($guards) > 0)
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -57,6 +60,7 @@
                     </table>
                 @endif
             </div>
+            
         </div>
     </div>
 @endsection

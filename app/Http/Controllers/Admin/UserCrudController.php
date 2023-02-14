@@ -76,17 +76,17 @@ class UserCrudController extends CrudController
             'name' => 'name',
             'type' => 'text',
             'label' => 'User name'
-          ]);
+        ]);
         $this->crud->addField([
             'name' => 'email',
             'type' => 'Email Address',
             'label' => 'email'
-            ]);
+        ]);
         $this->crud->addField([
             'name' => 'password',
             'type' => 'password',
             'label' => 'password'
-          ]);
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
