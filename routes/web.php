@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 // use App\Models\Guard;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('security.index');
+    return view('security.index', ['c_datetime'=> Carbon::now('GMT+8')->format('g:i:s A') ." | ". Date('Y/m/d') ]);
     // return dd(auth()->user()->position);
 });
 

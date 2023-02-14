@@ -33,7 +33,7 @@
                 <?php
                 use Carbon\Carbon;
                 ?>
-                <p class="m-0 text-white fs-6 ">{{ $current = Carbon::now('GMT+8')->format('g:i A') ." ". Date('Y/m/d') }}</p>
+                <p class="m-0 text-white fs-6 ">{{ $c_datetime }}</p>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                     aria-label="Toggle navigation">
