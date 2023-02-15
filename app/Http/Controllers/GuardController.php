@@ -81,7 +81,7 @@ class GuardController extends Controller
 
         $status = 'Guards Added!';
 
-        return redirect('/securityguard/add')->with('status', $status);
+        return redirect('/securityguard/create')->with('status', $status);
     }
 
     /**

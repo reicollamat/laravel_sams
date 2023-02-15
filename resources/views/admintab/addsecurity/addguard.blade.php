@@ -34,7 +34,7 @@
 
         
 
-        <form method="POST" action="/securityguard/add/">
+        <form method="POST" action="{{ route('storesecurityguard') }}">
             @csrf
             <!-- First Name -->
             <div class="columns-1 md:columns-3">
@@ -153,7 +153,7 @@
             </div>
 
             <div class="flex items-center justify-center mt-4">
-                <x-custom-back-button href="{{ url()->previous() }}">
+                <x-custom-back-button href="{{ route('showsecurityguard') }}">
                     {{ __('Back') }}
                 </x-custom-back-button>
                 <x-custom-primary-button class="ml-4">
