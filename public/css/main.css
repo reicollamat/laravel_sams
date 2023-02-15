@@ -1,3 +1,6 @@
+html{
+	scroll-behavior: smooth;
+}
 * {
 	box-sizing: border-box;
 	--bs-body-font-family: var(--bs-font-sans-serif);
