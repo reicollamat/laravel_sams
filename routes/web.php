@@ -4,6 +4,9 @@ use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
 use App\Http\Controllers\GuardController;
 use App\Http\Controllers\JobRequestsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminJobRequestsController;
+use App\Http\Controllers\AdminIssueDdoController;
+use App\Http\Controllers\AdminActiveContractsController;
 // use App\Models\Guard;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
@@ -84,7 +87,20 @@ Route::group(['middleware' => 'auth'], function () {
             [GuardController::class, 'show']
         )->name('viewsecurityguard');
 
-        // Route::resource('guards',GuardController::class);
+        // End
+        Route::get("/jobrequest",
+        [AdminJobRequestsController::class, 'index']
+        )->name('jobrequestindex');
+        // End
+        Route::get("/activecontract",
+        [AdminActiveContractsController::class, 'index']
+        )->name('activecontractindex');
+        // End
+        Route::get("/ddo",
+        [AdminIssueDdoController::class, 'index']
+        )->name('issueddoindex');
+        // End
+
 
     });
     Route::group(['middleware' => 'checkIs_admin:0'], function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class AdminJobRequestsController extends Controller
 {
@@ -11,10 +12,13 @@ class AdminJobRequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+
+        return view('admintab.jobrequest.index', [
+        ]);
+        
     }
+
 
     /**
      * Show the form for creating a new resource.

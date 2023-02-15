@@ -13,7 +13,8 @@ class AdminActiveContractsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admintab.activecontract.index', [
+        ]);
     }
 
     /**
