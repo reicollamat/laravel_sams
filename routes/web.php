@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\RedirectAuthenticatedUsersController;
-use App\Http\Controllers\ContractController;
 use App\Http\Controllers\GuardController;
 use App\Http\Controllers\JobRequestsController;
 use App\Http\Controllers\ProfileController;
