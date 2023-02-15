@@ -2,11 +2,53 @@
 @section('content')
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-        {{-- temporary table display --}}
+        
+        @if (Session::has('status'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">{{ Session::get('status') }}</span>
+        </div>
+        @endif
+    
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <x-custom-back-button href="{{ url()->previous() }}">
                 {{ __('Back') }}
             </x-custom-back-button>
+            <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <caption class="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                Add Post
+            </caption>
+            </table>
+        </div>
+    
+        <form method="POST" action="{{ route('jobrequest.storepost') }}">
+            @csrf
+            <div class="mt-4 ">
+                <div class="columns-1 md:columns-2 mt-4">
+                    {{-- input post --}}
+                    <div>
+                        <x-input-label for="place" :value="__('Post Name')" />
+                        <x-text-input type="text" class="block mt-1 w-full" id="place" name="place" :value="old('place')" required autofocus autocomplete="name" />
+                        <p id="floating_helper_text" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Please insert post here.</p>
+                    </div>
+
+                    <div>
+                        <x-input-label for="address" :value="__('Address')" />
+                        <x-text-input type="text" class="block mt-1 w-full" id="address" name="address" :value="old('address')" required autofocus autocomplete="name" />
+                        <p id="floating_helper_text" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Please insert address here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 ">
+                <x-custom-primary-button>
+                    Add Post
+                </x-custom-primary-button>
+            </div>
+        </form>
+
+
+        {{-- temporary table display --}}
+        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption
                     class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
@@ -58,41 +100,8 @@
                 </tbody>
             </table>
         </div>
-        <hr class="pt-10">
 
-        @if (Session::has('status'))
-        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <span class="font-medium">{{ Session::get('status') }}</span>
-        </div>
-        @endif
-    
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <caption class="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                Add Post
-            </caption>
-            </table>
-        </div>
-    
-        <hr class="pt-8">
-
-        <form method="POST" action="{{ route('jobrequest.storepost') }}">
-            @csrf
-            <div class="relative z-0 w-full mb-6 group">
-                <input type="text" name="place" id="place"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                    placeholder=" " required />
-                <label for="place"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Post
-                    Name</label>
-                <p id="floating_helper_text" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Please insert
-                    post here.</p>
-            </div>
-
-            <x-custom-primary-button>
-                Add Post
-            </x-custom-primary-button>
-        </form>
+        
 
 
 
