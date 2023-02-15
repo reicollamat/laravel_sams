@@ -88,14 +88,16 @@ class JobRequestsController extends Controller
 
 
         $request->validate([
-            'place' => 'required'
+            'place' => 'required',
         ]);
+        // checked = 1, not checked = 0
+        $is_armed = (isset($_POST['is_armed']) == '1' ? '1' : '0'); 
 
-        // dd($location);
+        // dd($is_armed);
 
         Post::create([
             'place' => $request->place,
-            'is_armed' => 0,
+            'is_armed' => $is_armed,
             'locations_id' => $location->id // for testing purposes
         ]);
 
