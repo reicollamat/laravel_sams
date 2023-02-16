@@ -15,35 +15,50 @@ use Illuminate\View\View;
 
 class JobRequestsController extends Controller
 {
-    public function index(): View
+    public function index($user_id): View
     {
-        return view('usertab.jobrequest.index');
+        // $user_id = Auth::user()->id;
+        return view('usertab.jobrequest.index')->with(['user_id'=>$user_id]);
+    }
+
+    public function storecontract($user_id): RedirectResponse
+    {
+        $currentdate = now();
+
+        // instantiates a new Contract
+        $contract = new Contract([
+            'is_finished' => 0,
+            'issued_date' => $currentdate,
+            'status' => 1,
+        ]);
+
+        // fetch current user id 
+        $user = User::find($user_id);
+
+
+        // checks if contract table is null or column "is_finished" has 1
+        $checkcontract = Contract::where('user_id','=',$user_id)->latest('id')->first();
+        if ($checkcontract === null || $checkcontract->is_finished == 1){
+            // saving a new contract in database related to current user
+            $user->contract()->save($contract);
+        }
+
+        // fetch current contract id
+        $contract_id = $checkcontract->id;
+
+        return redirect(route('jobrequest.location',['user_id'=>$user_id, 'contract_id'=>$contract_id]));
     }
 
     // location page
-    public function location(): View
+    public function location($user_id, $contract_id): View
     {
-        // get user id 
-        $users_id = Auth::user()->id;
-        $currentdate = now();
-
-        $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
-
-        if ($contract === null || $contract->is_finished == 1){
-            Contract::create([
-                'is_finished' => 0,
-                'users_id' => $users_id,
-                'issued_date' => $currentdate,
-                'status' => 1,
-            ]);
-        }
-
+        // retrieve all data from locations table
         $location_data = Location::all();
-
-        return view('usertab.jobrequest.location', ['locations'=> $location_data]);
+        
+        return view('usertab.jobrequest.location')->with(['user_id'=>$user_id,  'contract_id'=>$contract_id, 'locations'=>$location_data]);
     }
 
-    public function storelocation(Request $request): RedirectResponse
+    public function storelocation(Request $request, $user_id, $contract_id): RedirectResponse
     {
         $request->validate([
             'locations_name' => ['required', 'string', 'max:255'],
@@ -51,47 +66,56 @@ class JobRequestsController extends Controller
         
         ]);
 
-        // get user id 
-        $users_id = Auth::user()->id;
-
-        $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
-        
-
-        Location::create([
+        // instantiates a new Location
+        $location = new Location([
             'locations_name' => $request->locations_name,
-            'address' => $request->address,
-            'contracts_id' => $contract->id, // for testing purposes
-        ]);
+            'address' => $request->address,]);
+
+        // fetch current contract id
+        $contract = Contract::find($contract_id);
+
+        // saving a new location in database related to current contract
+        $contract->location()->save($location);
 
         $status = 'Location Added!';
-
-        return redirect('/jobrequest/post')->with('status',$status);
+        return redirect(route('jobrequest.post',['user_id'=>$user_id,  'contract_id'=>$contract_id, 'location_id'=>$location->id]))->with('status',$status);
     }
 
 
     // post page
-    public function post(): View
+    public function post($contract_id, $location_id): View
     {
-        // dd(Location::all());
+        // retrieve all data from posts table
         $post_data = Post::all();
-        return view('usertab.jobrequest.post',['posts'=>$post_data]);
+        $location_data = Location::find($location_id);
+        return view('usertab.jobrequest.post')->with(['contract_id'=>$contract_id, 'location_id'=>$location_id ,'posts'=>$post_data, 'locations'=>$location_data]);
     }
 
     public function storepost(Request $request): RedirectResponse
     {
-        // get user id 
-        $users_id = Auth::user()->id;
-
-        $contract = Contract::where('users_id','=',$users_id)->latest('id')->first();
-
-        $location = Location::where('contracts_id','=',$contract->id)->latest('id')->first();
-
-
         $request->validate([
             'place' => 'required',
         ]);
         // checked = 1, not checked = 0
         $is_armed = (isset($_POST['is_armed']) == '1' ? '1' : '0'); 
+
+        // instantiates a new Post
+        $post = new Post([
+            'place' => $request->place,
+            'is_armed' => $is_armed,
+        ]);
+
+        // fetch current user id 
+        $user_id = Auth::user()->id;
+
+        // fetch current contract id
+        $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first()->id;
+
+        // fetch current location id
+        $location_id = Location::where('contract_id','=',$contract_id)->latest('id')->first();
+
+        $location = Location::find();
+
 
         // dd($is_armed);
 

@@ -20,14 +20,14 @@ return new class extends Migration
             $table->integer('months')->nullable();
             $table->tinyInteger('is_finished')->nullable();
             $table->string('link')->nullable();
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('user_id');
             $table->date('issued_date');
             $table->double('daily_wage',15,2)->nullable();
             $table->integer('status');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

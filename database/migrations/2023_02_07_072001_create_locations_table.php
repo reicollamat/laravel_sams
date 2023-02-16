@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('locations_name')->nullable();
             $table->string('address')->unique()->nullable();
             $table->tinyInteger('include')->default(0);
-            $table->unsignedBigInteger('contracts_id');
+            $table->unsignedBigInteger('contract_id');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('contracts_id')->references('id')->on('contracts')->onDelete('cascade');
+            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
         });
     }
 

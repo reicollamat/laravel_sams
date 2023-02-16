@@ -110,16 +110,20 @@ Route::group(['middleware' => 'auth'], function () {
         })->name('userdashboard');
 
         // routes for "Create Job Request" tab
-        Route::get('/jobrequest/index', [JobRequestsController::class, 'index'])
+        Route::get('/jobrequest/index/{user_id}', [JobRequestsController::class, 'index'])
             ->name('jobrequest.index');
+        // Contract
+        Route::post('/jobrequest/storecontract/{user_id}', [JobRequestsController::class, 'storecontract'])
+            ->name('jobrequest.storecontract');
+
         // Location
-        Route::get('/jobrequest/location', [JobRequestsController::class, 'location'])
+        Route::get('/{user_id}/jobrequest/{contract_id}/location', [JobRequestsController::class, 'location'])
             ->name('jobrequest.location');
-        Route::post('/jobrequest/storelocation', [JobRequestsController::class, 'storelocation'])
+        Route::post('/{user_id}/jobrequest/{contract_id}/storelocation', [JobRequestsController::class, 'storelocation'])
             ->name('jobrequest.storelocation');
 
         // Post
-        Route::get('/jobrequest/post', [JobRequestsController::class, 'post'])
+        Route::get('/{contract_id}/jobrequest/{location_id}/post', [JobRequestsController::class, 'post'])
             ->name('jobrequest.post');
         Route::post('/jobrequest/storepost', [JobRequestsController::class, 'storepost'])
             ->name('jobrequest.storepost');

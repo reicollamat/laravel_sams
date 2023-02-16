@@ -24,7 +24,7 @@
         </div>
 
 
-        <form method="POST" action="{{ route('jobrequest.storelocation') }}">
+        <form method="POST" action="{{ route('jobrequest.storelocation', ['user_id'=>$user_id, 'contract_id'=>$contract_id]) }}">
             @csrf
 
             <div class="mt-4 ">
@@ -95,7 +95,7 @@
                             {{ $location['include'] }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                            <a href="{{ route('jobrequest.post', ['user_id'=>$user_id, 'contract_id'=>$contract_id, 'location_id'=>$location['id']]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit Posts</a>
                         </td>
                         <td class="px-6 py-4 text-right">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>

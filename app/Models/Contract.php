@@ -20,7 +20,7 @@ class Contract extends Model
     // relationship with location
     public function location()
     {
-        return $this->hasManyThrough(Location::class, Ddo::class);
+        return $this->hasMany(Location::class);
     }
 
     protected $fillable = [
@@ -29,7 +29,7 @@ class Contract extends Model
         'months',
         'is_finished',
         'link',
-        'users_id',
+        'user_id',
         'issued_date',
         'daily_wage',
         'status',

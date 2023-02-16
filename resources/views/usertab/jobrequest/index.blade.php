@@ -3,16 +3,39 @@
 
 <div class="p-4 sm:ml-64 mt-14">
 
-
-        <x-custom-button href="{{ route('jobrequest.location') }}">
-            +Create
-            <x-slot name="heading" class="">
-                Create Job Request
-                <x-slot name="body" class="">
-                    Click "+Create" button to continue
-                </x-slot>
-            </x-slot>
-        </x-custom-button>
+    <form method="POST" action="{{ route('jobrequest.storecontract', ['user_id'=>$user_id]) }}">
+        @csrf
+        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-2">
+            {{-- temporary table display --}}
+        
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead
+                        class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                    <tr>
+                        <th class="p-4 w-1/4">
+                            <div>
+                                <div class="mt-1 w-full flex justify-center">
+                                    <x-custom-primary-button>
+                                        +Create
+                                    </x-custom-primary-button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class= 'font-bold'>
+                            Create Job Request
+                            <p class= 'mt-1 text-sm font-normal text-gray-500 dark:text-gray-400'>
+                                Click "+Create" button to continue
+                            </p>
+                        </th>
+                    </tr>
+                    </thead>
+        
+                </table>
+            </div>
+        
+        </div>
+    </form>
     
 
     <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
