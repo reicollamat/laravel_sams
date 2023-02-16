@@ -49,16 +49,17 @@ class JobRequestsController extends Controller
         return redirect(route('jobrequest.location',['user_id'=>$user_id, 'contract_id'=>$contract_id]));
     }
 
+
+
     // location page
     public function location($user_id, $contract_id): View
     {
         // retrieve all data from locations table
         $location_data = Location::all();
         
-        return view('usertab.jobrequest.location')->with(['user_id'=>$user_id,  'contract_id'=>$contract_id, 'locations'=>$location_data]);
+        return view('usertab.jobrequest.location')->with(['user_id'=>$user_id, 'contract_id'=>$contract_id, 'locations'=>$location_data]);
     }
-
-    public function storelocation(Request $request, $user_id, $contract_id): RedirectResponse
+    public function storelocation(Request $request, $contract_id): RedirectResponse
     {
         $request->validate([
             'locations_name' => ['required', 'string', 'max:255'],
@@ -78,8 +79,9 @@ class JobRequestsController extends Controller
         $contract->location()->save($location);
 
         $status = 'Location Added!';
-        return redirect(route('jobrequest.post',['user_id'=>$user_id,  'contract_id'=>$contract_id, 'location_id'=>$location->id]))->with('status',$status);
+        return redirect(route('jobrequest.post',['contract_id'=>$contract_id, 'location_id'=>$location->id]))->with('status',$status);
     }
+
 
 
     // post page
@@ -90,8 +92,7 @@ class JobRequestsController extends Controller
         $location_data = Location::find($location_id);
         return view('usertab.jobrequest.post')->with(['contract_id'=>$contract_id, 'location_id'=>$location_id ,'posts'=>$post_data, 'locations'=>$location_data]);
     }
-
-    public function storepost(Request $request): RedirectResponse
+    public function storepost(Request $request, $location_id): RedirectResponse
     {
         $request->validate([
             'place' => 'required',
@@ -105,36 +106,24 @@ class JobRequestsController extends Controller
             'is_armed' => $is_armed,
         ]);
 
-        // fetch current user id 
-        $user_id = Auth::user()->id;
-
-        // fetch current contract id
-        $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first()->id;
-
         // fetch current location id
-        $location_id = Location::where('contract_id','=',$contract_id)->latest('id')->first();
+        $location = Location::find($location_id);
 
-        $location = Location::find();
-
-
-        // dd($is_armed);
-
-        Post::create([
-            'place' => $request->place,
-            'is_armed' => $is_armed,
-            'locations_id' => $location->id // for testing purposes
-        ]);
+        // saving a new post in database related to current location
+        $location->post()->save($post);
 
         $status = 'Post Added!';
-
-        return redirect('/jobrequest/shift')->with('status',$status);
+        return redirect(route('jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post->id]))->with('status',$status);
     }
 
+
+
     // Shift page
-    public function shift()
+    public function shift($location_id, $post_id)
     {
         $shift_data = Shift::all();
-        return view('usertab.jobrequest.shift',['shifts'=>$shift_data]);
+        $post_data = Post::find($post_id);
+        return view('usertab.jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post_id, 'shifts'=>$shift_data, 'posts'=>$post_data]);
     }
     
     public function storeshift()

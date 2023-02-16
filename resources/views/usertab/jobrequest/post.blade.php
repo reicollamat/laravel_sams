@@ -22,7 +22,7 @@
             </table>
         </div>
     
-        <form method="POST" action="{{ route('jobrequest.storepost') }}">
+        <form method="POST" action="{{ route('jobrequest.storepost', ['location_id'=>$location_id]) }}">
             @csrf
             <div class="mt-4 ">
                 {{-- input post --}}
@@ -78,7 +78,7 @@
                             Edit
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">View</span>
+                            <span class="">Remove Post</span>
                         </th>
                     </tr>
                 </thead>
@@ -96,7 +96,7 @@
                             {{ $post['remarks'] }} 
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                            <a href="{{ route('jobrequest.shift', ['location_id'=>$location_id, 'post_id'=>$post['id']]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
                         <td class="px-6 py-4 text-right">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
