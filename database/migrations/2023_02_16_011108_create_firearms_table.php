@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('kind');
             $table->string('caliber');
             $table->string('fas_SN');
-            $table->string('validity_fas_license');
-            $table->unsignedBigInteger('guard_id');
-            $table->unsignedBigInteger('post_id');
+            $table->date('validity_fas_license');
             $table->softDeletes();
             $table->timestamps();
         });

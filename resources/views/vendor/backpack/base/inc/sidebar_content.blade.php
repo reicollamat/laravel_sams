@@ -5,3 +5,4 @@
 
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('contract') }}"><i class="nav-icon la la-question"></i> Contracts</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('guard') }}"><i class="nav-icon la la-question"></i> Guards</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('firearm') }}"><i class="nav-icon la la-question"></i> Firearms</a></li>

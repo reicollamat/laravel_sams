@@ -18,7 +18,7 @@
         <div class="border-2 border-gray-200 rounded-lg dark:border-gray-700 mt-7">
             <div class="w-full border-2 rounded-lg px-20 border-black bg-white dark:bg-white">
                 <div class="flex justify-center">
-                    <h1 class="py-3 font-bold text-2xl">Security Services Agreement Contract</h1>
+                    <h1 class="py-6 font-bold text-2xl">Security Services Agreement Contract</h1>
                 </div>
                 <div class="text-center font-bold text-lg">
                     <p class="py-3">Section 1</p>

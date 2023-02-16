@@ -12,6 +12,10 @@ class Firearm extends Model
     use HasFactory, CrudTrait, SoftDeletes;
 
     protected $fillable = [
-        
+        'kind',
+        'caliber',
+        'fas_SN',
+        'validity_fas_license',
     ];
+    protected $dates = ['deleted_at'];
 }
