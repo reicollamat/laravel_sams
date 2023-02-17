@@ -54,8 +54,9 @@ class JobRequestsController extends Controller
     // location page
     public function location($user_id, $contract_id): View
     {
-        // retrieve all data from locations table
-        $location_data = Location::all();
+        // retrieve all data from locations table of current contract
+        $location_data = Location::where('contract_id','=',$contract_id)->get();
+
         
         return view('usertab.jobrequest.location')->with(['user_id'=>$user_id, 'contract_id'=>$contract_id, 'locations'=>$location_data]);
     }
@@ -87,9 +88,10 @@ class JobRequestsController extends Controller
     // post page
     public function post($contract_id, $location_id): View
     {
-        // retrieve all data from posts table
-        $post_data = Post::all();
+        // retrieve all data from posts table of current location
+        $post_data = Post::where('location_id','=',$location_id)->get();
         $location_data = Location::find($location_id);
+
         return view('usertab.jobrequest.post')->with(['contract_id'=>$contract_id, 'location_id'=>$location_id ,'posts'=>$post_data, 'locations'=>$location_data]);
     }
     public function storepost(Request $request, $location_id): RedirectResponse
@@ -121,13 +123,23 @@ class JobRequestsController extends Controller
     // Shift page
     public function shift($location_id, $post_id)
     {
+        // test code - splitting day based on number of shifts
+        $start = strtotime(date('h:ia 00:00am'));
+        $shiftsno = 3;
+        $shift = 86400 / $shiftsno;
+        for ($i = 0; $i < $shiftsno; $i++) {
+            echo date('h:i A', $start + $i * $shift) . "-";
+            echo date('h:i A', $start + ($i+1) * $shift) . "<br>";
+        }
+
         $shift_data = Shift::all();
         $post_data = Post::find($post_id);
         return view('usertab.jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post_id, 'shifts'=>$shift_data, 'posts'=>$post_data]);
     }
     
-    public function storeshift()
+    public function storeshift(Request $request, $post_id): RedirectResponse
     {
+        dd($request);
         return redirect('/jobrequest/shift');
     }
 
