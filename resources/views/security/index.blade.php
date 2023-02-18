@@ -14,8 +14,8 @@
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    {{-- <link rel="stylesheet" href="{{ URL::asset('bootstrap/css/bootstrap.min.css') }}" /> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ URL::asset('bootstrap/css/bootstrap.min.css') }}" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> --}}
 
     @vite(['public/css/main.css', 'public/js/main.js'])
 </head>
@@ -99,15 +99,8 @@
                         <a href="{{ route('userdashboard') }}" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
                         @endif
                     @else
-                    <a href="{{ route('login') }}" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
                     @endauth
-                    
-                    
-                        
-                    
-                    
-                    
-                        
                 </div>
             </div>
         </div>
@@ -282,9 +275,8 @@
 
 
     {{-- js script --}}
-    {{-- <script src="{{ URL::asset('bootstrap/js/bootstrap.bundle.min.js') }}" async></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <script src="{{ URL::asset('bootstrap/js/bootstrap.bundle.min.js') }}" async></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script> --}}
 
 </body>
-
 </html>
