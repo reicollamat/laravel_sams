@@ -44,7 +44,7 @@ class JobRequestsController extends Controller
         }
 
         // fetch current contract id
-        $contract_id = $checkcontract->id;
+        $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first();
 
         return redirect(route('jobrequest.location',['user_id'=>$user_id, 'contract_id'=>$contract_id]));
     }
@@ -121,20 +121,75 @@ class JobRequestsController extends Controller
 
 
     // Shift page
-    public function shift($location_id, $post_id)
+    public function shift($location_id, $post_id): View
+    {
+        $post_data = Post::find($post_id);
+        return view('usertab.jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post_id, 'posts'=>$post_data]);
+    }
+
+    
+
+    public function postshift(Request $request, $post_id): View
     {
         // test code - splitting day based on number of shifts
-        $start = strtotime(date('h:ia 00:00am'));
-        $shiftsno = 3;
-        $shift = 86400 / $shiftsno;
-        for ($i = 0; $i < $shiftsno; $i++) {
-            echo date('h:i A', $start + $i * $shift) . "-";
-            echo date('h:i A', $start + ($i+1) * $shift) . "<br>";
+        function SplitTime($StartTime, $EndTime, $shiftsno){
+            $ReturnArray = array();
+            $StartTime    = strtotime($StartTime);
+            $EndTime      = strtotime($EndTime);
+        
+            $shift = 86400 / $shiftsno; // 86400 seconds = 24 hours
+        
+            while ($StartTime < $EndTime)
+            {
+                $ReturnArray[] = date ("h:i A", $StartTime)."-".date ("h:i A", $StartTime+$shift);
+                $StartTime += $shift;
+            }
+            return $ReturnArray;
+        }
+        
+        $startday = $request->startday;
+        $endday = $request->endday;
+        $shiftsno = $request->shiftsno;
+        $starttime = $request->starttime;
+        $guardspershift = $request->guardspershift;
+        
+        // calling the function
+        $splitresult = SplitTime("2018-05-12 ".$starttime, "2018-05-13 ".$starttime, $shiftsno);
+        // changing array key start from 1
+        array_unshift($splitresult,"");
+        unset($splitresult[0]);
+
+        $schedules = $splitresult;
+
+        // storing shiftno to array
+        switch ($shiftsno) {
+            case '1':
+                $shiftsno = array('1');
+                break;
+            case '2':
+                $shiftsno = array('1','2');
+                break;
+            case '3':
+                $shiftsno = array('1','2','3');
+                break;
+            default:
+                break;
         }
 
+        // get the total days between startday and endday
+        foreach (range($startday,$endday) as $day)
+        {
+            $days[] = $day;
+        }
+
+        return view('usertab.jobrequest.schedule')->with(['post_id'=>$post_id,'schedules'=>$schedules,'shifts'=>$shiftsno, 'guardspershift'=>$guardspershift, "days"=>$days]);
+    }
+
+    public function schedule($post_id)
+    {
         $shift_data = Shift::all();
         $post_data = Post::find($post_id);
-        return view('usertab.jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post_id, 'shifts'=>$shift_data, 'posts'=>$post_data]);
+        return view('usertab.jobrequest.schedule',['post_id'=>$post_id, 'shifts'=>$shift_data, 'posts'=>$post_data]);
     }
     
     public function storeshift(Request $request, $post_id): RedirectResponse

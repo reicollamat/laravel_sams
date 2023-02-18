@@ -131,6 +131,10 @@ Route::group(['middleware' => 'auth'], function () {
         // Shift
         Route::get('/{location_id}/jobrequest/{post_id}/shift', [JobRequestsController::class, 'shift'])
             ->name('jobrequest.shift');
+        Route::post('/jobrequest/{post_id}/postshift', [JobRequestsController::class, 'postshift'])
+            ->name('jobrequest.postshift');
+        Route::get('/jobrequest/{post_id}/schedule', [JobRequestsController::class, 'schedule'])
+            ->name('jobrequest.schedule');
         Route::post('/jobrequest/{post_id}/storeshift', [JobRequestsController::class, 'storeshift'])
             ->name('jobrequest.storeshift');
     });

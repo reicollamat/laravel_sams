@@ -27,9 +27,8 @@
         </div>
 
 
-        <form method="POST" action="{{ route('jobrequest.storeshift', ['post_id'=>$post_id]) }}">
+        <form method="POST" action="{{ route('jobrequest.postshift', ['post_id'=>$post_id]) }}">
             @csrf
-
             <div class="mt-4 ">
                 <div class="columns-1 md:columns-2 mt-4">
 
@@ -37,8 +36,8 @@
                     <div>
                         <x-input-label for="startday" :value="__('Day Start')" />
                         <select class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-500 dark:text-gray-400 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8" id="startday" name="startday" :value="old('startday')" required autocomplete="name">
-                            <option value="" disabled selected>Select Starting Day</option>
-                            <option value="1">Monday</option>
+                            <option value="" disabled>Select Starting Day</option>
+                            <option value="1" selected>Monday</option>
                             <option value="2">Tuesday</option>
                             <option value="3">Wednesday</option>
                             <option value="4">Thusday</option>
@@ -52,34 +51,29 @@
                     <div>
                         <x-input-label for="endday" :value="__('Day End')" />
                         <select class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-500 dark:text-gray-400 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8" id="endday" name="endday" :value="old('endday')" required autocomplete="name">
-                            <option value="" disabled selected>Select Ending Day</option>
+                            <option value="" disabled>Select Ending Day</option>
                             <option value="1">Monday</option>
                             <option value="2">Tuesday</option>
                             <option value="3">Wednesday</option>
                             <option value="4">Thusday</option>
                             <option value="5">Friday</option>
                             <option value="6">Saturday</option>
-                            <option value="7">Sunday</option>
+                            <option value="7" selected>Sunday</option>
                         </select>
                     </div>
 
                 </div>
 
-                <div class="columns-1 md:columns-2 mt-4">
+                <div class="columns-1 mt-4">
 
                     {{-- input no. of shifts --}}
                     <div>
-                        <x-input-label for="locations_name" :value="__('Number of Shifts (1-3)')" />
-                        <x-text-input type="number" class="block mt-1 w-full" id="locations_name" name="locations_name" :value="old('locations_name')" required autofocus autocomplete="name" min="1" max="3"/>
-                    </div>
-    
-                    {{-- input working hrs --}}
-                    <div>
-                        <x-input-label for="address" :value="__('Working Hours')" />
-                        <select class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-500 dark:text-gray-400 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8" id="startday" name="startday" :value="old('startday')" required autocomplete="name">
-                            <option value="" disabled selected>Select Working Hours</option>
-                            <option value="1">8 Hours</option>
-                            <option value="2">12 Hours</option>
+                        <x-input-label for="shiftsno" :value="__('Number of Shifts (1-3)')" />
+                        <select class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-500 dark:text-gray-400 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8" id="shiftsno" name="shiftsno" :value="old('shiftsno')" required autocomplete="name">
+                            <option value="" disabled selected>Select number of shift/s</option>
+                            <option value="1">1 Shift - 24 Working Hours</option>
+                            <option value="2">2 Shifts - 12 Working Hours</option>
+                            <option value="3">3 Shifts - 8 Hours</option>
                         </select>
                     </div>
 
@@ -89,14 +83,28 @@
 
                     {{-- input rotation start --}}
                     <div>
-                        <x-input-label for="locations_name" :value="__('Rotation Start (1-12)')" />
-                        <x-text-input type="number" class="block mt-1 w-full" id="locations_name" name="locations_name" :value="old('locations_name')" required autofocus autocomplete="name" min="1" max="12" />
+                        <x-input-label for="starttime" :value="__('Rotation Start (1-12)')" />
+                        <select class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-500 dark:text-gray-400 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8" id="starttime" name="starttime" :value="old('starttime')" required autocomplete="name">
+                            <option value="" disabled selected>Select Working Hours</option>
+                            <option value="1:00">1:00 AM</option>
+                            <option value="2:00">2:00 AM</option>
+                            <option value="3:00">3:00 AM</option>
+                            <option value="4:00">4:00 AM</option>
+                            <option value="5:00">5:00 AM</option>
+                            <option value="6:00">6:00 AM</option>
+                            <option value="7:00">7:00 AM</option>
+                            <option value="8:00">8:00 AM</option>
+                            <option value="9:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                        </select>
                     </div>
     
                     {{-- input no. of guards per shift --}}
                     <div>
-                        <x-input-label for="address" :value="__('Number of Guards per Shift')" />
-                        <x-text-input type="number" class="block mt-1 w-full" id="address" name="address" :value="old('address')" required autofocus autocomplete="name" />
+                        <x-input-label for="guardspershift" :value="__('Number of Guards per Shift')" />
+                        <x-text-input type="number" class="block mt-1 w-full" id="guardspershift" name="guardspershift" :value="old('guardspershift')" required autofocus autocomplete="name" />
                     </div>
 
                 </div>
@@ -110,6 +118,7 @@
             </div>
         </form>
 
+        @if (Session::has('schedules'))
         {{-- temporary table display --}}
         <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -120,11 +129,15 @@
                         consectetur, adipisicing elit. Nesciunt autem quisquam voluptatum culpa dolor.</p>
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+
+                    </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
         </div>
+        @endif
         
     </div>
 </div>

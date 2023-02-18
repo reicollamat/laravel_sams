@@ -98,12 +98,11 @@
                         <td class="px-6 py-4">
                             <a href="{{ route('jobrequest.shift', ['location_id'=>$location_id, 'post_id'=>$post['id']]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
                         </td>
                     </tr>
-                    @endforeach                    
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">                        
+                    @endforeach                  
                 </tbody>
             </table>
         </div>
