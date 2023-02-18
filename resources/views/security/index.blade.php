@@ -92,7 +92,22 @@
                     </h1>
                     <p class="lead my-4 user-select-none">It is designed to effectively organize the security guard
                         industry that would be highly beneficial for any private patrol company or security agency.</p>
-                    <a href="#" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
+                    @auth
+                        @if (auth()->user()->is_admin)
+                        <a href="{{ route('admindashboard') }}" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
+                        @else
+                        <a href="{{ route('userdashboard') }}" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
+                        @endif
+                    @else
+                    <a href="{{ route('login') }}" class="btn btn-primary btn-lg shadow-lg">Get Started</a>
+                    @endauth
+                    
+                    
+                        
+                    
+                    
+                    
+                        
                 </div>
             </div>
         </div>
