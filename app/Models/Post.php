@@ -17,6 +17,12 @@ class Post extends Model
         return $this->belongsTo(Location::class);
     }
 
+    // relationship with shift
+    public function shift()
+    {
+        return $this->hasMany(Shift::class);
+    }
+
     protected $fillable = [
         'place',
         'remarks',

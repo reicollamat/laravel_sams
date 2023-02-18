@@ -81,9 +81,40 @@
                         
                     </tr>
                     @endforeach
+                    {{-- {{dd($shifts)}}
+                    {{dd($days)}}
+                    {{dd($schedules)}} --}}
                 </tbody>
             </table>
         </div>
+
+            @foreach ($days as $day)
+                @foreach ($schedules as $sched)
+                {{$day}} | {{$start_time= substr($sched,0,8)}} | {{$end_time= substr($sched,9)}}<br>
+                @endforeach
+            @endforeach
+
+        <form method="POST" action="{{ route('jobrequest.storeshift',['post_id'=>$post_id]) }}">
+            @csrf
+
+            @foreach ($shifts as $shift)                
+                <input type="text" name="shifts[]" value="{{$shift}}" hidden>
+            @endforeach
+
+            @foreach ($days as $day)
+                <input type="text" name="days[]" value="{{$day}}" hidden>
+            @endforeach
+
+            @foreach ($schedules as $schedule)
+                <input type="text" name="schedules[]" value="{{$schedule}}" hidden>
+            @endforeach
+
+            <div class="mt-4 ">
+                <x-custom-primary-button>
+                    Confirm
+                </x-custom-primary-button>
+            </div>
+        </form>
         
     </div>
 </div>

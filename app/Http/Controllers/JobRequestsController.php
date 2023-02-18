@@ -185,7 +185,7 @@ class JobRequestsController extends Controller
         return view('usertab.jobrequest.schedule')->with(['post_id'=>$post_id,'schedules'=>$schedules,'shifts'=>$shiftsno, 'guardspershift'=>$guardspershift, "days"=>$days]);
     }
 
-    public function schedule($post_id)
+    public function schedule($post_id): View
     {
         $shift_data = Shift::all();
         $post_data = Post::find($post_id);
@@ -194,8 +194,37 @@ class JobRequestsController extends Controller
     
     public function storeshift(Request $request, $post_id): RedirectResponse
     {
-        dd($request);
-        return redirect('/jobrequest/shift');
+
+        $shifts = $request->shifts;
+        $days = $request->days;
+        $schedules = $request->schedules;
+
+        // foreach ($schedules as $key => $schedule) {
+        //     $start_time[] = substr($schedule,0,8);
+        //     $end_time[] = substr($schedule,9);
+        // }
+        
+        foreach ($days as $key => $day) {
+            foreach ($schedules as $key => $schedule) {
+                
+                // instantiates a new Shift
+                $shift = new Shift([
+                    'day' => $day,
+                    'start_time' => substr($schedule,0,8),
+                    'end_time' => substr($schedule,9),
+                ]);
+
+                // fetch current post id
+                $post = Post::find($post_id);
+
+                // saving a new shift in database related to current post
+                $post->shift()->save($shift);
+
+            }
+        }
+
+        $status = 'Post Added!';
+        return redirect(route('jobrequest.schedule',['post_id'=>$post->id]))->with('status',$status);
     }
 
 }

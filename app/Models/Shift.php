@@ -11,6 +11,12 @@ class Shift extends Model
 {
     use HasFactory, CrudTrait, SoftDeletes;
 
+    // relationship with post
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
     protected $fillable = [
         'name',
         'address',
