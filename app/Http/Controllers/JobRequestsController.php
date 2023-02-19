@@ -58,7 +58,10 @@ class JobRequestsController extends Controller
         $location_data = Location::where('contract_id','=',$contract_id)->get();
 
         
-        return view('usertab.jobrequest.location')->with(['user_id'=>$user_id, 'contract_id'=>$contract_id, 'locations'=>$location_data]);
+        return view('usertab.jobrequest.location')->with([
+            'user_id'=>$user_id, 
+            'contract_id'=>$contract_id, '
+            locations'=>$location_data]);
     }
     public function storelocation(Request $request, $contract_id): RedirectResponse
     {
@@ -76,11 +79,19 @@ class JobRequestsController extends Controller
         // fetch current contract id
         $contract = Contract::find($contract_id);
 
-        // saving a new location in database related to current contract
-        $contract->location()->save($location);
 
-        $status = 'Location Added!';
-        return redirect(route('jobrequest.post',['contract_id'=>$contract_id, 'location_id'=>$location->id]))->with('status',$status);
+        // checks if location table is null or column current "contract_id" has already
+        $checklocation = Location::where('contract_id','=',$contract_id)->latest('id')->first();
+        if ($checklocation === null || $checklocation->contract_id != $contract_id){
+            // saving a new location in database related to current contract
+            $contract->location()->save($location);
+        }
+
+        // fetch current location id
+        $location_id = Location::where('contract_id','=',$contract_id)->latest('id')->first();
+
+        $status = 'Location Successfully Added!';
+        return redirect(route('jobrequest.post',['contract_id'=>$contract_id, 'location_id'=>$location_id]))->with('status',$status);
     }
 
 
@@ -92,10 +103,16 @@ class JobRequestsController extends Controller
         $post_data = Post::where('location_id','=',$location_id)->get();
         $location_data = Location::find($location_id);
 
-        return view('usertab.jobrequest.post')->with(['contract_id'=>$contract_id, 'location_id'=>$location_id ,'posts'=>$post_data, 'locations'=>$location_data]);
+        return view('usertab.jobrequest.post')->with([
+            'contract_id'=>$contract_id, 
+            'location_id'=>$location_id ,
+            'posts'=>$post_data, 
+            'locations'=>$location_data]);
     }
-    public function storepost(Request $request, $location_id): RedirectResponse
+    public function storepost(Request $request, $location_id): View
     {
+        $contract_id = $request->contract_id;
+
         $request->validate([
             'place' => 'required',
         ]);
@@ -114,23 +131,91 @@ class JobRequestsController extends Controller
         // saving a new post in database related to current location
         $location->post()->save($post);
 
-        $status = 'Post Added!';
-        return redirect(route('jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post->id]))->with('status',$status);
+        $status = 'Post Successfully Added!';
+        return view('usertab.jobrequest.shift')->with([
+            'status'=>$status, 
+            'contract_id'=>$contract_id, 
+            'location_id'=>$location_id,
+            'post_id'=>$post->id]);
     }
 
 
 
     // Shift page
-    public function shift($location_id, $post_id): View
+    public function shift(Request $request, $post_id): View
     {
-        $post_data = Post::find($post_id);
-        return view('usertab.jobrequest.shift',['location_id'=>$location_id, 'post_id'=>$post_id, 'posts'=>$post_data]);
+        $contract_id = $request->contract_id;
+        $location_id = $request->location_id;
+
+        return view('usertab.jobrequest.shift')->with([
+            'contract_id'=>$contract_id, 
+            'location_id'=>$location_id,
+            'post_id'=>$post_id]);
     }
 
     
 
-    public function postshift(Request $request, $post_id): View
+    // public function postshift(Request $request, $post_id): View
+    // {
+    //     // test code - splitting day based on number of shifts
+    //     function SplitTime($StartTime, $EndTime, $shiftsno){
+    //         $ReturnArray = array();
+    //         $StartTime    = strtotime($StartTime);
+    //         $EndTime      = strtotime($EndTime);
+        
+    //         $shift = 86400 / $shiftsno; // 86400 seconds = 24 hours
+        
+    //         while ($StartTime < $EndTime)
+    //         {
+    //             $ReturnArray[] = date ("h:i A", $StartTime)."-".date ("h:i A", $StartTime+$shift);
+    //             $StartTime += $shift;
+    //         }
+    //         return $ReturnArray;
+    //     }
+        
+    //     $startday = $request->startday;
+    //     $endday = $request->endday;
+    //     $shiftsno = $request->shiftsno;
+    //     $starttime = $request->starttime;
+    //     $guardspershift = $request->guardspershift;
+        
+    //     // calling the function
+    //     $splitresult = SplitTime("2018-05-12 ".$starttime, "2018-05-13 ".$starttime, $shiftsno);
+    //     // changing array key start from 1
+    //     array_unshift($splitresult,"");
+    //     unset($splitresult[0]);
+
+    //     $schedules = $splitresult;
+
+    //     // storing shiftno to array
+    //     switch ($shiftsno) {
+    //         case '1':
+    //             $shiftsno = array('1');
+    //             break;
+    //         case '2':
+    //             $shiftsno = array('1','2');
+    //             break;
+    //         case '3':
+    //             $shiftsno = array('1','2','3');
+    //             break;
+    //         default:
+    //             break;
+    //     }
+
+    //     // get the total days between startday and endday
+    //     foreach (range($startday,$endday) as $day)
+    //     {
+    //         $days[] = $day;
+    //     }
+
+    //     return view('usertab.jobrequest.schedule')->with(['post_id'=>$post_id,'schedules'=>$schedules,'shifts'=>$shiftsno, 'guardspershift'=>$guardspershift, 'days'=>$days,'status'=>null]);
+    // }
+
+    public function schedule(Request $request, $post_id): View
     {
+        $contract_id = $request->contract_id;
+        $location_id = $request->location_id;
+
         // test code - splitting day based on number of shifts
         function SplitTime($StartTime, $EndTime, $shiftsno){
             $ReturnArray = array();
@@ -182,49 +267,65 @@ class JobRequestsController extends Controller
             $days[] = $day;
         }
 
-        return view('usertab.jobrequest.schedule')->with(['post_id'=>$post_id,'schedules'=>$schedules,'shifts'=>$shiftsno, 'guardspershift'=>$guardspershift, "days"=>$days]);
-    }
 
-    public function schedule($post_id): View
-    {
-        $shift_data = Shift::all();
-        $post_data = Post::find($post_id);
-        return view('usertab.jobrequest.schedule',['post_id'=>$post_id, 'shifts'=>$shift_data, 'posts'=>$post_data]);
+        return view('usertab.jobrequest.schedule')->with([
+            'contract_id'=>$contract_id, 
+            'location_id'=>$location_id,
+            'post_id'=>$post_id,
+            'schedules'=>$schedules,
+            'shifts'=>$shiftsno, 
+            'guardspershift'=>$guardspershift, 
+            'days'=>$days,
+            'status'=>null]);
     }
     
     public function storeshift(Request $request, $post_id): RedirectResponse
     {
+        $contract_id = $request->contract_id;
+        $location_id = $request->location_id;
 
         $shifts = $request->shifts;
         $days = $request->days;
         $schedules = $request->schedules;
+        $guardspershift = $request->guardspershift;
 
-        // foreach ($schedules as $key => $schedule) {
-        //     $start_time[] = substr($schedule,0,8);
-        //     $end_time[] = substr($schedule,9);
-        // }
-        
-        foreach ($days as $key => $day) {
-            foreach ($schedules as $key => $schedule) {
+        // changing array key start from 1
+        array_unshift($schedules,"");
+        unset($schedules[0]);
                 
-                // instantiates a new Shift
-                $shift = new Shift([
-                    'day' => $day,
-                    'start_time' => substr($schedule,0,8),
-                    'end_time' => substr($schedule,9),
-                ]);
 
-                // fetch current post id
-                $post = Post::find($post_id);
+        // fetch current post id
+        $post = Post::find($post_id);
 
-                // saving a new shift in database related to current post
-                $post->shift()->save($shift);
+        // checks if shift table is null or column current "post" has already
+        $checkshift = Shift::where('post_id','=',$post_id)->latest('id')->first();
+        if ($checkshift === null || $checkshift->post_id != $post_id){
 
+            foreach ($days as $key => $day) {
+                foreach ($schedules as $key => $schedule) {
+                    
+                    // instantiates a new Shift
+                    $shift = new Shift([
+                        'day' => $day,
+                        'start_time' => date("H:i:s",strtotime(substr($schedule,0,8))) ,
+                        'end_time' => date("H:i:s",strtotime(substr($schedule,9))),
+                    ]);
+
+                    // saving a new shift in database related to current post
+                    $post->shift()->save($shift);
+
+                }
             }
+
+            $status = 'Schedule Successfully Added!';
+
+        }
+        else
+        {
+            $status = null;
         }
 
-        $status = 'Post Added!';
-        return redirect(route('jobrequest.schedule',['post_id'=>$post->id]))->with('status',$status);
+        return redirect(route('jobrequest.post',['contract_id'=>$contract_id, 'location_id'=>$location_id]))->with('status',$status);
     }
 
 }

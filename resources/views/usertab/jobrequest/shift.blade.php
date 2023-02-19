@@ -27,7 +27,7 @@
         </div>
 
 
-        <form method="POST" action="{{ route('jobrequest.postshift', ['post_id'=>$post_id]) }}">
+        <form method="GET" action="{{ route('jobrequest.schedule', ['post_id'=>$post_id]) }}">
             @csrf
             <div class="mt-4 ">
                 <div class="columns-1 md:columns-2 mt-4">
@@ -85,7 +85,7 @@
                     <div>
                         <x-input-label for="starttime" :value="__('Rotation Start (1-12)')" />
                         <select class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 text-gray-500 dark:text-gray-400 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8" id="starttime" name="starttime" :value="old('starttime')" required autocomplete="name">
-                            <option value="" disabled selected>Select Working Hours</option>
+                            <option value="" disabled selected>Select Start Time</option>
                             <option value="1:00">1:00 AM</option>
                             <option value="2:00">2:00 AM</option>
                             <option value="3:00">3:00 AM</option>
@@ -104,7 +104,7 @@
                     {{-- input no. of guards per shift --}}
                     <div>
                         <x-input-label for="guardspershift" :value="__('Number of Guards per Shift')" />
-                        <x-text-input type="number" class="block mt-1 w-full" id="guardspershift" name="guardspershift" :value="old('guardspershift')" required autofocus autocomplete="name" />
+                        <x-text-input type="number" class="block mt-1 w-full" id="guardspershift" name="guardspershift" :value="old('guardspershift')" required autofocus autocomplete="name" value="2"/>
                     </div>
 
                 </div>
@@ -113,31 +113,13 @@
 
             <div class="mt-4 ">
                 <x-custom-primary-button>
-                    Confirm
+                    Next
                 </x-custom-primary-button>
             </div>
+
+            <input type="text" name="contract_id" value="{{$contract_id}}" hidden>
+            <input type="text" name="location_id" value="{{$location_id}}" hidden>
         </form>
-
-        @if (Session::has('schedules'))
-        {{-- temporary table display --}}
-        <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <caption
-                    class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    Schedule for Post #{{ $post_id }}
-                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet
-                        consectetur, adipisicing elit. Nesciunt autem quisquam voluptatum culpa dolor.</p>
-                </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        @endif
         
     </div>
 </div>

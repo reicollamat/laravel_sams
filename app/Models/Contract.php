@@ -20,7 +20,7 @@ class Contract extends Model
     // relationship with location
     public function location()
     {
-        return $this->hasMany(Location::class);
+        return $this->hasOne(Location::class);
     }
 
     protected $fillable = [

@@ -18,10 +18,10 @@ class Shift extends Model
     }
 
     protected $fillable = [
-        'name',
-        'address',
-        'include',
-        'contract_id',
+        'day',
+        'start_time',
+        'end_time',
+        'post_id',
     ];
 
     protected $dates = ['deleted_at'];
