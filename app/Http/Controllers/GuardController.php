@@ -79,7 +79,7 @@ class GuardController extends Controller
             'nbi_issued_date' => $request->nbi_issued_date,
         ]);
 
-        $status = 'Guards Added!';
+        $status = 'Guard Added Scuccessfully';
 
         return redirect('/securityguard/create')->with('status', $status);
     }
