@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contract;
+use App\Models\Location;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -24,15 +27,22 @@ class AdminJobRequestsController extends Controller
         $contract_details = DB::table('users')
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
-        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->join('posts','locations.id','=','posts.location_id')
+        // ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
         ->get();
+
+        // $contract_details = Location::all();
+        // $contract_details = User::with(['contract'])
+        //                     ->where('is_admin',0)
+        //                     ->get();
+
 
         // $client_id = User::all()->where('is_admin',0);
         // compact('$client_id');
-        dd($contract_details);
+        // dd($contract_details->toArray());
 
         return view('admintab.jobrequest.index', [
-            'contract_details' => $contract_details,
+            'contract_details' => $contract_details->toArray(),
         ]);
         
     }
