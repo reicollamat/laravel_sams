@@ -12,9 +12,6 @@
         @endif
     
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <x-custom-back-button href="{{ url()->previous() }}">
-                {{ __('Back') }}
-            </x-custom-back-button>
             <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <caption class="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                 Add Post
@@ -50,11 +47,13 @@
                 <x-custom-primary-button>
                     Add Post
                 </x-custom-primary-button>
+
+                <input type="text" name="contract_id" value="{{$contract_id}}" hidden>
+
             </div>
         </form>
 
 
-        {{-- temporary table display --}}
         <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption
@@ -96,7 +95,16 @@
                             {{ $post['remarks'] }} 
                         </td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('jobrequest.shift', ['location_id'=>$location_id, 'post_id'=>$post['id']]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <form method="GET" action="{{ route('jobrequest.shift',['post_id'=>$post['id']]) }}">
+
+                                <input type="text" name="contract_id" value="{{$contract_id}}" hidden>
+                                <input type="text" name="location_id" value="{{$location_id}}" hidden>
+
+
+                                <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    Edit
+                                </button>
+                            </form>
                         </td>
                         <td class="px-6 py-4">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>

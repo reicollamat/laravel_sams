@@ -1,5 +1,6 @@
 @extends('layouts.masterapp')
 @section('content')
+
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
 
@@ -12,9 +13,6 @@
         @endif
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <x-custom-back-button href="{{ url()->previous() }}">
-                {{ __('Back') }}
-            </x-custom-back-button>
             <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption
                     class="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
@@ -27,7 +25,6 @@
         </div>
 
 
-        {{-- temporary table display --}}
         <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption
@@ -81,18 +78,10 @@
                         
                     </tr>
                     @endforeach
-                    {{-- {{dd($shifts)}}
-                    {{dd($days)}}
-                    {{dd($schedules)}} --}}
+
                 </tbody>
             </table>
         </div>
-
-            @foreach ($days as $day)
-                @foreach ($schedules as $sched)
-                {{$day}} | {{$start_time= substr($sched,0,8)}} | {{$end_time= substr($sched,9)}}<br>
-                @endforeach
-            @endforeach
 
         <form method="POST" action="{{ route('jobrequest.storeshift',['post_id'=>$post_id]) }}">
             @csrf
@@ -109,12 +98,26 @@
                 <input type="text" name="schedules[]" value="{{$schedule}}" hidden>
             @endforeach
 
+            <input type="text" name="guardspershift" value="{{$guardspershift}}" hidden>
+            
+            <input type="text" name="contract_id" value="{{$contract_id}}" hidden>
+            <input type="text" name="location_id" value="{{$location_id}}" hidden>
+
             <div class="mt-4 ">
                 <x-custom-primary-button>
-                    Confirm
+                    Save->
                 </x-custom-primary-button>
             </div>
         </form>
+
+        <div class="mt-4 ">
+
+            <form action="{{ route('jobrequest.shift',['post_id'=>$post_id]) }}">
+                <x-custom-primary-button>
+                    <-Edit
+                </x-custom-primary-button>
+            </form>
+        </div>
         
     </div>
 </div>
