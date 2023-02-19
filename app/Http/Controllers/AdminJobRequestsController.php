@@ -23,6 +23,7 @@ class AdminJobRequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    // accept the requst and change the value of status to 2 for user approval
     public function accept(Request $request, $id): RedirectResponse {
 
         $contract = Contract::find($id);
@@ -32,6 +33,7 @@ class AdminJobRequestsController extends Controller
         return Redirect::route('indexjobrequest')->with('status', 'Approved Successfully');
     }
 
+        // accept the requst and change the value of status to 5 for urejection
     public function reject(Request $request,$id): RedirectResponse {
         $contract = Contract::find($id);
         $contract->status = 5;
@@ -43,6 +45,8 @@ class AdminJobRequestsController extends Controller
         // $client_id = DB::table('users')->where('is_admin',0)->get();
         // $client_id = DB::table('contracts')->get();
         // $contract_details = DB::table('contracts')->join('users','users.id','=','contracts.user_id')->get();
+
+        // same join but only selecting specific columns
         $contract_details = DB::table('users')
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
@@ -97,13 +101,14 @@ class AdminJobRequestsController extends Controller
      */
     public function show($id)
     {
-        // viewjobrequest.blade
 
+        // join 4 tables to get data (should be optimize more)
         $contract_details = DB::table('users')
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('posts','locations.id','=','posts.location_id')
         ->where('contracts.id',$id)
+        ->limit(1)
         ->get();
 
         // dd($contract_details->toArray());
