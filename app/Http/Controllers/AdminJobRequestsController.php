@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use App\Models\Contract;
 use App\Models\Location;
-use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 
 //models for index
 
-use App\Models\User;
+use Illuminate\Support\Facades\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+
 class AdminJobRequestsController extends Controller
 {
     /**
@@ -19,6 +22,22 @@ class AdminJobRequestsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function accept(Request $request, $id): RedirectResponse {
+
+        $contract = Contract::find($id);
+        $contract->status = 2;
+        $contract->update();
+        // dd($contract);
+        return Redirect::route('indexjobrequest')->with('status', 'Approved Successfully');
+    }
+
+    public function reject(Request $request,$id): RedirectResponse {
+        $contract = Contract::find($id);
+        $contract->status = 5;
+        $contract->update();
+        return Redirect::route('indexjobrequest')->with('status', 'Rejected Successfully');
+    }
     public function index() {
 
         // $client_id = DB::table('users')->where('is_admin',0)->get();
@@ -29,6 +48,7 @@ class AdminJobRequestsController extends Controller
         ->join('locations','contracts.id','=','locations.id')
         ->join('posts','locations.id','=','posts.location_id')
         ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->wherein('contracts.status',[1,2])
         ->get();
 
         // $contract_details = Location::all();

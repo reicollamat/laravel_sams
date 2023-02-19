@@ -91,10 +91,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get("/jobrequest",
         [AdminJobRequestsController::class, 'index']
         )->name('indexjobrequest');
+
+        Route::post("/jobrequest/accept/{id}",
+        [AdminJobRequestsController::class, 'accept']
+        )->name('acceptjobrequest');
+
+        Route::post("/jobrequest/reject/{id}",
+        [AdminJobRequestsController::class, 'reject']
+        )->name('rejectjobrequest');
         
         Route::get("/jobrequest/{id}/show",
         [AdminJobRequestsController::class, 'show']
-        )->name('jobrequestshow');
+        )->name('showjobrequest');
+
         // End
         Route::get("/activecontract",
         [AdminActiveContractsController::class, 'index']

@@ -245,17 +245,37 @@
                 </div>
 
             </div>
-            <div class="mt-6 w-full flex justify-center">
-                <form action="">
-                    <x-custom-accept-button>
-                        {{ __('Accept') }}
-                    </x-custom-accept-button>
-                    <x-custom-reject-button>
-                        {{ __('Reject') }}
-                    </x-custom-reject-button>
-                    
-                </form>
-            </div>
+            {{-- <form method="POST" action="{{ route('acceptjobrequest') }}" >
+                @csrf --}}
+                {{-- <div class="mt-4 flex justify-center gap-6">
+                    <div class="flex items-center  pl-4 pr-4 border border-gray-200 rounded-md dark:border-gray-700">
+                        <input id="bordered-radio-1" type="radio" value="1" name="bordered-radio" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="bordered-radio-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Approve</label>
+                    </div>
+                    <div class="flex items-center pl-4 pr-4 border border-gray-200 rounded-md dark:border-gray-700">
+                        <input checked id="bordered-radio-2" type="radio" value="0" name="bordered-radio" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="bordered-radio-2" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Reject</label>
+                    </div>
+                </div> --}}
+                <div class="flex justify-center gap-6 mb-6">
+                    <form method="POST" action="{{ route('acceptjobrequest',[ $contract_detail->id ]) }}" >
+                        @csrf
+                        <div class="mt-6 w-full flex justify-center gap-6">
+                            <x-custom-accept-button>
+                                {{ __('Submit') }}
+                            </x-custom-accept-button>
+                        </div>
+                    </form>
+                    <form method="POST" action="{{ route('rejectjobrequest',[ $contract_detail->id ]) }}" >
+                        @csrf
+                        <div class="mt-6 w-full flex justify-center gap-6">
+                            <x-custom-reject-button>
+                                {{ __('Reject') }}
+                            </x-custom-reject-button>
+                        </div>
+                    </form>
+                </div>
+                
         </div>
     @endforeach
 @endsection
