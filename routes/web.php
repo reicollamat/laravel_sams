@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         //show security guard
         Route::get("/securityguard",
             [GuardController::class, 'index']
-        )->name('showsecurityguard');
+        )->name('indexsecurityguard');
 
         //search guard
         //show security guard
@@ -90,7 +90,11 @@ Route::group(['middleware' => 'auth'], function () {
         // End
         Route::get("/jobrequest",
         [AdminJobRequestsController::class, 'index']
-        )->name('jobrequestindex');
+        )->name('indexjobrequest');
+        
+        Route::get("/jobrequest/{id}/show",
+        [AdminJobRequestsController::class, 'show']
+        )->name('jobrequestshow');
         // End
         Route::get("/activecontract",
         [AdminActiveContractsController::class, 'index']

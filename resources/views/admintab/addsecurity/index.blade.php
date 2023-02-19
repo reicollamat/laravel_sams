@@ -13,7 +13,7 @@
         </x-custom-button>
 
         <x-search-bar action="{{ route('searchsecurityguard') }}" method="GET">
-            <x-slot name="anchor" href="{{ route('showsecurityguard') }}">
+            <x-slot name="anchor" href="{{ route('indexsecurityguard') }}">
 
             </x-slot>
         </x-search-bar>

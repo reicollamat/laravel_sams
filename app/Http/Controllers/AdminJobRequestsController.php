@@ -28,7 +28,7 @@ class AdminJobRequestsController extends Controller
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('posts','locations.id','=','posts.location_id')
-        // ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
         ->get();
 
         // $contract_details = Location::all();
@@ -77,7 +77,20 @@ class AdminJobRequestsController extends Controller
      */
     public function show($id)
     {
-        //
+        // viewjobrequest.blade
+
+        $contract_details = DB::table('users')
+        ->join('contracts','contracts.user_id','=','users.id')
+        ->join('locations','contracts.id','=','locations.id')
+        ->join('posts','locations.id','=','posts.location_id')
+        ->where('contracts.id',$id)
+        ->get();
+
+        // dd($contract_details->toArray());
+
+        return view('admintab.jobrequest.viewjobrequest', [
+            'contract_details' => $contract_details->toArray(),
+        ]);
     }
 
     /**

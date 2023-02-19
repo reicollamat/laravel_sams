@@ -8,12 +8,13 @@
                 </div>
             </div>
         </div>
+        <x-search-bar action="{{ route('searchsecurityguard') }}" method="GET">
+            <x-slot name="anchor" href="#">
+
+            </x-slot>
+        </x-search-bar>
         <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-4">
             <div class="relative overflow-x-auto">
-                {{-- @foreach ($contract_details as $contract_detail)
-                    <p>{{ $contract_detail['contract'] }}</p> <br>
-                @endforeach --}}
-
                 @if (count($contract_details) > 0)
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -70,7 +71,7 @@
                                         </p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a class="text-blue-600" href="#">Full Details
+                                        <a class="text-blue-600" href="/jobrequest/{{ $contract_detail->id }}/show">Full Details
                                         </a>
                                     </td>
                                 </tr>

@@ -4,21 +4,21 @@
         <div class="p-4 mt-14">
             <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
                 {{-- Banner --}}
-                <div
-                    class="w-full flex justify-center text-lg p-2 shadow-md uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    <h1>Information Sheet</h1>
-
+                <div class="w-full p-3 rounded-lg flex shadow-md uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                    <x-custom-back-button href="{{ route('indexsecurityguard') }}">
+                        {{ __('Back') }}
+                    </x-custom-back-button>
+                    {{-- Full name --}}
+                    <div
+                        class="fs-6 font-bold text-lg p-2 ">
+                        <h1>{{ $guard->first_name . ' ' . $guard->middle_name . ' ' . $guard->last_name }}</h1>
+                    </div>
                 </div>
-                {{-- Full name --}}
-                <div
-                    class="w-full mt-2 fs-6 font-bold text-lg p-2 shadow-md uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    <h1>{{ $guard->first_name . ' ' . $guard->middle_name . ' ' . $guard->last_name }}</h1>
-
-                </div>
+                
                 {{-- Main Screen --}}
                 <div class="block sm:flex gap-x-11">
                     <div
-                        class="w-full rounded-sm p-3 mt-4 text-gray-900 bg-white border-b  dark:text-white dark:bg-gray-800 dark:border-gray-700 sm:w-1/2">
+                        class="w-full rounded-lg p-3 mt-4 text-gray-900 bg-white border-b  dark:text-white dark:bg-gray-800 dark:border-gray-700 sm:w-1/2">
                         <p>Basic Information</p>
                         <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
 
@@ -87,7 +87,7 @@
 
                     </div>
                     <div
-                        class="w-full rounded-sm p-3 mt-4 text-gray-900 bg-white border-b  dark:text-white dark:bg-gray-800 dark:border-gray-700 sm:w-1/2">
+                        class="w-full rounded-lg p-3 mt-4 text-gray-900 bg-white border-b  dark:text-white dark:bg-gray-800 dark:border-gray-700 sm:w-1/2">
                         <p>Personal / Private Information</p>
                         <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
                         <div class="grid grid-cols-1 gap-0 sm:grid-cols-2">

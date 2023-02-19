@@ -153,7 +153,7 @@
             </div>
 
             <div class="flex items-center justify-center mt-4">
-                <x-custom-back-button href="{{ route('showsecurityguard') }}">
+                <x-custom-back-button href="{{ route('indexsecurityguard') }}">
                     {{ __('Back') }}
                 </x-custom-back-button>
                 <x-custom-primary-button class="ml-4">
