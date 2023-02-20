@@ -17,8 +17,20 @@ class JobRequestsController extends Controller
 {
     public function index($user_id): View
     {
-        // $user_id = Auth::user()->id;
-        return view('usertab.jobrequest.index')->with(['user_id'=>$user_id]);
+        $user = Auth::user();
+
+        $contract = Contract::where('user_id','=',$user_id)
+            ->with(['location'])
+            ->get();
+
+        $checkcontract = Contract::where('user_id','=',$user_id)
+            ->with(['location'])->latest('id')->first();
+
+        return view('usertab.jobrequest.index')->with([
+            'user_id'=>$user_id,
+            'user_data'=>$user,
+            'contracts'=>$contract,
+            'checkcontract'=>$checkcontract]);
     }
 
     public function storecontract($user_id): RedirectResponse
