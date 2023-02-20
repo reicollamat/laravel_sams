@@ -3,12 +3,12 @@
 
 <div class="p-4 sm:ml-64 mt-14">
 
+    {{-- check contract if finished --}}
+    {{-- if contract is finished, display create new contract --}}
     @if ($checkcontract === null || $checkcontract->is_finished == 1)
         <form method="POST" action="{{ route('jobrequest.storecontract', ['user_id'=>$user_id]) }}">
             @csrf
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-2">
-                {{-- temporary table display --}}
-            
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead
@@ -36,9 +36,10 @@
                 </div>
             
             </div>
-        </form>        
+        </form>  
+
+    {{-- if contract is NOT finished, display resume last request form --}}
     @elseif ($checkcontract === null || $checkcontract->is_finished == 0)
-        {{-- {{dd($checkcontract->id)}} --}}
         <form method="GET" action="{{ route('jobrequest.post',['contract_id'=>$checkcontract->id, 'location_id'=>$checkcontract->location->id]) }}">
             @csrf
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-2">
@@ -110,6 +111,7 @@
                             {{$contract->id}}
                         </th>
                         <td class="px-6 py-4">
+                            {{-- fetch the number of post from its related models --}}
                             {{count($contract->location->post)}}
                         </td>
                         <td class="px-6 py-4">
@@ -117,7 +119,9 @@
                         </td>
                         <td class="px-6 py-4">
                             {{$contract->status}}
+                            {{-- display status depending on what status on database --}}
                             @if ($contract->status == 1)
+                                {{-- if request is finished --}}
                                 @if ($contract->is_finished == 0)
                                     Unfinished Request
                                 @elseif ($contract->is_finished == 1)
