@@ -86,7 +86,12 @@ class AdminIssueDdoController extends Controller
         // $curr_posts = Location::find($id)
         ->get();
 
-        dd($curr_ddo, $curr_posts);
+        // dd($curr_ddo, $curr_posts);
+
+        return view('admintab.issueddo.viewddo',[
+            'curr_ddos' => $curr_ddo,
+            'curr_posts' => $curr_posts,
+        ]);
     }
 
     /**

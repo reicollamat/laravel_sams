@@ -44,7 +44,7 @@
                     <h1 class="text-xl">Client Name &nbsp: <span class="font-black uppercase">{{ $active_ddo->name . " " . $active_ddo->last_name }}</span></h1>
                 </div>
                 <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
-                <div class="w-full mt-3 flex justify-start gap-8">
+                <div class="w-full mt-3 flex justify-between gap-8">
                     <div class="flex flex-col gap-3 sm:flex-row">
                         <h1 class="text-xl">Contract Start Date : <span class="font-black uppercase">{{ $active_ddo->start_date }}</span>  </h1>
                         <h1 class="text-xl"> To </h1>
