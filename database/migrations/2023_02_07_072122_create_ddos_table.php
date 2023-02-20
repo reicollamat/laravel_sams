@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('validity');
             $table->string('link')->nullable();
             $table->tinyInteger('is_finished');
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('contract_id');
             $table->softDeletes();
             $table->timestamps();
 

@@ -18,7 +18,7 @@ class Ddo extends Model
         'validity',
         'link',
         'is_finished',
-        'locations_id',
+        'contract_id',
     ];
 
     protected $dates = ['deleted_at'];
