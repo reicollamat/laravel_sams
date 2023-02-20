@@ -55,9 +55,10 @@ class AdminJobRequestsController extends Controller
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('posts','locations.id','=','posts.location_id')
-        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status','contracts.created_at')
         ->wherein('contracts.status',[1,2])
         ->distinct('locations.id')
+        ->orderByDesc('contracts.created_at')
         ->get();
 
 

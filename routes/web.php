@@ -111,11 +111,14 @@ Route::group(['middleware' => 'auth'], function () {
         // End
         Route::get("/activecontract",
         [AdminActiveContractsController::class, 'index']
-        )->name('activecontractindex');
+        )->name('indexactivecontract');
         // End
         Route::get("/ddo",
         [AdminIssueDdoController::class, 'index']
-        )->name('issueddoindex');
+        )->name('indexissueddo');
+        Route::get("/ddo/{id}/show",
+        [AdminIssueDdoController::class, 'create']
+        )->name('showissueddo');
         // End
 
 

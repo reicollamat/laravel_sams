@@ -5,7 +5,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="py-3 flex self-center content-center items-center">
-                    <x-custom-back-button class="mx-4" href="{{ route('activecontractindex') }}">
+                    <x-custom-back-button class="mx-4" href="{{ route('indexactivecontract') }}">
                         {{ __('Back') }}
                     </x-custom-back-button>
                     <p class="ml-3 font-bold text-2xl text-gray-900 dark:text-gray-100">

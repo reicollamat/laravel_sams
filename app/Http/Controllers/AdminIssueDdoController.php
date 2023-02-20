@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
+use App\Models\Contract;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +18,7 @@ class AdminIssueDdoController extends Controller
      */
     public function index()
     {
-        $active_ddo = User::with(['contract'])
-        ->where('is_admin',0)
-        ->get();
+        
 
         // $curr_loc = DB::table('locations')
         // ->join('posts','locations.id','=','posts.location_id')
@@ -41,9 +41,31 @@ class AdminIssueDdoController extends Controller
         // dd($curr_loc->toArray());
 
         // dd($active_ddo);
+
+        // $active_ddo = User::with('contract')
+        // ->where('is_admin',0)
+        // ->get();
+
+        $active_ddo = DB::table('users')
+        ->join('contracts','contracts.user_id','=','users.id')
+        ->join('locations','contracts.id','=','locations.id')
+        // ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        // ->wherein('contracts.status',[1,2])
+        // ->distinct('contracts.id')
+        // ->groupBy('contracts.id')
+        ->orderByDesc('contracts.created_at')
+        ->paginate(2);
+
+        // $curr_posts = Location::with('post')->get();
+
+        // $active_ddo = Contract::with(['location'])->get();
+
+        // dd($active_ddo);
+        // dd($curr_posts->toArray());
+
         return view('admintab.issueddo.index', [
             'active_ddos' => $active_ddo,
-            // 'curr_locs' => $curr_loc,
+            // 'curr_posts' => $curr_posts->toArray(),
         ]);
     }
 
@@ -52,9 +74,19 @@ class AdminIssueDdoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $curr_ddo = DB::table('users')
+        ->join('contracts','contracts.user_id','=','users.id')
+        ->join('locations','contracts.id','=','locations.id')
+        ->where('contracts.id',$id)
+        ->get();
+
+        $curr_posts = Post::where('location_id',$id)
+        // $curr_posts = Location::find($id)
+        ->get();
+
+        dd($curr_ddo, $curr_posts);
     }
 
     /**
