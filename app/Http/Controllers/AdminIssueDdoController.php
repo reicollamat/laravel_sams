@@ -13,6 +13,7 @@ class AdminIssueDdoController extends Controller
      */
     public function index()
     {
+        
         return view('admintab.issueddo.index', [
         ]);
     }

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 //models for index
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -24,23 +25,26 @@ class AdminJobRequestsController extends Controller
      */
 
     // accept the requst and change the value of status to 2 for user approval
-    public function accept(Request $request, $id): RedirectResponse {
+    public function accept(Request $request, $id): RedirectResponse
+    {
 
         $contract = Contract::find($id);
-        $contract->status = 2;
+        $contract->status = 3;
         $contract->update();
         // dd($contract);
         return Redirect::route('indexjobrequest')->with('status', 'Approved Successfully');
     }
 
-        // accept the requst and change the value of status to 5 for urejection
-    public function reject(Request $request,$id): RedirectResponse {
+    // accept the requst and change the value of status to 5 for urejection
+    public function reject(Request $request, $id): RedirectResponse
+    {
         $contract = Contract::find($id);
         $contract->status = 5;
         $contract->update();
         return Redirect::route('indexjobrequest')->with('status', 'Rejected Successfully');
     }
-    public function index() {
+    public function index()
+    {
 
         // $client_id = DB::table('users')->where('is_admin',0)->get();
         // $client_id = DB::table('contracts')->get();
@@ -53,7 +57,22 @@ class AdminJobRequestsController extends Controller
         ->join('posts','locations.id','=','posts.location_id')
         ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
         ->wherein('contracts.status',[1,2])
+        ->distinct()
         ->get();
+
+
+        // $contract_details = User::select('*')
+        //     // ->withCount('contract')
+        //     // ->withCount('location')
+        //     ->with(['contract'])
+        //     // ->withCount('pos')
+        //     // ->where('is_admin',0)
+        //     // ->groupBy('location_id')
+        //     ->where('is_admin',0)
+        //     ->get();
+        // $curr_location = Location::find()
+
+        // dd($contract_details->toArray());
 
         // $contract_details = Location::all();
         // $contract_details = User::with(['contract'])
@@ -66,9 +85,8 @@ class AdminJobRequestsController extends Controller
         // dd($contract_details->toArray());
 
         return view('admintab.jobrequest.index', [
-            'contract_details' => $contract_details->toArray(),
+            'contract_details' => $contract_details,
         ]);
-        
     }
 
 
@@ -104,17 +122,23 @@ class AdminJobRequestsController extends Controller
 
         // join 4 tables to get data (should be optimize more)
         $contract_details = DB::table('users')
-        ->join('contracts','contracts.user_id','=','users.id')
-        ->join('locations','contracts.id','=','locations.id')
-        ->join('posts','locations.id','=','posts.location_id')
-        ->where('contracts.id',$id)
-        ->limit(1)
-        ->get();
+            ->join('contracts', 'contracts.user_id', '=', 'users.id')
+            ->join('locations', 'contracts.id', '=', 'locations.id')
+            ->where('contracts.id', $id)
+            // ->limit(1)
+            ->get();
 
-        // dd($contract_details->toArray());
+        $curr_posts = Post::where('location_id',$id)
+        // $curr_posts = Location::find($id)
+        ->get();
+        // ->toArray();
+
+        // dd($curr_posts);
+          // dd($contract_details->toArray());
 
         return view('admintab.jobrequest.viewjobrequest', [
             'contract_details' => $contract_details->toArray(),
+            'curr_posts' => $curr_posts,
         ]);
     }
 

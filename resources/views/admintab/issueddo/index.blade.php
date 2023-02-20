@@ -8,5 +8,21 @@
                 </div>
             </div>
         </div>
+        <x-search-bar action="{{ route('searchsecurityguard') }}" method="GET">
+            <x-slot name="anchor" href="#">
+            </x-slot>
+        </x-search-bar>
+        <div class="border-2 p-3 border-gray-200 rounded-lg dark:border-gray-700 dark:bg-gray-800 mt-4">
+            <div class="w-full p-2 border rounded-md dark:border-gray-500 dark:text-white">
+                <div class="flex flex-col gap-4 sm:flex-row">
+                    <h1 class="text-xl">Contract ID Number : </h1>
+                    <h1 class="text-xl">Client Name : </h1>
+                </div>
+                <div>
+                    <h1 class="text-xl">Contract Start Date :  </h1>
+                    <h1 class="text-xl">Contract End Date : </h1>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

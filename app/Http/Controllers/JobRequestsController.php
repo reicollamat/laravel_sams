@@ -72,8 +72,8 @@ class JobRequestsController extends Controller
         
         return view('usertab.jobrequest.location')->with([
             'user_id'=>$user_id, 
-            'contract_id'=>$contract_id, '
-            locations'=>$location_data]);
+            'contract_id'=>$contract_id, 
+            'locations'=>$location_data]);
     }
     public function storelocation(Request $request, $contract_id): RedirectResponse
     {
