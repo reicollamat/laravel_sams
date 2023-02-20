@@ -62,7 +62,8 @@
                                 </p>
                                 <p
                                     class="w-full font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    {{ date('Y-m-d', strtotime($curr_ddo->start_date . '+' . $curr_ddo->years . ' years')) }}
+                                    {{-- {{ dd($curr_ddo->years) }} --}}
+                                    {{ date('Y-m-d', strtotime($curr_ddo->start_date . '+' . $curr_ddo->years . 'years')) }}
                                 </p>
                             </div>
                             <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
@@ -121,26 +122,136 @@
                     <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-9">
                         <div class="w-full md:mb-0">
-                            <x-input-label for="birthdate" :value="__('Start Date')" class="mb-1"/>
+                            <x-input-label for="birthdate" :value="__('Start Date')" class="mb-1" />
                             <x-text-input id="birthdate"
                                 class="appearance-none block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-2.5 px-4"
                                 type="date" name="birthdate" :value="old('birthdate')" required autocomplete="name" />
                         </div>
-                        <div>
-                            <div>
-                                <div>
-                                    <label for="visitors"
-                                        class="block text-sm font-medium text-gray-900 dark:text-white mb-1.5">
-                                        Effective Number of Days
-                                    </label>
-                                    <input type="number" id="visitors"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="" required>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    {{-- <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-center text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Shift
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Monday
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tuesday
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Wednesday
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Thursday
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Friday
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Saturday
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Sunday
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($curr_posts as $curr_post)
+                            @foreach ($curr_post->shift as $shifts)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{-- {{$shift}} 
+                                </th>
+                                @for ($i=1;$i<=7;$i++)
+                                    <td class="px-6 py-4">
+                                        @if (in_array($i,$shifts->$days))
+                                        {{ $shifts->start_time }} <br>
+                                        @endif
+                                    </td>
+                                 @endfor
+                            </tr>
+                            @endforeach
+                            @endforeach
+        
+                        </tbody>
+                    </table> --}}
+                    <div>
+                        {{-- {{ dd($curr_ddo->location_id) }} --}}
+                        @foreach ($curr_posts as $curr_post)
+                            @foreach ($curr_post->shift as $shifts)
+                                {{-- {{ $shifts->day }} --}}
+                                @switch($shifts->day)
+                                    @case(1)
+                                        Monday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        @break
+                                    @case(2)
+                                        Tuesday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        <br>
+                                        @break
+                                    @case(3)
+                                        Wednesday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        <br>
+                                        @break
+                                    @case(4)
+                                        Thursday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        <br>
+                                        @break
+                                    @case(5)
+                                        Friday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        <br>
+                                        @break
+                                    @case(6)
+                                        Saturday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        <br>
+                                        @break
+                                    @case(7)
+                                        Sunday
+                                        {{ $shifts->start_time }}
+                                        {{ $shifts->end_time }}
+                                        <br>
+                                        @break
+                                
+                                    @default
+                                        Default case...
+                                @endswitch
+                                {{-- <br>
+                                {{ $shifts->start_time }} --}}
+                            @endforeach
+                        @endforeach
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-center gap-6 mb-6">
+                <form method="POST" action="">
+                    @csrf
+                    <div class="mt-6 w-full flex justify-center gap-6">
+                        <x-custom-accept-button>
+                            {{ __('Approve') }}
+                        </x-custom-accept-button>
+                    </div>
+                </form>
+                <form method="POST" action="">
+                    @csrf
+                    <div class="mt-6 w-full flex justify-center gap-6">
+                        <x-custom-reject-button>
+                            {{ __('Reject') }}
+                        </x-custom-reject-button>
+                    </div>
+                </form>
             </div>
         </div>
     @endforeach

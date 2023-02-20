@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ddos', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date_issued')->nullable();
+            $table->dateTime('approved_date')->nullable();
             $table->date('start_date')->nullable();
             $table->string('operations_manager');
             $table->integer('validity');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
         });
     }
 

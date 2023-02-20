@@ -83,8 +83,11 @@ class AdminIssueDdoController extends Controller
         ->get();
 
         $curr_posts = Post::where('location_id',$id)
+        ->with('shift')
         // $curr_posts = Location::find($id)
         ->get();
+
+
 
         // dd($curr_ddo, $curr_posts);
 
@@ -100,7 +103,7 @@ class AdminIssueDdoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,)
     {
         //
     }
