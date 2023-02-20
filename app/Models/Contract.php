@@ -26,9 +26,9 @@ class Contract extends Model
     protected $fillable = [
         'start_date',
         'years',
-        'months',
+        'end_date',
         'is_finished',
-        'link',
+        'number_of_guards',
         'user_id',
         'issued_date',
         'daily_wage',

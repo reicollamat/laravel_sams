@@ -73,7 +73,6 @@
                             <option value="" disabled selected>Select number of shift/s</option>
                             <option value="1">1 Shift - 24 Working Hours</option>
                             <option value="2">2 Shifts - 12 Working Hours</option>
-                            <option value="3">3 Shifts - 8 Hours</option>
                         </select>
                     </div>
 

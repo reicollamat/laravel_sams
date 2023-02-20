@@ -3,10 +3,18 @@
 
 <div class="p-4 sm:ml-64 mt-14">
 
+    @if (Session::has('status'))
+        <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <span class="font-medium">{{ Session::get('status') }}</span>
+            </div>
+        </div>
+    @endif
+
     {{-- check contract if finished --}}
     {{-- if contract is finished, display create new contract --}}
     @if ($checkcontract === null || $checkcontract->is_finished == 1)
-        <form method="POST" action="{{ route('jobrequest.storecontract', ['user_id'=>$user_id]) }}">
+        <form method="GET" action="{{ route('jobrequest.location', ['user_id'=>$user_id]) }}">
             @csrf
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-2">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -138,6 +146,8 @@
                     @endforeach
                 </tbody>
             </table>
+
+
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@
         </div>
 
 
-        <form method="POST" action="{{ route('jobrequest.storelocation', ['contract_id'=>$contract_id]) }}">
+        <form method="POST" action="{{ route('jobrequest.storelocation', ['user_id'=>$user_id]) }}">
             @csrf
 
             <div class="mt-4 ">
@@ -50,58 +50,6 @@
                 </x-custom-primary-button>
             </div>
         </form>
-
-        {{-- temporary table display --}}
-        {{-- <div class="mt-4 relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <caption
-                    class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    Locations Table of Contract #{{ $contract_id }}
-                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet
-                        consectetur, adipisicing elit. Nesciunt autem quisquam voluptatum culpa dolor.</p>
-                </caption>
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Location Name
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Location Address
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Number of Guards
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Edit
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="">Remove Location</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($locations as $location)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $location['locations_name'] }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ $location['address'] }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $location['include'] }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('jobrequest.post', ['contract_id'=>$contract_id, 'location_id'=>$location['id']]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit Post</a>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
-                        </td>
-                    </tr>      
-                    @endforeach
-                </tbody>
-            </table>
-        </div> --}}
         
     </div>
 </div>

@@ -36,10 +36,46 @@ class JobRequestsController extends Controller
             'checkcontract'=>$checkcontract]);
     }
 
-    public function storecontract($user_id): RedirectResponse
-    {
-        $currentdate = now();
+    // public function storecontract($user_id): RedirectResponse
+    // {
+    //     $currentdate = now();
 
+    //     // instantiates a new Contract
+    //     $contract = new Contract([
+    //         'is_finished' => 0,
+    //         'issued_date' => $currentdate,
+    //         'status' => 1,
+    //     ]);
+
+    //     // fetch current user id 
+    //     $user = User::find($user_id);
+
+
+    //     // checks if contract table is null or column "is_finished" has 1
+    //     $checkcontract = Contract::where('user_id','=',$user_id)->latest('id')->first();
+    //     if ($checkcontract === null || $checkcontract->is_finished == 1){
+    //         // saving a new contract in database related to current user
+    //         $user->contract()->save($contract);
+    //     }
+
+    //     // fetch current contract id
+    //     $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first();
+
+    //     return redirect(route('jobrequest.location',['user_id'=>$user_id, 'contract_id'=>$contract_id]));
+    // }
+
+
+
+    // location page
+    public function location($user_id): View
+    {
+        return view('usertab.jobrequest.location')->with([
+            'user_id'=>$user_id]);
+    }
+    public function storelocation(Request $request, $user_id): RedirectResponse
+    {
+        // creates new CONTRACT
+        $currentdate = now();
         // instantiates a new Contract
         $contract = new Contract([
             'is_finished' => 0,
@@ -59,27 +95,11 @@ class JobRequestsController extends Controller
         }
 
         // fetch current contract id
-        $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first();
-
-        return redirect(route('jobrequest.location',['user_id'=>$user_id, 'contract_id'=>$contract_id]));
-    }
-
-
-
-    // location page
-    public function location($user_id, $contract_id): View
-    {
-        // retrieve all data from locations table of current contract
-        $location_data = Location::where('contract_id','=',$contract_id)->get();
-
+        $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first()->id;
         
-        return view('usertab.jobrequest.location')->with([
-            'user_id'=>$user_id, 
-            'contract_id'=>$contract_id, 
-            'locations'=>$location_data]);
-    }
-    public function storelocation(Request $request, $contract_id): RedirectResponse
-    {
+
+
+        // creates new LOCATION
         $request->validate([
             'locations_name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255', 'unique:'.Location::class],
@@ -94,7 +114,7 @@ class JobRequestsController extends Controller
         // fetch current contract id
         $contract = Contract::find($contract_id);
 
-
+        
         // checks if location table is null or column current "contract_id" has already
         $checklocation = Location::where('contract_id','=',$contract_id)->latest('id')->first();
         if ($checklocation === null || $checklocation->contract_id != $contract_id){
@@ -266,6 +286,7 @@ class JobRequestsController extends Controller
                         'day' => $day,
                         'start_time' => date("H:i:s",strtotime(substr($schedule,0,8))) ,
                         'end_time' => date("H:i:s",strtotime(substr($schedule,9))),
+                        'number_of_guards' => $guardspershift
                     ]);
 
                     // saving a new shift in database related to current post
@@ -273,6 +294,11 @@ class JobRequestsController extends Controller
 
                 }
             }
+
+            // find current contract and insert number of guards
+            $contract = Contract::find($contract_id);
+            $contract->number_of_guards = $guardspershift;
+            $contract->save();
 
             $status = 'Schedule Successfully Added!';
 
@@ -283,6 +309,83 @@ class JobRequestsController extends Controller
         }
 
         return redirect(route('jobrequest.post',['contract_id'=>$contract_id, 'location_id'=>$location_id]))->with('status',$status);
+    }
+
+    // final
+    public function final($contract_id, $location_id): View
+    {
+
+        $datenow = date("Y-m-d");
+
+        // retrieve all data from posts table of current location
+        $post_data = Post::where('location_id','=',$location_id)->get();
+        $location_data = Location::find($location_id);
+
+        return view('usertab.jobrequest.final')->with([
+            'contract_id'=>$contract_id, 
+            'location_id'=>$location_id ,
+            'posts'=>$post_data, 
+            'locations'=>$location_data,
+            'datenow'=>$datenow]);
+    }
+
+    // confirm
+    public function confirm(Request $request): View
+    {
+        $user = Auth::user();
+        $contract_id = $request->contract_id;
+        $location_id = $request->location_id;
+        $start_date = $request->start_date;
+        $years = $request->years;
+        $daily_wage = $request->daily_wage;
+
+        $end_date = date('Y-m-d', strtotime($start_date. ' +'.$years.' years'));
+
+        // retrieve all data from posts table of current location
+        $post_data = Post::where('location_id','=',$location_id)->get();
+        $location_data = Location::find($location_id);
+
+        // dd($location_data);
+
+        return view('usertab.jobrequest.confirm')->with([
+            'location_id'=>$location_id,
+            'contract_id'=>$contract_id,
+            'posts'=>$post_data, 
+            'locations'=>$location_data,
+            'start_date'=>$start_date,
+            'years'=>$years,
+            'daily_wage'=>$daily_wage,
+            'end_date'=>$end_date,
+            'user' => $user,
+            ]);
+    }
+
+    public function storefinal(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        $contract_id = $request->contract_id;
+        $start_date = $request->start_date;
+        $years = $request->years;
+        $end_date = $request->end_date;
+        $daily_wage = $request->daily_wage;
+
+
+        // fetch current contract row and insert/update
+        $contract = Contract::find($contract_id);
+
+        $contract->start_date = $start_date;
+        $contract->years = $years;
+        $contract->end_date = $end_date;
+        $contract->is_finished = 1;
+        $contract->daily_wage = $daily_wage;
+
+        $contract->save();
+
+
+        $status = "Job Request Completed! Please wait for request approval.";
+
+        return redirect(route('jobrequest.index',['user_id'=>$user->id]))->with('status',$status);
     }
 
 }

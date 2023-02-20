@@ -21,6 +21,7 @@ class Shift extends Model
         'day',
         'start_time',
         'end_time',
+        'number_of_guards',
         'post_id',
     ];
 
