@@ -17,12 +17,15 @@ class JobRequestsController extends Controller
 {
     public function index($user_id): View
     {
+        // fetch current user's data
         $user = Auth::user();
 
+        // fetch current contract with its relation to location model
         $contract = Contract::where('user_id','=',$user_id)
             ->with(['location'])
             ->get();
 
+        // fetch the latest contract (for checking if is_finished)
         $checkcontract = Contract::where('user_id','=',$user_id)
             ->with(['location'])->latest('id')->first();
 
@@ -164,64 +167,6 @@ class JobRequestsController extends Controller
             'location_id'=>$location_id,
             'post_id'=>$post_id]);
     }
-
-    
-
-    // public function postshift(Request $request, $post_id): View
-    // {
-    //     // test code - splitting day based on number of shifts
-    //     function SplitTime($StartTime, $EndTime, $shiftsno){
-    //         $ReturnArray = array();
-    //         $StartTime    = strtotime($StartTime);
-    //         $EndTime      = strtotime($EndTime);
-        
-    //         $shift = 86400 / $shiftsno; // 86400 seconds = 24 hours
-        
-    //         while ($StartTime < $EndTime)
-    //         {
-    //             $ReturnArray[] = date ("h:i A", $StartTime)."-".date ("h:i A", $StartTime+$shift);
-    //             $StartTime += $shift;
-    //         }
-    //         return $ReturnArray;
-    //     }
-        
-    //     $startday = $request->startday;
-    //     $endday = $request->endday;
-    //     $shiftsno = $request->shiftsno;
-    //     $starttime = $request->starttime;
-    //     $guardspershift = $request->guardspershift;
-        
-    //     // calling the function
-    //     $splitresult = SplitTime("2018-05-12 ".$starttime, "2018-05-13 ".$starttime, $shiftsno);
-    //     // changing array key start from 1
-    //     array_unshift($splitresult,"");
-    //     unset($splitresult[0]);
-
-    //     $schedules = $splitresult;
-
-    //     // storing shiftno to array
-    //     switch ($shiftsno) {
-    //         case '1':
-    //             $shiftsno = array('1');
-    //             break;
-    //         case '2':
-    //             $shiftsno = array('1','2');
-    //             break;
-    //         case '3':
-    //             $shiftsno = array('1','2','3');
-    //             break;
-    //         default:
-    //             break;
-    //     }
-
-    //     // get the total days between startday and endday
-    //     foreach (range($startday,$endday) as $day)
-    //     {
-    //         $days[] = $day;
-    //     }
-
-    //     return view('usertab.jobrequest.schedule')->with(['post_id'=>$post_id,'schedules'=>$schedules,'shifts'=>$shiftsno, 'guardspershift'=>$guardspershift, 'days'=>$days,'status'=>null]);
-    // }
 
     public function schedule(Request $request, $post_id): View
     {
