@@ -104,6 +104,10 @@ Route::group(['middleware' => 'auth'], function () {
         [AdminJobRequestsController::class, 'show']
         )->name('showjobrequest');
 
+        Route::get("/jobrequest/search/",
+        [AdminJobRequestsController::class, 'search']
+        )->name('searchjobrequest');
+
         // End
         Route::get("/activecontract",
         [AdminActiveContractsController::class, 'index']
