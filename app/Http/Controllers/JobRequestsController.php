@@ -36,34 +36,6 @@ class JobRequestsController extends Controller
             'checkcontract'=>$checkcontract]);
     }
 
-    // public function storecontract($user_id): RedirectResponse
-    // {
-    //     $currentdate = now();
-
-    //     // instantiates a new Contract
-    //     $contract = new Contract([
-    //         'is_finished' => 0,
-    //         'issued_date' => $currentdate,
-    //         'status' => 1,
-    //     ]);
-
-    //     // fetch current user id 
-    //     $user = User::find($user_id);
-
-
-    //     // checks if contract table is null or column "is_finished" has 1
-    //     $checkcontract = Contract::where('user_id','=',$user_id)->latest('id')->first();
-    //     if ($checkcontract === null || $checkcontract->is_finished == 1){
-    //         // saving a new contract in database related to current user
-    //         $user->contract()->save($contract);
-    //     }
-
-    //     // fetch current contract id
-    //     $contract_id = Contract::where('user_id','=',$user_id)->latest('id')->first();
-
-    //     return redirect(route('jobrequest.location',['user_id'=>$user_id, 'contract_id'=>$contract_id]));
-    // }
-
 
 
     // location page
@@ -345,7 +317,6 @@ class JobRequestsController extends Controller
         $post_data = Post::where('location_id','=',$location_id)->get();
         $location_data = Location::find($location_id);
 
-        // dd($location_data);
 
         return view('usertab.jobrequest.confirm')->with([
             'location_id'=>$location_id,
