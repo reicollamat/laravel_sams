@@ -17,7 +17,7 @@ class Ddo extends Model
         'operations_manager',
         'validity',
         'is_finished',
-        'locations_id',
+        'contract_id',
     ];
 
     protected $dates = ['deleted_at'];

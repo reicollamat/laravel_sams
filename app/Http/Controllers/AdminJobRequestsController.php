@@ -55,9 +55,10 @@ class AdminJobRequestsController extends Controller
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('posts','locations.id','=','posts.location_id')
-        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status','contracts.created_at')
         ->wherein('contracts.status',[1,2])
-        ->distinct()
+        ->distinct('locations.id')
+        ->orderByDesc('contracts.created_at')
         ->get();
 
 
@@ -86,6 +87,7 @@ class AdminJobRequestsController extends Controller
 
         return view('admintab.jobrequest.index', [
             'contract_details' => $contract_details,
+            's_contract_details' => array(),
         ]);
     }
 
@@ -127,7 +129,7 @@ class AdminJobRequestsController extends Controller
             ->where('contracts.id', $id)
             // ->limit(1)
             ->get();
-
+        
         $curr_posts = Post::where('location_id',$id)
         // $curr_posts = Location::find($id)
         ->get();
@@ -174,5 +176,34 @@ class AdminJobRequestsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // dd($search);
+
+        $contract_details = array();
+    
+        // Search in the title and body columns from the posts table
+        // $s_guards = Guard::query()
+        //     ->where('first_name', 'LIKE', "%{$search}%")
+        //     ->orWhere('middle_name', 'LIKE', "%{$search}%")
+        //     ->orWhere('last_name', 'LIKE', "%{$search}%")
+        //     ->get();
+
+        $s_contract_details = DB::table('users')
+        ->join('contracts','contracts.user_id','=','users.id')
+        ->join('locations','contracts.id','=','locations.id')
+        ->join('posts','locations.id','=','posts.location_id')
+        ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->where('contracts.id', 'LIKE', "%{$search}%")
+        ->orWhere('start_date', 'LIKE', "%{$search}%")
+        ->orWhere('daily_wage', 'LIKE', "%{$search}%")
+        ->distinct('locations.id')
+        ->get();
+        
+        // Return the search view with the resluts compacted
+        return view('admintab.jobrequest.index', compact('s_contract_details','contract_details'));
     }
 }

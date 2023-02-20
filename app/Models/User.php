@@ -19,10 +19,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contract::class);
     }
-    public function location()
-    {
-        return $this->hasOneThrough(Location::class,Contract::class);
-    }
+    // public function location()
+    // {
+    //     return $this->hasOneThrough(Location::class,Contract::class);
+    // }
     // public function posts()
     // {
     //     // return $this->hasManyThrough(

@@ -125,7 +125,7 @@
                         <div class=" gap-3 flex flex-col font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                             @foreach ($curr_posts as $posts)
                             <p>
-                                {{ $posts['id'] . " . " . $posts['place']  }}
+                                {{ " " . " " . $posts['place']  }}
                             </p>
                             @endforeach
                         </div>

@@ -104,14 +104,21 @@ Route::group(['middleware' => 'auth'], function () {
         [AdminJobRequestsController::class, 'show']
         )->name('showjobrequest');
 
+        Route::get("/jobrequest/search/",
+        [AdminJobRequestsController::class, 'search']
+        )->name('searchjobrequest');
+
         // End
         Route::get("/activecontract",
         [AdminActiveContractsController::class, 'index']
-        )->name('activecontractindex');
+        )->name('indexactivecontract');
         // End
         Route::get("/ddo",
         [AdminIssueDdoController::class, 'index']
-        )->name('issueddoindex');
+        )->name('indexissueddo');
+        Route::get("/ddo/{id}/show",
+        [AdminIssueDdoController::class, 'create']
+        )->name('showissueddo');
         // End
 
 
