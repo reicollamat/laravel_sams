@@ -2,6 +2,38 @@
 @section('content')
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+
+        @if (!$posts->isEmpty())
+        <form method="GET" action="{{ route('jobrequest.final',['contract_id'=>$contract_id, 'location_id'=>$location_id]) }}">
+            @csrf
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead
+                            class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                        <tr>
+                            <th class="p-4 w-1/4">
+                                <div>
+                                    <div class="mt-1 w-full flex justify-center">
+                                        <x-custom-primary-button>
+                                            Proceed
+                                        </x-custom-primary-button>
+                                    </div>
+                                </div>
+                            </th>
+                            <th class= 'font-bold'>
+                                Job Request Form Details
+                                <p class= 'mt-1 text-sm font-normal text-gray-500 dark:text-gray-400'>
+                                    Click "Procees" button to complete
+                                </p>
+                            </th>
+                        </tr>
+                        </thead>
+            
+                    </table>
+                </div>
+            
+        </form>
+        @endif
         
         @if (Session::has('status'))
         <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">

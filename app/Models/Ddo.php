@@ -16,7 +16,6 @@ class Ddo extends Model
         'start_date',
         'operations_manager',
         'validity',
-        'link',
         'is_finished',
         'contract_id',
     ];

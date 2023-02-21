@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('place')->nullable();
-            $table->string('remarks')->nullable();
             $table->tinyInteger('is_armed')->default(0);
             $table->unsignedBigInteger('location_id');
             $table->softDeletes();

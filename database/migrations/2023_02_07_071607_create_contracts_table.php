@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('start_date')->nullable();
             $table->integer('years')->nullable();
-            $table->integer('months')->nullable();
+            $table->date('end_date')->nullable();
             $table->tinyInteger('is_finished')->nullable();
-            $table->string('link')->nullable();
+            $table->tinyInteger('number_of_guards')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->date('issued_date');
             $table->double('daily_wage',15,2)->nullable();

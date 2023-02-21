@@ -26,7 +26,7 @@ use Carbon\Carbon;
 Route::get('/', function () {
     return view('security.index', ['c_datetime'=> Carbon::now('GMT+8')->format('g:i:s A') ." | ". Date('Y/m/d') ]);
     // return dd(auth()->user()->position);
-});
+})->name('welcome');
 
 // for testing
 Route::get('/sampleguard', [GuardController::class, 'index']);
@@ -136,14 +136,12 @@ Route::group(['middleware' => 'auth'], function () {
         // routes for "Create Job Request" tab
         Route::get('/jobrequest/index/{user_id}', [JobRequestsController::class, 'index'])
             ->name('jobrequest.index');
-        // Contract
-        Route::post('/jobrequest/storecontract/{user_id}', [JobRequestsController::class, 'storecontract'])
-            ->name('jobrequest.storecontract');
 
         // Location
-        Route::get('/{user_id}/jobrequest/{contract_id}/location', [JobRequestsController::class, 'location'])
+        Route::get('/{user_id}/jobrequest/location', [JobRequestsController::class, 'location'])
             ->name('jobrequest.location');
-        Route::post('/jobrequest/{contract_id}/storelocation', [JobRequestsController::class, 'storelocation'])
+        // store contract and location
+        Route::post('/{user_id}/jobrequest/storelocation', [JobRequestsController::class, 'storelocation'])
             ->name('jobrequest.storelocation');
 
         // Post
@@ -159,6 +157,14 @@ Route::group(['middleware' => 'auth'], function () {
             ->name('jobrequest.schedule');
         Route::post('/jobrequest/{post_id}/storeshift', [JobRequestsController::class, 'storeshift'])
             ->name('jobrequest.storeshift');
+
+        // final
+        Route::get('/{contract_id}/jobrequest/{location_id}/final', [JobRequestsController::class, 'final'])
+            ->name('jobrequest.final');
+        Route::get('/jobrequest/confirm', [JobRequestsController::class, 'confirm'])
+            ->name('jobrequest.confirm');
+        Route::post('/jobrequest/storefinal', [JobRequestsController::class, 'storefinal'])
+            ->name('jobrequest.storefinal');
     });
 
 
