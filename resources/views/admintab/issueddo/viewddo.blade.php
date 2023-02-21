@@ -13,11 +13,11 @@
                         <h1 class="w-full">{{ __('Duty Detail Order') . ' Number : # ' . $curr_ddo->id }}</h1>
                         <div class="w-full flex flex-col justify-end gap-2 sm:flex-row">
                             <h1>{{ __('STATUS :') }}</h1>
-                            {{-- @if ($contract_detail->status == 1)
-                            <h1 class="text-red-600">Waiting for Approval</h1>
-                        @else
-                            <h1>Waiting for Approval</h1>
-                        @endif --}}
+                                @if ($curr_ddo->status == 3)
+                                <h1 class="text-yellow-300">For DDO Approval</h1>
+                                @else
+                                    <h1>Waiting for Approval</h1>
+                                @endif
                             </h1>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <div>
                         <div class="grid grid-cols-1 gap-0 sm:grid-cols-2">
                             <p class="w-full text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                Location Included Posts :
+                                Location Included Posts : <span class="ml-2 font-bold text-md">{{ count($curr_posts) }}</span>
                             </p>
                         </div>
                         <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
@@ -116,8 +116,8 @@
                                     array_push($list, $curr_post->id);
                                 @endphp
                                 <p
-                                    class="ml-[3em] text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    &nbsp;&nbsp; <span class="ml-2 font-bold text-md"> {{ $curr_post->place }}</span>
+                                    class="ml-[3em] w-fit text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                                    &nbsp;&nbsp; <span class="ml-2 font-bold text-"> {{ $curr_post->place }}</span>
                                 </p>
                             @endforeach
                         </div>

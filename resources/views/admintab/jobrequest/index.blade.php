@@ -112,22 +112,22 @@
                             <tbody>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        class="px-6 py-4 font-xl text-gray-900 whitespace-nowrap dark:text-white">
                                         <p class="text-white">
                                             {{ strtoupper($contract_detail->name) . ' ' . strtoupper($contract_detail->last_name) }}
                                         </p>
                                     </th>
                                     <td class="px-6 py-4">
-                                        <p class="text-white">{{ $contract_detail->locations_name }}</p>
+                                        <p class="text-white font-xl font-black">{{ $contract_detail->locations_name }}</p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        none
+                                        <p class="text-white font-xl font-black">{{ $contract_detail->number_of_guards }}</p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <p class="text-white">{{ $contract_detail->start_date }}</p>
+                                        <p class="text-white font-xl font-black">{{ $contract_detail->start_date }}</p>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <p class="text-white">
+                                        <p class="text-white font-xl font-black">
                                             @if ($contract_detail->status == 1)
                                                 Pending
                                             @elseif ($contract_detail->status == 2)

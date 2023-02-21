@@ -2,7 +2,8 @@
 @section('content')
     {{-- {{ dd($loc_id,$post_id,$data) }} --}}
     <div class="p-4 mt-14">
-        <form action="#" method="POST">
+        <form action="{{ route('storeissueddo',[$loc_id,$post_id,$data]) }}" method="POST">
+            @csrf
             <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
 
                 {{-- client info detail --}}
@@ -30,6 +31,7 @@
                     <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
                     @php
                         $shift_counts = count($curr_shifts);
+                        dd($shift_counts);
                         $shift_count = $shift_counts / 7;
                     @endphp
                     <div class="flex flex-col mt-4 sm:justify-evenly sm:flex-row">

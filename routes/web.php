@@ -117,6 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get("/ddo",
         [AdminIssueDdoController::class, 'index']
         )->name('indexissueddo');
+
         Route::get("/ddo/{id}",
         [AdminIssueDdoController::class, 'create']
         )->name('showissueddo');
@@ -124,6 +125,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get("/ddo/{loc_id}/{post_id}/{array}",
         [AdminIssueDdoController::class, 'steptwo']
         )->name('steptwo');
+
+        Route::post("/ddo/{loc_id}/{post_id}/{array}",
+        [AdminIssueDdoController::class, 'store']
+        )->name('storeissueddo');
+        
         // End
 
 

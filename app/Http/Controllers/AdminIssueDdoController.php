@@ -96,6 +96,7 @@ class AdminIssueDdoController extends Controller
         // ->wherein('contracts.status',[1,2])
         // ->distinct('contracts.id')
         // ->groupBy('contracts.id')
+        ->where('status',3)
         ->orderByDesc('contracts.created_at')
         ->paginate(2);
 
@@ -146,9 +147,9 @@ class AdminIssueDdoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,)
-    {
-        //
+    public function store(Request $request,$loc_id,$post_id,$array)
+    {   
+        dd($request->getContent(),$loc_id,$post_id,$array);
     }
 
     /**
