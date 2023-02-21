@@ -61,6 +61,13 @@
                     <p id="floating_helper_text" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Please insert post here.</p>
                 </div>
 
+                {{-- input no. of guards per shift --}}
+                <div class="mt-4">
+                    <x-input-label for="guardspershift" :value="__('Number of Guards per Post')" />
+                    <x-text-input type="number" class="block mt-1 w-full" id="guardspershift" name="guardspershift" :value="old('guardspershift')" required autofocus autocomplete="name" value="2"/>
+                    <p id="floating_helper_text" class="mt-2 text-xs text-gray-500 dark:text-gray-400">Please insert number of guards here.</p>
+                </div>
+
                 {{-- check if is armed --}}
                 <div class="mt-4 flex">
                     <div class="flex items-center h-5">

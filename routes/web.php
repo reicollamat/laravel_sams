@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminActiveContractsController;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,6 +133,8 @@ Route::group(['middleware' => 'auth'], function () {
         // routes for "Create Job Request" tab
         Route::get('/jobrequest/index/{user_id}', [JobRequestsController::class, 'index'])
             ->name('jobrequest.index');
+        Route::get('/jobrequest/approved/{user_id}', [JobRequestsController::class, 'approved'])
+            ->name('jobrequest.approved');
 
         // Location
         Route::get('/{user_id}/jobrequest/location', [JobRequestsController::class, 'location'])
@@ -161,6 +164,9 @@ Route::group(['middleware' => 'auth'], function () {
             ->name('jobrequest.confirm');
         Route::post('/jobrequest/storefinal', [JobRequestsController::class, 'storefinal'])
             ->name('jobrequest.storefinal');
+        Route::get('/jobrequest/{contract_id}/view_contract', [JobRequestsController::class, 'view_contract'])
+            ->name('jobrequest.view_contract');
+
     });
 
 

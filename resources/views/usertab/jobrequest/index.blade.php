@@ -108,7 +108,7 @@
                             Status
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">View</span>
+                            <span>Details</span>
                         </th>
                     </tr>
                 </thead>
@@ -139,8 +139,8 @@
                                 Contract Proposed
                             @endif
                         </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('jobrequest.view_contract',['contract_id'=>$contract->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                         </td>
                     </tr>
                     @endforeach

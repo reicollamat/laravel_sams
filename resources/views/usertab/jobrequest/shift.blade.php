@@ -78,7 +78,7 @@
 
                 </div>
 
-                <div class="columns-1 md:columns-2 mt-4">
+                <div class="columns-1 mt-4">
 
                     {{-- input rotation start --}}
                     <div>
@@ -100,11 +100,11 @@
                         </select>
                     </div>
     
-                    {{-- input no. of guards per shift --}}
+                    {{-- input no. of guards per shift
                     <div>
                         <x-input-label for="guardspershift" :value="__('Number of Guards per Shift')" />
                         <x-text-input type="number" class="block mt-1 w-full" id="guardspershift" name="guardspershift" :value="old('guardspershift')" required autofocus autocomplete="name" value="2"/>
-                    </div>
+                    </div> --}}
 
                 </div>
 

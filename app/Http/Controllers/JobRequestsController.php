@@ -119,6 +119,7 @@ class JobRequestsController extends Controller
     public function storepost(Request $request, $location_id): View
     {
         $contract_id = $request->contract_id;
+        $guardspershift = $request->guardspershift;
 
         $request->validate([
             'place' => 'required',
@@ -134,9 +135,13 @@ class JobRequestsController extends Controller
 
         // fetch current location id
         $location = Location::find($location_id);
-
         // saving a new post in database related to current location
         $location->post()->save($post);
+
+        // find current contract and insert number of guards
+        $contract = Contract::find($contract_id);
+        $contract->number_of_guards = $guardspershift;
+        $contract->save();
 
         $status = 'Post Successfully Added!';
         return view('usertab.jobrequest.shift')->with([
@@ -185,7 +190,6 @@ class JobRequestsController extends Controller
         $endday = $request->endday;
         $shiftsno = $request->shiftsno;
         $starttime = $request->starttime;
-        $guardspershift = $request->guardspershift;
         
         // calling the function
         $splitresult = SplitTime("2018-05-12 ".$starttime, "2018-05-13 ".$starttime, $shiftsno);
@@ -223,7 +227,6 @@ class JobRequestsController extends Controller
             'post_id'=>$post_id,
             'schedules'=>$schedules,
             'shifts'=>$shiftsno, 
-            'guardspershift'=>$guardspershift, 
             'days'=>$days,
             'status'=>null]);
     }
@@ -236,7 +239,6 @@ class JobRequestsController extends Controller
         $shifts = $request->shifts;
         $days = $request->days;
         $schedules = $request->schedules;
-        $guardspershift = $request->guardspershift;
 
         // changing array key start from 1
         array_unshift($schedules,"");
@@ -258,7 +260,6 @@ class JobRequestsController extends Controller
                         'day' => $day,
                         'start_time' => date("H:i:s",strtotime(substr($schedule,0,8))) ,
                         'end_time' => date("H:i:s",strtotime(substr($schedule,9))),
-                        'number_of_guards' => $guardspershift
                     ]);
 
                     // saving a new shift in database related to current post
@@ -266,11 +267,6 @@ class JobRequestsController extends Controller
 
                 }
             }
-
-            // find current contract and insert number of guards
-            $contract = Contract::find($contract_id);
-            $contract->number_of_guards = $guardspershift;
-            $contract->save();
 
             $status = 'Schedule Successfully Added!';
 
@@ -357,6 +353,51 @@ class JobRequestsController extends Controller
         $status = "Job Request Completed! Please wait for request approval.";
 
         return redirect(route('jobrequest.index',['user_id'=>$user->id]))->with('status',$status);
+    }
+
+
+    public function view_contract($contract_id): View
+    {
+        $id = $contract_id;
+        $getPost = DB::select('CALL get_contract_by_id('.$id.')');
+    
+        // fetch current user
+        $user = Auth::user();
+
+        // fetch current contract
+        $contract = Contract::find($contract_id);
+
+        // fetch current location
+        $location = Location::where('contract_id','=',$contract_id)->first();
+
+        // fetch current posts
+        $posts = Post::where('location_id','=',$location->id)->get();
+        
+
+        return view('usertab.jobrequest.view_contract')->with([
+            'user'=>$user,
+            'contract'=>$contract,
+            'location'=>$location,
+            'posts'=>$posts
+        ]);
+    }
+
+    public function approved($user_id): View
+    {
+        // fetch current user's data
+        $user = Auth::user();
+
+        // fetch current contract with its relation to location model
+        $contract = Contract::where('user_id','=',$user_id)
+            ->with(['location'])
+            ->get();
+
+
+        return view('usertab.jobrequest.approved')->with([
+            'user_id'=>$user_id,
+            'user_data'=>$user,
+            'contracts'=>$contract
+        ]);
     }
 
 }

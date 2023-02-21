@@ -18,7 +18,6 @@ return new class extends Migration
             $table->tinyInteger('day');
             $table->time('start_time');
             $table->time('end_time');
-            $table->tinyInteger('number_of_guards');
             $table->unsignedBigInteger('post_id');
             $table->softDeletes();
             $table->timestamps();

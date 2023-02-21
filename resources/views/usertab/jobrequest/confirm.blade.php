@@ -130,7 +130,7 @@
             @csrf
             <div class="mt-4 text-center">
                 <x-custom-primary-button>
-                    Confirm
+                    Submit Request
                 </x-custom-primary-button>
 
                 <input type="text" name="start_date" value="{{$start_date}}" hidden>

@@ -71,7 +71,6 @@
                             <td class="px-6 py-4">
                                 @if (in_array($i,$days))
                                     {{ $schedules[$shift] }} <br>
-                                    Guard/s Assigned: {{ $guardspershift }}
                                 @endif
                             </td>
                         @endfor
@@ -98,8 +97,6 @@
                 <input type="text" name="schedules[]" value="{{$schedule}}" hidden>
             @endforeach
 
-            <input type="text" name="guardspershift" value="{{$guardspershift}}" hidden>
-            
             <input type="text" name="contract_id" value="{{$contract_id}}" hidden>
             <input type="text" name="location_id" value="{{$location_id}}" hidden>
 
