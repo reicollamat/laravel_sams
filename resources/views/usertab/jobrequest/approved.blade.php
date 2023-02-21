@@ -14,49 +14,51 @@
                 </caption>
             </table>
 
-            @foreach ($contracts as $contract)
-                <div class="p-4">
-                    <a href="#">
-                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                Contract ID :
-                            </p>
-                            <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                #{{$contract->id}}
-                            </h1>
-                            <hr>
-                            <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                Requested Start Date :
-                            </p>
-                            <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                {{date("F jS, Y", strtotime($contract->start_date))}}
-                            </h1>
-                            <hr>
-                            <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                Expiration Date :
-                            </p>
-                            <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                {{date("F jS, Y", strtotime($contract->end_date))}}
-                            </h1>
-                            <hr>
-                            <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                Number of Guards :
-                            </p>
-                            <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                {{$contract->number_of_guards}}
-                            </h1>
-                            <hr>
-                            <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                Number of Post/s :
-                            </p>
-                            <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                {{count($contract->location->post)}}
-                            </h1>
-                        </div> 
-                    </a>
-                </div>
-            @endforeach
-            
+            {{-- display if status is 3(approved by admin) --}}
+            @if ($contract->status == 3)
+                @foreach ($contracts as $contract)
+                    <div class="p-4">
+                        <a href="#">
+                            <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
+                                    Contract ID :
+                                </p>
+                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
+                                    #{{$contract->id}}
+                                </h1>
+                                <hr>
+                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
+                                    Requested Start Date :
+                                </p>
+                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
+                                    {{date("F jS, Y", strtotime($contract->start_date))}}
+                                </h1>
+                                <hr>
+                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
+                                    Expiration Date :
+                                </p>
+                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
+                                    {{date("F jS, Y", strtotime($contract->end_date))}}
+                                </h1>
+                                <hr>
+                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
+                                    Number of Guards :
+                                </p>
+                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
+                                    {{$contract->number_of_guards}}
+                                </h1>
+                                <hr>
+                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
+                                    Number of Post/s :
+                                </p>
+                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
+                                    {{count($contract->location->post)}}
+                                </h1>
+                            </div> 
+                        </a>
+                    </div>
+                @endforeach
+            @endif
 
 
         </div>
