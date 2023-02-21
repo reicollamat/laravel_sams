@@ -46,15 +46,16 @@
                 <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
                 <div class="w-full mt-3 flex justify-between gap-8">
                     <div class="flex flex-col gap-3 sm:flex-row">
-                        <h1 class="text-xl">Contract Start Date : <span class="font-black uppercase">{{ $active_ddo->start_date }}</span>  </h1>
-                        <h1 class="text-xl"> To </h1>
-                        <h1 class="text-xl"><span class="font-black uppercase">kunwari meron</span> </h1>
+                        <h1 class="text-xl">Contract Issued Date : <span class="font-black uppercase">{{ $active_ddo->issued_date }}</span>  </h1>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row">
+                        <h1 class="text-xl">Contract Daily Wage : <span class="font-black uppercase">{{ $active_ddo->daily_wage }}</span>  </h1>
                     </div>
                 </div>
                 <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
                 <div class="flex justify-between content-center items-center">
                     <h1 class="text-xl">Location : <span class="font-black uppercase">{{ $active_ddo->locations_name }}</span></h1>
-                    <x-custom-link-button href="/ddo/{{  $active_ddo->id }}/show">
+                    <x-custom-link-button href="/ddo/{{  $active_ddo->id }}">
                         {{ __('View and Assign') }}
                     </x-custom-link-button>
                 </div>

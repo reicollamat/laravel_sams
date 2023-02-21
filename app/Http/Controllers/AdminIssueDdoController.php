@@ -4,13 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Shift;
 use App\Models\Contract;
+use App\Models\Ddo;
+use App\Models\Firearm;
+use App\Models\Guard;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminIssueDdoController extends Controller
 {
+    public function steptwo(Request $request, $loc_id,$post_id, $array){
+        //decode the json from header
+        $data = json_decode($array);
+
+        //decode the array returned by json_decode
+        $data = implode(",",$data);
+
+        $posts = Post::where('location_id', $loc_id)->get();
+
+        // dd($posts);
+
+        $curr_shift = Shift::where('post_id', $post_id)
+        // ->limit(2)
+        ->get();
+
+        $shift_time = Shift::where('post_id', $post_id)
+        ->limit(2)
+        ->get();
+
+        $guard_list = Guard::all();
+
+        // dd($guard_list->toArray());
+
+        $firearm_list = Firearm::all();
+
+        // dd($curr_shift);
+
+        return view('admintab.issueddo.issueddosteptwo',[
+            'loc_id' => $loc_id,
+            'post_id'=> $post_id,
+            'data' => $data,
+            'curr_shifts' => $curr_shift,
+            'shift_time' => $shift_time,
+            'posts' => $posts,
+            'guard_lists'=>$guard_list,
+            'firearm_lists'=> $firearm_list
+
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -84,9 +127,9 @@ class AdminIssueDdoController extends Controller
 
         $curr_posts = Post::where('location_id',$id)
         ->with('shift')
-        // $curr_posts = Location::find($id)
         ->get();
 
+        // dd($curr_posts->toArray());
 
 
         // dd($curr_ddo, $curr_posts);
