@@ -41,7 +41,7 @@
                                 </p>
                                 <p
                                     class="w-full font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    {{ $contract_detail->issued_date }}
+                                    {{ $contract_detail->start_date }}
                                 </p>
                             </div>
                             <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
@@ -65,7 +65,7 @@
                                 </p>
                                 <p
                                     class="w-full font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    {{ $contract_detail->organization_name }}
+                                    {{ date('Y-m-d', strtotime($contract_detail->start_date . '+' . $contract_detail->years . 'years')) }}
                                 </p>
                             </div>
                             <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
@@ -101,7 +101,7 @@
                                 </p>
                                 <p
                                     class="w-full font-bold text-md p-2 uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    none
+                                    {{ $contract_detail->number_of_guards }}
                                 </p>
                             </div>
                             <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
