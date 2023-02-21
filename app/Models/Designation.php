@@ -16,6 +16,8 @@ class Designation extends Model
         'day_off_day',
         'ddo_id',
         'guard_id',
+        'firearm_id',
+        'post_id',
     ];
 
     protected $dates = ['deleted_at'];

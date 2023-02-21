@@ -262,7 +262,7 @@
                         @csrf
                         <div class="mt-6 w-full flex justify-center gap-6">
                             <x-custom-accept-button>
-                                {{ __('Submit') }}
+                                {{ __('Approve') }}
                             </x-custom-accept-button>
                         </div>
                     </form>

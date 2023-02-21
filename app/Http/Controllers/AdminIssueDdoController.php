@@ -9,6 +9,7 @@ use App\Models\Guard;
 use App\Models\Shift;
 use App\Models\Firearm;
 use App\Models\Contract;
+use App\Models\Designation;
 use App\Models\Location;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -190,17 +191,42 @@ class AdminIssueDdoController extends Controller
         //     $curr_contract->save();
         // }
 
+        // assign_gun
+        // assign_guard
+
         // dd($request->toArray());
-        
         // dd($curr_contract);
 
-        Ddo::create([
+        // foreach ($request->assign_gun as $id) {
+        //     echo $id;
+        // }
+
+        
+            
+        // dd($request->assign_gun);
+
+        $savethis_db = Ddo::create([
             'start_date' => $request->start_date,
             'operations_manager' => $operations_manager,
             'contract_id' => $loc_id,
             'is_finished' => true,
             'approved_date' => date("Y-m-d H:i:s"),
         ]);
+
+        $savethis_db->save();
+
+        
+        foreach(array_combine($request->assign_gun, $request->assign_guard) as $d1 => $d2) {
+            // echo $d1 . "from gun";
+            // echo  . "from guard";
+            Designation::create([
+                'ddo_id' => $savethis_db->id,
+                'guard_id' => $d1,
+                'firearm_id' =>$d2,
+                // 'post_id' => 1, 
+            ]);
+        }
+        
 
         $status = "Successfully Added and Approved";
         

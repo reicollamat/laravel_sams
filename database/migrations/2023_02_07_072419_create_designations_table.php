@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
-            $table->integer('designation_type');
-            $table->integer('day_off_day');
+            $table->integer('designation_type')->nullable();
+            $table->integer('day_off_day')->nullable();
             $table->unsignedBigInteger('ddo_id');
             $table->unsignedBigInteger('guard_id');
             $table->unsignedBigInteger('firearm_id');
-            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('post_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

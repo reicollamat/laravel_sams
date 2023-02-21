@@ -113,6 +113,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get("/activecontract",
         [AdminActiveContractsController::class, 'index']
         )->name('indexactivecontract');
+
+        Route::get("/activecontract/test",
+        [AdminActiveContractsController::class, 'show']
+        )->name('showcontract');
+
         // End
         Route::get("/ddo",
         [AdminIssueDdoController::class, 'index']
