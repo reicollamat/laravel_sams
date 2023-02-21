@@ -17,10 +17,18 @@ return new class extends Migration
             $table->id();
             $table->integer('designation_type');
             $table->integer('day_off_day');
-            $table->integer('ddo_id');
-            $table->integer('guard_id');
+            $table->unsignedBigInteger('ddo_id');
+            $table->unsignedBigInteger('guard_id');
+            $table->unsignedBigInteger('firearm_id');
+            $table->unsignedBigInteger('post_id');
             $table->softDeletes();
             $table->timestamps();
+
+            // $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('firearm_id')->references('id')->on('firearms')->onDelete('cascade');
+            $table->foreign('guard_id')->references('id')->on('guards')->onDelete('cascade');
+            $table->foreign('ddo_id')->references('id')->on('ddos')->onDelete('cascade');
+
         });
     }
 

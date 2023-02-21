@@ -11,6 +11,8 @@
         </div>
     @endif
 
+
+
     {{-- check contract if finished --}}
     {{-- if contract is finished, display create new contract --}}
     @if ($checkcontract === null || $checkcontract->is_finished == 1)

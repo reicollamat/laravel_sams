@@ -2,7 +2,7 @@
 @section('content')
     {{-- {{ dd($loc_id,$post_id,$data) }} --}}
     <div class="p-4 mt-14">
-        <form action="{{ route('storeissueddo',[$loc_id,$post_id,$data]) }}" method="POST">
+        <form action="{{ route('storeissueddo', [$loc_id, $post_id, $data]) }}" method="POST">
             @csrf
             <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
 
@@ -15,7 +15,7 @@
                 </div>
                 <div
                     class="w-full mt-3 p-3 rounded-lg shadow-md uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    
+
                     <div class="w-full text-lg flex justify-center font-black">
                         <h1>Initial Setup</h1>
                     </div>
@@ -31,12 +31,11 @@
                     <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
                     @php
                         $shift_counts = count($curr_shifts);
-                        dd($shift_counts);
                         $shift_count = $shift_counts / 7;
                     @endphp
                     <div class="flex flex-col mt-4 sm:justify-evenly sm:flex-row">
                         <div>
-                            <p class="text-xl">Conttract Shift Per Day</p>
+                            <p class="text-xl">Contract Shift Per Day</p>
                             <div class="mt-2 w-full md:mb-0">
                                 <x-input-label for="phone_number" :value="__('')" class="w-full" />
                                 <input
@@ -46,6 +45,18 @@
 
                             </div>
                         </div>
+                        <div>
+                            <p class="text-xl">Number of Guards</p>
+                            <div class="mt-2 w-full md:mb-0">
+                                <x-input-label for="phone_number" :value="__('')" class="w-full" />
+                                <input
+                                    class="appearance-none block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 "
+                                    id="phone_number" type="text" name="phone_number" value="{{ $curr_contract }}"
+                                    disabled :value="{{ $curr_contract }}" />
+
+                            </div>
+                        </div>
+
                         <div>
                             <div class="mt-4 flex gap-10 sm:mt-0">
                                 @php
@@ -117,37 +128,49 @@
                                                 for="sex">
                                             </label>
                                             <div class="relative">
-                                                <select
-                                                    class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
-                                                    id="assign_guard" name="assign_guard" :value="old('assign_guard')"
-                                                    required autocomplete="">
-                                                    <option value="" disabled selected>Select</option>
-                                                    @foreach ($guard_lists as $guard_list)
-                                                        <option value="{{ $guard_list->id }}">
-                                                            {{ $guard_list->first_name . " " .$guard_list->last_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <x-input-error :messages="$errors->get('assign_guard')" class="mt-2" />
+                                                {{-- @for ($i = 1; $i <= $curr_contract; $i++) --}}
+                                                    <select
+                                                        class="mt-1 block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
+                                                        id="assign_guard" name="assign_guard[]" :value="old('assign_guard')"
+                                                        required autocomplete="">
+                                                        <option value="" disabled selected>Select</option>
+                                                        @foreach ($guard_lists as $guard_list)
+                                                            <option value="{{ $guard_list->id }}">
+                                                                {{ $guard_list->first_name . ' ' . $guard_list->last_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <x-input-error :messages="$errors->get('assign_guard')" class="mt-2" />
+                                                {{-- @endfor --}}
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4">
-                                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-300"
-                                                for="sex">
-                                            </label>
-                                            <div class="relative">
-                                                <select
-                                                    class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
-                                                    id="assign_gun" name="assign_gun" :value="old('assign_gun')" required
-                                                    autocomplete="">
-                                                    <option value="" disabled selected>Select</option>
-                                                    @foreach ($firearm_lists as $firearm_list)
-                                                        <option value="{{ $firearm_list->id }}">
-                                                            {{ $firearm_list->kind . " " .$firearm_list->caliber }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <x-input-error :messages="$errors->get('assign_gun')" class="mt-2" />
-                                            </div>
-                                        </td>
+                                        @if ($post->is_armed)
+                                            <td class="px-6 py-4">
+                                                <label class="block font-medium text-sm text-gray-700 dark:text-gray-300"
+                                                    for="sex">
+                                                </label>
+                                                <div class="relative">
+                                                    <select
+                                                        class="block appearance-none w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm py-3 px-4 pr-8"
+                                                        id="assign_gun" name="assign_gun[]" :value="old('assign_gun')"
+                                                        required autocomplete="">
+                                                        <option value="" disabled selected>Select</option>
+                                                        @foreach ($firearm_lists as $firearm_list)
+                                                            <option value="{{ $firearm_list->id }}">
+                                                                {{ $firearm_list->kind . ' ' . $firearm_list->caliber }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <x-input-error :messages="$errors->get('assign_gun')" class="mt-2" />
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td
+                                                class="flex justify-center item content-center self-center px-6 py-4 font-black text-lg">
+                                                <h1>Not Armed</h1>
+                                            </td>
+                                        @endif
+
 
                                     </tr>
                                 </tbody>
@@ -155,7 +178,7 @@
                         </table>
                     </div>
                     <div class="w-full mt-6 flex justify-center">
-                        
+
                         <x-custom-clear-button>
                             {{ __('Reset') }}
                         </x-custom-clear-button>
@@ -167,4 +190,5 @@
                 </div>
         </form>
     </div>
+
 @endsection

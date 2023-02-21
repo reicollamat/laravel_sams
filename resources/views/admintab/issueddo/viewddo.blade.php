@@ -89,11 +89,17 @@
                         </div>
                         <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
                     </div>
+
+                    
                     <div>
-                        <div class="grid grid-cols-1 gap-0 sm:grid-cols-1">
+                        <div class="grid grid-cols-1 gap-0 sm:grid-cols-2">
                             <p
                                 class="w-full  text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                                 Location Address : <span class="ml-2 font-bold text-md">{{ $curr_ddo->address }}</span>
+                            </p>
+                            <p
+                                class="w-full  text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                                Request Number Of Guards : <span class="ml-2 font-bold text-md">{{ $curr_ddo->number_of_guards }}</span>
                             </p>
                         </div>
                         <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">

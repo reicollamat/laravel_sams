@@ -18,9 +18,7 @@ return new class extends Migration
             $table->dateTime('approved_date')->nullable();
             $table->date('start_date')->nullable();
             $table->string('operations_manager');
-            $table->integer('validity');
-            $table->string('link')->nullable();
-            $table->tinyInteger('is_finished');
+            $table->tinyInteger('is_finished')->nullable();
             $table->unsignedBigInteger('contract_id');
             $table->softDeletes();
             $table->timestamps();

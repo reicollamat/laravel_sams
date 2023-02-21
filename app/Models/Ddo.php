@@ -12,10 +12,11 @@ class Ddo extends Model
     use HasFactory, CrudTrait, SoftDeletes;
 
     protected $fillable = [
-        'date_issued',
+        'approved_date',
         'start_date',
         'operations_manager',
         'validity',
+        'link',
         'is_finished',
         'contract_id',
     ];

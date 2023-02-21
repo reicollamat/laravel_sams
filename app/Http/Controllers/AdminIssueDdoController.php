@@ -2,25 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ddo;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Shift;
-use App\Models\Contract;
-use App\Models\Ddo;
-use App\Models\Firearm;
 use App\Models\Guard;
+use App\Models\Shift;
+use App\Models\Firearm;
+use App\Models\Contract;
 use App\Models\Location;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminIssueDdoController extends Controller
 {
     public function steptwo(Request $request, $loc_id,$post_id, $array){
-        //decode the json from header
+
+        //decode the json from header (bracket with comma separtion)
         $data = json_decode($array);
 
-        //decode the array returned by json_decode
+        // dd($data);
+
+        //decode the array returned by json_decode to make a string
         $data = implode(",",$data);
+
+        // dd($data);
+
+        $contract = Contract::where('id',$loc_id)
+        ->select('number_of_guards')
+        ->pluck('number_of_guards')
+        ->first();
+
+        // dd($contract);
 
         $posts = Post::where('location_id', $loc_id)->get();
 
@@ -50,8 +64,8 @@ class AdminIssueDdoController extends Controller
             'shift_time' => $shift_time,
             'posts' => $posts,
             'guard_lists'=>$guard_list,
-            'firearm_lists'=> $firearm_list
-
+            'firearm_lists'=> $firearm_list,
+            'curr_contract' => $contract,
         ]);
     }
     /**
@@ -147,9 +161,50 @@ class AdminIssueDdoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$loc_id,$post_id,$array)
+    public function store(Request $request,$loc_id,$post_id,$array): RedirectResponse
     {   
-        dd($request->getContent(),$loc_id,$post_id,$array);
+        $request->validate([
+            'start_date' => ['required', 'date'],
+        ]);
+
+        // a string to an array mapping
+        $explode_id = array_map('intval', explode(',', $array));
+
+        // dd($explode_id);
+
+
+        //get current admin name and last name 
+        $operations_manager = Auth::user()->name . " " . Auth::user()->last_name;
+
+        //get current instance of contract table to update
+        $curr_contract = Contract::findOrFail($loc_id);
+
+        // update the status record to approved
+        $curr_contract->status = 4;
+        //save the update
+        $curr_contract->save();
+
+
+        // if ($curr_contract) {
+        //     $curr_contract->status = 4;
+        //     $curr_contract->save();
+        // }
+
+        // dd($request->toArray());
+        
+        // dd($curr_contract);
+
+        Ddo::create([
+            'start_date' => $request->start_date,
+            'operations_manager' => $operations_manager,
+            'contract_id' => $loc_id,
+            'is_finished' => true,
+            'approved_date' => date("Y-m-d H:i:s"),
+        ]);
+
+        $status = "Successfully Added and Approved";
+        
+        return redirect('/ddo')->with('status', $status);
     }
 
     /**

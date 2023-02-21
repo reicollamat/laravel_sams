@@ -14,6 +14,12 @@
             </x-slot>
         </x-search-bar>
         <div class="border-2 p-4 border-gray-200 rounded-lg dark:border-gray-700 dark:bg-gray-800 mt-4">
+            @if (session('status'))
+                <x-custom-info-banner>
+                    {{ session('status') }} 
+                </x-custom-info-banner>
+            @endif
+
             @if (count($active_ddos) > 0)
 
                 @foreach ($active_ddos as $active_ddo)
@@ -53,10 +59,6 @@
                     </h1>
                 </div>
             @endif
-            
-            
-            
-            
             <div class="relative w-full mb-3">
                 @if (count($active_ddos) > 0)
                     {{ $active_ddos->links('pagination::tailwind') }}
