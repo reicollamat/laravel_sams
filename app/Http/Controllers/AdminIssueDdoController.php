@@ -22,10 +22,21 @@ class AdminIssueDdoController extends Controller
         //decode the array returned by json_decode
         $data = implode(",",$data);
 
-        $curr_shift = Shift::where('post_id', $post_id)->first()->get();
-        dd($curr_shift->toArray());
+        $posts = Post::where('location_id', $loc_id)->get();
+
+        // dd($posts);
+
+        $curr_shift = Shift::where('post_id', $post_id)
+        // ->limit(2)
+        ->get();
+
+        $shift_time = Shift::where('post_id', $post_id)
+        ->limit(2)
+        ->get();
 
         $guard_list = Guard::all();
+
+        // dd($guard_list->toArray());
 
         $firearm_list = Firearm::all();
 
@@ -36,6 +47,11 @@ class AdminIssueDdoController extends Controller
             'post_id'=> $post_id,
             'data' => $data,
             'curr_shifts' => $curr_shift,
+            'shift_time' => $shift_time,
+            'posts' => $posts,
+            'guard_lists'=>$guard_list,
+            'firearm_lists'=> $firearm_list
+
         ]);
     }
     /**

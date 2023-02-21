@@ -82,6 +82,10 @@
                                 class="w-full  text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                                 Location Name : <span class="ml-4 font-bold text-md">{{ $curr_ddo->locations_name }}</span>
                             </p>
+                            <p
+                                class="w-full  text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                                Daily Wage in Contract: <span class="ml-4 font-bold text-md">{{ $curr_ddo->daily_wage }}</span>
+                            </p>
                         </div>
                         <hr class="h-px my-1 bg-gray-200 border-0 dark:bg-gray-700">
                     </div>
@@ -113,7 +117,7 @@
                                 @endphp
                                 <p
                                     class="ml-[3em] text-md p-2  uppercase text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                                    &nbsp;&nbsp;{{ $curr_post->id . $curr_post->place }}
+                                    &nbsp;&nbsp; <span class="ml-2 font-bold text-md"> {{ $curr_post->place }}</span>
                                 </p>
                             @endforeach
                         </div>
@@ -144,23 +148,12 @@
                     {{-- {{ dd($list) }} --}}
                     {{-- {{  $serializeArray = serialize($list) }}  --}}
                     {{-- {{ $encoded = json_encode($list) }} --}}
-                    <div class="flex justify-center gap-6 mb-6">
-                        <form method="POST" action="">
-                            @csrf
-                            <div class="mt-6 w-full flex justify-center gap-6">
-                                <x-custom-back-button href="{{ route('indexissueddo') }}">
-                                    {{ __('Back') }}
-                                </x-custom-back-button>
-                            </div>
-                        </form>
-                        <form method="POST" action="">
-                            @csrf
-                            <div class="mt-6 w-full flex justify-center gap-6">
-                                <x-custom-link-button href="{{ $curr_ddo->id }}/{{ $curr_post->id }}/{{ json_encode($list) }}">
-                                    {{ __('Next') }}
-                                </x-custom-link-button>
-                            </div>
-                        </form>
+                    <div class="flex justify-center gap-0 mb-6">
+                        <div class="mt-6 flex justify-center gap-6">
+                            <x-custom-link-button href="{{ $curr_ddo->id }}/{{ $curr_post->id }}/{{ json_encode($list) }}">
+                                {{ __('Next') }}
+                            </x-custom-link-button>
+                        </div>
                     </div>
                 </div>
     @endforeach

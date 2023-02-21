@@ -48,6 +48,9 @@
                     <div class="flex flex-col gap-3 sm:flex-row">
                         <h1 class="text-xl">Contract Issued Date : <span class="font-black uppercase">{{ $active_ddo->issued_date }}</span>  </h1>
                     </div>
+                    <div class="flex flex-col gap-3 sm:flex-row">
+                        <h1 class="text-xl">Contract Daily Wage : <span class="font-black uppercase">{{ $active_ddo->daily_wage }}</span>  </h1>
+                    </div>
                 </div>
                 <hr class="h-px my-3 bg-gray-200 border-0 dark:bg-gray-700">
                 <div class="flex justify-between content-center items-center">
