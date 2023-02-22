@@ -30,5 +30,7 @@ class GuardsTableSeeder extends Seeder
             'agency_affiliation_date' => now(),
             'nbi_issued_date' => now(),
         ]);
+
+        Guard::factory()->count(5)->create();
     }
 }

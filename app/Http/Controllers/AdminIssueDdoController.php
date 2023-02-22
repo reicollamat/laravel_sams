@@ -214,11 +214,12 @@ class AdminIssueDdoController extends Controller
         ]);
 
         $savethis_db->save();
-
         
-        foreach(array_combine($request->assign_gun, $request->assign_guard) as $d1 => $d2) {
+        
+        foreach(array_combine($request->assign_guard, $request->assign_gun) as $d1 => $d2) {
             // echo $d1 . "from gun";
             // echo  . "from guard";
+            // dd($d1 . $d2 );
             Designation::create([
                 'ddo_id' => $savethis_db->id,
                 'guard_id' => $d1,

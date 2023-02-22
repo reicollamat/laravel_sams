@@ -19,7 +19,8 @@ class AdminActiveContractsController extends Controller
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('ddos','contracts.id','=','ddos.id')
-        // ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        ->select('users.name','users.last_name','contracts.id','contracts.end_date','locations.id','ddos.approved_date','contracts.status','ddos.id AS ddoid')
+        // ->select('ddos.id AS ddoid')
         // ->wherein('contracts.status',[1,2])
         // ->distinct('contracts.id')
         // ->groupBy('contracts.id')
@@ -28,9 +29,10 @@ class AdminActiveContractsController extends Controller
         ->get();
         // ->paginate(2);
 
-        dd($all_contracts->toArray());
+        // dd($all_contracts->toArray());
 
         return view('admintab.activecontract.index', [
+            'all_contracts' => $all_contracts,
         ]);
     }
 

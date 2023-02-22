@@ -36,27 +36,34 @@
                                     Approved Date
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Contract Expiry Date
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Status
                                 </th>
-                                {{-- <th scope="col" class="px-6 py-3">
-                                    Status
-                                </th> --}}
                                 <th scope="col" class="px-6 py-3">
                                     View
                                 </th>
                             </tr>
                         </thead>
-                        {{-- @foreach ($s_guards as $s_guard) --}}
+                        @foreach ($all_contracts as $all_contract)
                         <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr class="bg-white text-md border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    class="px-6 py-4 text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $all_contract->name . " " .$all_contract->last_name}}
                                 </th>
                                 <td class="px-6 py-4">
+                                    {{ $all_contract->id }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    {{ $all_contract->approved_date }}
                                 </td>
                                 <td class="px-6 py-4">
+                                    {{ $all_contract->end_date }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $all_contract->status }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <a class="text-blue-600" href="/activecontract/test">View
@@ -64,7 +71,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </table>
                 </div>
             </div>
