@@ -64,7 +64,7 @@ class AdminActiveContractsController extends Controller
 
         $posts = Post::where('location_id', $contrid)->get();
 
-        dd($posts->toArray());
+        // dd($posts->toArray());
         // $curr_loc = 
 
         // $curr_posts = Post::where('location_id',$id)
@@ -78,11 +78,15 @@ class AdminActiveContractsController extends Controller
         ->join('firearms','designations.firearm_id','=','firearms.id')
         ->get();
 
-        dd($contract_info->toArray(),$curr_ddo->toArray(),$curr_designation->toArray());
+        // dd($contract_info->toArray(),$posts->toArray(),$curr_ddo->toArray(),$curr_designation->toArray());
 
 
 
         return view('admintab.activecontract.contracttemplate', [
+            'contract_infos' => $contract_info,
+            'posts' => $posts,
+            'curr_ddos' => $curr_ddo,
+            'curr_designation' => $curr_designation,
         ]);
     }
 
