@@ -194,11 +194,12 @@
                         <p class="py-3">Section 5</p>
                         <p class="py-3">Authored By</p>
                     </div>
-                        <div class=" w-full flex justify-center px-12 bg-pink-400">
-                            h
-                            <p>Current Administrator and Operation Manager</p>
+                        <div class=" w-full flex justify-center px-12 text-xl">
+                            <h1 class=" underline uppercase font-black ">{{ $contract_info->operations_manager  }}</h1>
                         </div>
-                        
+                        <div class=" w-full flex justify-center px-12">
+                            <p class="">Current Administrator and Operation Manager</p>
+                        </div>
                     <div class="pt-9 text-center font-bold text-lg">
                         <p class="py-3">Section 6</p>
                         <p class="py-3">Work Schedule</p>
