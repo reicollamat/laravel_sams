@@ -182,6 +182,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/jobrequest/{contract_id}/view_contract', [JobRequestsController::class, 'view_contract'])
             ->name('jobrequest.view_contract');
 
+        Route::post('/jobrequest/clientapprove', [JobRequestsController::class, 'clientapprove'])
+            ->name('jobrequest.clientapprove');
+
     });
 
 
