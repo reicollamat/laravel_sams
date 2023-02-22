@@ -10,57 +10,52 @@
                 <caption
                     class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                     {{$user_data->name}}'s Approved Requests
-                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">List of approved requests from Admin. Please click to review the contract and agree if satisfied</p>
+                    <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">List of approved requests from Admin. "View Details" to review the contract and agree if satisfied</p>
                 </caption>
-            </table>
-
-            {{-- display if status is 3(approved by admin) --}}
-                @foreach ($contracts as $contract)
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Contract ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Location
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Number of Post/s
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Start Date
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <span>Details</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($contracts as $contract)
                     @if ($contract->status == 3)
-                    <div class="p-4">
-                        <a href="#">
-                            <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                    Contract ID :
-                                </p>
-                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                    #{{$contract->id}}
-                                </h1>
-                                <hr>
-                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                    Requested Start Date :
-                                </p>
-                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                    {{date("F jS, Y", strtotime($contract->start_date))}}
-                                </h1>
-                                <hr>
-                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                    Expiration Date :
-                                </p>
-                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                    {{date("F jS, Y", strtotime($contract->end_date))}}
-                                </h1>
-                                <hr>
-                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                    Number of Guards :
-                                </p>
-                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                    {{$contract->number_of_guards}}
-                                </h1>
-                                <hr>
-                                <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
-                                    Number of Post/s :
-                                </p>
-                                <h1 class="mb-3 text-lg tracking-tight text-gray-900 dark:text-white">
-                                    {{count($contract->location->post)}}
-                                </h1>
-                            </div> 
-                        </a>
-                    </div>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{$contract->id}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{-- fetch the locations name --}}
+                            {{$contract->location->locations_name}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{count($contract->location->post)}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{date("F jS, Y", strtotime($contract->start_date))}}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="{{ route('jobrequest.view_contract',['contract_id'=>$contract->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Details</a>
+                        </td>
+                    </tr>
                     @endif
-                @endforeach
-
-
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -113,7 +113,7 @@
                             Number of Guards
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Edit
+                            Edit Schedule
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="">Remove Post</span>
