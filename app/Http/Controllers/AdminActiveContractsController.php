@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminActiveContractsController extends Controller
 {
@@ -13,6 +14,22 @@ class AdminActiveContractsController extends Controller
      */
     public function index()
     {
+        // $all_contracts = Users::
+        $all_contracts = DB::table('users')
+        ->join('contracts','contracts.user_id','=','users.id')
+        ->join('locations','contracts.id','=','locations.id')
+        ->join('ddos','contracts.id','=','ddos.id')
+        // ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.start_date','contracts.status')
+        // ->wherein('contracts.status',[1,2])
+        // ->distinct('contracts.id')
+        // ->groupBy('contracts.id')
+        ->where('status',4)
+        ->orderByDesc('contracts.created_at')
+        ->get();
+        // ->paginate(2);
+
+        dd($all_contracts->toArray());
+
         return view('admintab.activecontract.index', [
         ]);
     }
