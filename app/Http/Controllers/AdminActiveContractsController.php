@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ddo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,7 @@ class AdminActiveContractsController extends Controller
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('ddos','contracts.id','=','ddos.id')
-        ->select('users.name','users.last_name','contracts.id','contracts.end_date','locations.id','ddos.approved_date','contracts.status','ddos.id AS ddoid')
+        ->select('users.id AS userid','users.name','users.last_name','contracts.id','contracts.end_date','locations.id','ddos.approved_date','contracts.status','ddos.id AS ddoid')
         // ->select('ddos.id AS ddoid')
         // ->wherein('contracts.status',[1,2])
         // ->distinct('contracts.id')
@@ -37,8 +38,25 @@ class AdminActiveContractsController extends Controller
     }
 
 
-    public function show()
+    public function show($userid,$ddoid)
     {
+        $contract_info = DB::table('users')
+        ->join('contracts','contracts.user_id','=','users.id')
+        ->join('locations','contracts.id','=','locations.id')
+        ->join('ddos','contracts.id','=','ddos.id')
+        // ->select('users.name','users.last_name','contracts.id','contracts.end_date','locations.id','ddos.approved_date','contracts.status')
+        // ->select('ddos.id AS ddoid')
+        // ->wherein('contracts.status',[1,2])
+        // ->distinct('contracts.id')
+        // ->groupBy('contracts.id')
+        ->where('users.id',$userid)
+        ->get();
+
+        $curr_ddo = Ddo::where('id', $ddoid)->get();
+
+        dd($contract_info->toArray(),$curr_ddo->toArray());
+
+
         return view('admintab.activecontract.contracttemplate', [
         ]);
     }

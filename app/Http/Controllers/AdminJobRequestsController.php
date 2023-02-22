@@ -29,7 +29,7 @@ class AdminJobRequestsController extends Controller
     {
 
         $contract = Contract::find($id);
-        $contract->status = 3;
+        $contract->status = 2;
         $contract->update();
         // dd($contract);
         return Redirect::route('indexjobrequest')->with('status', 'Approved Successfully');
@@ -56,7 +56,7 @@ class AdminJobRequestsController extends Controller
         ->join('locations','contracts.id','=','locations.id')
         ->join('posts','locations.id','=','posts.location_id')
         ->select('users.name','users.last_name','contracts.id','locations.locations_name','contracts.number_of_guards','contracts.start_date','contracts.status','contracts.created_at')
-        ->wherein('contracts.status',[1,2])
+        ->where('contracts.status',1)
         ->distinct('locations.id')
         ->orderByDesc('contracts.created_at')
         ->get();

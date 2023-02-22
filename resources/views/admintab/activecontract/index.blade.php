@@ -1,5 +1,6 @@
 @extends('layouts.masterapp')
 @section('content')
+    
     <div class="p-4 sm:ml-64 mt-14">
         <div class="border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -56,6 +57,7 @@
                                 <td class="px-6 py-4">
                                     {{ $all_contract->id }}
                                 </td>
+                                {{-- {{ $all_contract->userid }} --}}
                                 <td class="px-6 py-4">
                                     {{ $all_contract->approved_date }}
                                 </td>
@@ -66,7 +68,7 @@
                                     {{ $all_contract->status }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a class="text-blue-600" href="/activecontract/test">View
+                                    <a class="text-blue-600" href="/activecontract/{{ $all_contract->userid }}/{{ $all_contract->ddoid }}">View
                                         Contract</a>
                                 </td>
                             </tr>
