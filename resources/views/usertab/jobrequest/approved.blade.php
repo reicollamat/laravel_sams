@@ -3,6 +3,14 @@
 
 <div class="p-4 sm:ml-64 mt-14">
 
+    @if (Session::has('status'))
+        <div x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 5000)">
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <span class="font-medium">{{ Session::get('status') }}</span>
+            </div>
+        </div>
+    @endif
+
     <div class="p-3 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -33,7 +41,7 @@
                 </thead>
                 <tbody>
                     @foreach ($contracts as $contract)
-                    @if ($contract->status == 3)
+                    @if ($contract->status == 2)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{$contract->id}}

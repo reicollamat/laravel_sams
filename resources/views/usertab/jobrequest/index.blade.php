@@ -101,10 +101,10 @@
                             Contract ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Number of Posts
+                            Location
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Number of Guards
+                            Number of Post/s
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -117,38 +117,37 @@
                 <tbody>
                     @foreach ($contracts as $contract)
                     @if ($contract->status != 3)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{$contract->id}}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{-- fetch the number of post from its related models --}}
-                            {{count($contract->location->post)}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{$contract->number_of_guards}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{-- display status depending on what status on database --}}
-                            @if ($contract->status == 1)
-                                {{-- if request is finished --}}
-                                @if ($contract->is_finished == 0)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{$contract->id}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{-- fetch the number of post from its related models --}}
+                                {{$contract->location->locations_name}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{count($contract->location->post)}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{-- display status depending on what status on database --}}
+                                @if ($contract->status == 0)
                                     <span class="text-red-600 dark:text-red-500">
                                         Unfinished Request
                                     </span>
                                 @elseif ($contract->is_finished == 1)
-                                    <span class="text-green-600 dark:text-green-500">
+                                    <span class="text-yellow-300 dark:text-blue-300">
                                         Pending Request
                                     </span>
+                                @elseif ($contract->status == 2)
+                                    <span class="text-green-600 dark:text-green-500">
+                                        Contract Proposed
+                                    </span>
                                 @endif
-                            @elseif ($contract->status == 2)
-                                Contract Proposed
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('jobrequest.view_contract',['contract_id'=>$contract->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Details</a>
-                        </td>
-                    </tr>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="{{ route('jobrequest.view_contract',['contract_id'=>$contract->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Details</a>
+                            </td>
+                        </tr>
                     @endif
                     @endforeach
                 </tbody>

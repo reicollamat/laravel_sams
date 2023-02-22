@@ -52,7 +52,7 @@ class JobRequestsController extends Controller
         $contract = new Contract([
             'is_finished' => 0,
             'issued_date' => $currentdate,
-            'status' => 1,
+            'status' => 0,
         ]);
 
         // fetch current user id 
@@ -346,6 +346,7 @@ class JobRequestsController extends Controller
         $contract->end_date = $end_date;
         $contract->is_finished = 1;
         $contract->daily_wage = $daily_wage;
+        $contract->status = 1;
 
         $contract->save();
 
@@ -398,6 +399,26 @@ class JobRequestsController extends Controller
             'user_data'=>$user,
             'contracts'=>$contract
         ]);
+    }
+
+    public function clientapprove(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+
+        $contract_id = $request->contract_id;
+        $status = $request->status;
+
+
+        // fetch current contract row and insert/update
+        $contract = Contract::find($contract_id);
+        $contract->status = $status;
+
+        $contract->save();
+
+
+        $status = "Job Request Agreement Accepted!";
+        
+        return redirect(route('jobrequest.approved',['user_id'=>$user->id]))->with('status',$status);
     }
 
 }
