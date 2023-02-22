@@ -169,6 +169,7 @@
                         </table>
                     </div>
                     {{-- curr_designations --}}
+                    
                     <div class="pt-6 text-center font-bold text-lg">
                         <p class="py-3">Section 2.4</p>
                         <p class="py-3">Assigned Guard</p>
@@ -178,20 +179,27 @@
                                 <th class="border-4">Is_armed</th>
                                 <th class="border-4">Ballistics information</th>
                             </tr>
-                            @foreach ($curr_designations as $curr_designation)
                             <tr>
-                                <td class="border flex flex-row">
+                                @foreach ($curr_designations as $curr_designation)
+                                @foreach ($posts as $post)
+                                <td class="border">
                                     <span class="w-full underline ">
                                         {{ $curr_designation->first_name ." " . $curr_designation->last_name}}
                                     </span>
                                 </td>
-                                <td class="border flex flex-row">
+                                <td class="border">
+                                    {{ $post->is_armed }}
                                 </td>
-                                
-                            </tr>
+                                <td class="border">
+                                    {{ $curr_designation->kind ." / " . $curr_designation->caliber . " / " . $curr_designation->fas_SN}}
+                                </td>
+                                @endforeach
+                                @endforeach
 
-                            @endforeach
+                            </tr>
+                            
                         </table>
+                       
                     </div>
                     <div class="pt-9 text-center font-bold text-lg">
                         <p class="py-3">Section 3</p>
