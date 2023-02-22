@@ -19,7 +19,9 @@
                             @if ($contract->is_finished == 0)
                                 Form not complete! Please finish request form.
                             @elseif ($contract->is_finished == 1)
-                                Request is being evaluated by the admin    
+                                <span class="text-red-600">
+                                    Request is being evaluated by the admin    
+                                </span>
                             @endif
                         </p>
                     </caption>
@@ -255,14 +257,31 @@
                     <p class="py-3">Work Schedule</p>
                 </div>
             </div>
+            {{-- if agree = status = 3 --}}
             <form method="POST" action="{{ route('jobrequest.clientapprove') }}">
                 @csrf
                 <div class="mt-4 text-center">
                     <x-custom-primary-button>
-                        AGREE
+                        I AGREE
                     </x-custom-primary-button>
     
                     <input type="number" name="contract_id" value="{{$contract->id}}" hidden>
+                    <input type="number" name="status" value="3" hidden>
+    
+                </div>
+            </form>
+            {{-- if agree = status = 5 --}}
+            <form method="POST" action="{{ route('jobrequest.clientapprove') }}">
+                @csrf
+                <div class="mt-4 text-center">
+                    <x-custom-primary-button>
+                        <span class="text-red-600">
+                            I DISAGREE
+                        </span>
+                    </x-custom-primary-button>
+    
+                    <input type="number" name="contract_id" value="{{$contract->id}}" hidden>
+                    <input type="number" name="status" value="5" hidden>
     
                 </div>
             </form>

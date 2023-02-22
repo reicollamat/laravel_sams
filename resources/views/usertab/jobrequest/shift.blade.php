@@ -12,9 +12,6 @@
         @endif
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <x-custom-back-button href="{{ url()->previous() }}">
-                {{ __('Back') }}
-            </x-custom-back-button>
             <table class="mt-4 w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <caption
                     class="p-2 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">

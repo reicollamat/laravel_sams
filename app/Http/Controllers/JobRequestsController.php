@@ -406,11 +406,12 @@ class JobRequestsController extends Controller
         $user = Auth::user();
 
         $contract_id = $request->contract_id;
+        $status = $request->status;
 
 
         // fetch current contract row and insert/update
         $contract = Contract::find($contract_id);
-        $contract->status = 3;
+        $contract->status = $status;
 
         $contract->save();
 

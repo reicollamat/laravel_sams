@@ -117,38 +117,40 @@
                 <tbody>
                     @foreach ($contracts as $contract)
                     @if ($contract->status != 3)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{$contract->id}}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{-- fetch the number of post from its related models --}}
-                            {{count($contract->location->post)}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{$contract->number_of_guards}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{-- display status depending on what status on database --}}
-                            @if ($contract->status == 1)
-                                {{-- if request is finished --}}
-                                @if ($contract->is_finished == 0)
-                                    <span class="text-red-600 dark:text-red-500">
-                                        Unfinished Request
-                                    </span>
-                                @elseif ($contract->is_finished == 1)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{$contract->id}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{-- fetch the number of post from its related models --}}
+                                {{count($contract->location->post)}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$contract->number_of_guards}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{-- display status depending on what status on database --}}
+                                @if ($contract->status == 1)
+                                    {{-- if request is finished --}}
+                                    @if ($contract->is_finished == 0)
+                                        <span class="text-red-600 dark:text-red-500">
+                                            Unfinished Request
+                                        </span>
+                                    @elseif ($contract->is_finished == 1)
+                                        <span class="text-blue-600 dark:text-blue-500">
+                                            Pending Request
+                                        </span>
+                                    @endif
+                                @elseif ($contract->status == 2)
                                     <span class="text-green-600 dark:text-green-500">
-                                        Pending Request
+                                        Contract Proposed
                                     </span>
                                 @endif
-                            @elseif ($contract->status == 2)
-                                Contract Proposed
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="{{ route('jobrequest.view_contract',['contract_id'=>$contract->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Details</a>
-                        </td>
-                    </tr>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="{{ route('jobrequest.view_contract',['contract_id'=>$contract->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Details</a>
+                            </td>
+                        </tr>
                     @endif
                     @endforeach
                 </tbody>
