@@ -69,7 +69,7 @@
                                     {{ $all_contract->status }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a class="text-blue-600" href="/activecontract/{{ $all_contract->userid }}/{{ $all_contract->ddoid }}">View
+                                    <a class="text-blue-600" href="/activecontract/{{ $all_contract->userid }}/{{ $all_contract->contractid }}/{{ $all_contract->ddoid }}">View
                                         Contract</a>
                                 </td>
                             </tr>

@@ -114,7 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
         [AdminActiveContractsController::class, 'index']
         )->name('indexactivecontract');
 
-        Route::get("/activecontract/{userid}/{ddoid}",
+        Route::get("/activecontract/{userid}/{contrid}/{ddoid}",
         [AdminActiveContractsController::class, 'show']
         )->name('showcontract');
 

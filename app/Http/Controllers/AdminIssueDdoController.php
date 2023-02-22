@@ -205,6 +205,10 @@ class AdminIssueDdoController extends Controller
             
         // dd($request->assign_gun);
 
+        
+
+        // dd($request->assign_guard , $request->assign_gun);
+
         $savethis_db = Ddo::create([
             'start_date' => $request->start_date,
             'operations_manager' => $operations_manager,
@@ -214,12 +218,50 @@ class AdminIssueDdoController extends Controller
         ]);
 
         $savethis_db->save();
+
+        // $request->input('assign_gun', == 'null');
+        // if ($request->input('assign_gun') == 'null') {
+        //     $request->merge(['assign_gun' => array([1,2])]);;
+        // }
+
+        //if guard is not armed
+        $i = 0;
+        $myarray = array();
+        if (!isset($request->assign_gun)) {
+            
+            foreach ($request->assign_guard as $key) {
+                // echo $i ."\n";
         
+                array_push($myarray,'0');
+                
+                $request->merge([
+                'assign_gun' => $myarray
+
+            ]);
+
+                $i++;
+            }
+        }
+        // dd($myarray);
+
+        // for ($i=0; $i < ; $i++) { 
+        //     # code...
+        // }
+
+        // array_push($a,'0');
+
         
+
+        // dd($request->all());
+
         foreach(array_combine($request->assign_guard, $request->assign_gun) as $d1 => $d2) {
             // echo $d1 . "from gun";
             // echo  . "from guard";
             // dd($d1 . $d2 );
+            
+
+            // dd($d1 , $d2);
+
             Designation::create([
                 'ddo_id' => $savethis_db->id,
                 'guard_id' => $d1,

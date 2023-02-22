@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ddo;
+use App\Models\Post;
 use App\Models\Designation;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +23,7 @@ class AdminActiveContractsController extends Controller
         ->join('contracts','contracts.user_id','=','users.id')
         ->join('locations','contracts.id','=','locations.id')
         ->join('ddos','contracts.id','=','ddos.id')
-        ->select('users.id AS userid','users.name','users.last_name','contracts.id','contracts.end_date','locations.id','ddos.approved_date','contracts.status','ddos.id AS ddoid')
+        ->select('users.id AS userid','users.name','users.last_name','contracts.id as contractid','contracts.end_date','locations.id','ddos.approved_date','contracts.status','ddos.id AS ddoid')
         // ->select('ddos.id AS ddoid')
         // ->wherein('contracts.status',[1,2])
         // ->distinct('contracts.id')
@@ -39,7 +41,7 @@ class AdminActiveContractsController extends Controller
     }
 
 
-    public function show($userid,$ddoid)
+    public function show($userid,$contrid,$ddoid)
     {
         $contract_info = DB::table('users')
         ->join('contracts','contracts.user_id','=','users.id')
@@ -53,7 +55,20 @@ class AdminActiveContractsController extends Controller
         ->where('users.id',$userid)
         ->get();
 
+        // $loc_id = $contract_info->pluck('contrid');
+
+        $loc_id = Location::select('id')->where('contract_id', $contrid)
+        ->get();
+
+        // dd($loc_id->toArray());
+
+        $posts = Post::where('location_id', $contrid)->get();
+
+        dd($posts->toArray());
         // $curr_loc = 
+
+        // $curr_posts = Post::where('location_id',$id)
+        // ->with('shift')
 
 
         $curr_ddo = Ddo::where('id', $ddoid)->get();
