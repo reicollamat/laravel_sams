@@ -90,7 +90,7 @@ class AdminActiveContractsController extends Controller
             'contract_infos' => $contract_info,
             'posts' => $posts,
             'curr_ddos' => $curr_ddo,
-            'curr_designation' => $curr_designation,
+            'curr_designations' => $curr_designation,
         ]);
     }
 

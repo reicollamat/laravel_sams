@@ -57,7 +57,8 @@
                                 sustained by any person arising out of the negligence or misconduct of the Contractor, its
                                 employees, or agents. The liability of the Contractor to the Client, its affiliates,
                                 officers, directors, employees, and agents shall be limited to One Million Philippine Pesos
-                                (₱1,000,000.00) per occurrence, with a Two Million Philippine Pesos (₱2,000,000.00) annual
+                                (₱1,000,000.00)
+                                per occurrence, with a Two Million Philippine Pesos (₱2,000,000.00) annual
                                 aggregate.
                             </li>
                             <li class="pt-8 text-sm">
@@ -101,8 +102,28 @@
 
                         </table>
                     </div>
+                    <div class="px-12 list-decimal text-justify ">
+                        <div class="pt-6 text-center font-bold text-lg">
+                            <p class="py-3">Section 2.3</p>
+                            <p class="py-3">Salary System</p>
+                            <p> The salary System are adjusted base on the current year, such values may change when there is holiday, day-off, and any other special non-working holiday</p>
+                            <table class="w-full mt-3 border-4">
+                                <tr>
+                                    <th class="border-4">Daily Wage</th>
+                                    <th class="border-4">Quarterly Wage</th>
+                                    <th class="border-4">Annually Wage</th>
+                                </tr>
+                                <tr>
+                                    <td class="border">{{ $contract_info->daily_wage }}</td>
+                                    <td class="border">{{ number_format($contract_info->daily_wage * 91,2,',','.')  }} Php</td>
+                                    <td class="border">{{ number_format($contract_info->daily_wage * 260,2,',','.')  }} Php</td>
+                                </tr>
+    
+                            </table>
+                        </div>
+                    </div>
                     <div class="pt-6 text-center font-bold text-lg">
-                        <p class="py-3">Section 2.1</p>
+                        <p class="py-3">Section 2.2</p>
                         <p class="py-3">Post Locations</p>
                         <table class="w-full border-4">
                             <tr>
@@ -122,8 +143,54 @@
                                     </td>
                                 </tr>
                             @endforeach
+                        </table>
+                    </div>
+                    <div class="pt-6 text-center font-bold text-lg">
+                        <p class="py-3">Section 2.3</p>
+                        <p class="py-3">Post Guard</p>
+                        <table class="w-full border-4">
+                            <tr>
+                                <th class="border-4">Post Specific Location</th>
+                            </tr>
+                            {{-- posts --}}
+                            @php
+                                $numofpost = count($posts);
+                                // echo $numofpost;
+                            @endphp
+                            @foreach ($posts as $post)
+                                <tr>
+                                    <td class="border flex flex-row">
+                                        <span class="w-full underline ">
+                                            {{ $post->place }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    {{-- curr_designations --}}
+                    <div class="pt-6 text-center font-bold text-lg">
+                        <p class="py-3">Section 2.4</p>
+                        <p class="py-3">Assigned Guard</p>
+                        <table class="w-full border-4">
+                            <tr>
+                                <th class="border-4">Guard Name</th>
+                                <th class="border-4">Is_armed</th>
+                                <th class="border-4">Ballistics information</th>
+                            </tr>
+                            @foreach ($curr_designations as $curr_designation)
+                            <tr>
+                                <td class="border flex flex-row">
+                                    <span class="w-full underline ">
+                                        {{ $curr_designation->first_name ." " . $curr_designation->last_name}}
+                                    </span>
+                                </td>
+                                <td class="border flex flex-row">
+                                </td>
+                                
+                            </tr>
 
-
+                            @endforeach
                         </table>
                     </div>
                     <div class="pt-9 text-center font-bold text-lg">
@@ -194,16 +261,16 @@
                         <p class="py-3">Section 5</p>
                         <p class="py-3">Authored By</p>
                     </div>
-                        <div class=" w-full flex justify-center px-12 text-xl">
-                            <h1 class=" underline uppercase font-black ">{{ $contract_info->operations_manager  }}</h1>
-                        </div>
-                        <div class=" w-full flex justify-center px-12">
-                            <p class="">Current Administrator and Operation Manager</p>
-                        </div>
+                    <div class=" w-full flex justify-center px-12 text-xl">
+                        <h1 class=" underline uppercase font-black ">{{ $contract_info->operations_manager }}</h1>
+                    </div>
+                    <div class=" w-full flex justify-center px-12">
+                        <p class="">Current Administrator and Operation Manager</p>
+                    </div>
                     <div class="pt-9 text-center font-bold text-lg">
                         <p class="py-3">Section 6</p>
                         <p class="py-3">Work Schedule</p>
-                        
+
                         {{-- dito ka --}}
 
 
