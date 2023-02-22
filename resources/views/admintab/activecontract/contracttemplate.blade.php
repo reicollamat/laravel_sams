@@ -2,7 +2,6 @@
 @section('content')
 @foreach ($contract_infos as $contract_info)
     
-
     <div class="p-4 sm:ml-64 mt-14">
         <div class="border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -26,14 +25,14 @@
                 <div class="text-center font-bold text-lg">
                     <p class="py-3">Section 1</p>
                     <p class="py-3">Scope of Responsibilities</p>
-                    <p class="py-3">This AGREEMENT is made and entered into the Day of Aug. 10, 2022 by and between <span
-                            class="underline">{{ __(auth()->user()->name) }}</span> and SIKYUrity Agency, effective on Aug.
-                        20, 2022 until Aug. 20, 2028</p>
+                    <p class="py-3">This AGREEMENT is made and entered into the {{ date("F jS, Y", strtotime($contract_info->approved_date)) }} by and between <span
+                            class="underline uppercase">{{ $contract_info->name . " " . $contract_info->last_name }}</span> and  Security Agency Management System (SAMS), effective on <br>
+                            <span class="underline uppercase font-black">{{ date("F jS, Y", strtotime($contract_info->start_date)) }}</span> until <span class="underline uppercase font-black">{{ date("F jS, Y", strtotime($contract_info->end_date)) }} </span></p>
                 </div>
                 <div>
                     <ol class="px-12 list-decimal text-justify">
                         <li class="pt-8 text-sm">
-                            The SIKYUrity Agency. shall furnish security guard(s) at the premises located at the following
+                            The Security Agency. shall furnish security guard(s) at the premises located at the following
                             area of responsibilities ( Section II). The guard(s) will be in uniform and armed, unless stated
                             otherwise. They will provide security to persons and property in the premises. All services
                             shall be performed in accordance with applicable laws and ordinances.
@@ -59,13 +58,46 @@
                         <tr >
                             <th class="border-4">Location</th>
                             <th class="border-4">Address</th>
+                            <th class="border-4">Posts</th>
                             <th class="border-4">Total Number Of Guards</th>
                         </tr>
+                        {{-- posts --}}
+                        @php
+                            $numofpost = count($posts);
+                            // echo $numofpost;
+                        @endphp
                         <tr>
-                            <td class="border">Alfreds Futterkiste</td>
-                            <td class="border">Maria Anders</td>
-                            <td class="border">Germany</td>
+                            <td class="border">{{ $contract_info->locations_name}}</td>
+                            <td class="border">{{ $contract_info->address}}</td>
+                            <td class="border">{{ $numofpost}}</td>
+                            <td class="border">{{ $contract_info->number_of_guards * $numofpost}}</td>
                         </tr>
+                       
+                    </table>
+                </div>
+                <div class="pt-6 text-center font-bold text-lg">
+                    <p class="py-3">Section 2.1</p>
+                    <p class="py-3">Post Locations</p>
+                    <table class="w-full border-4">
+                        <tr >
+                            <th class="border-4">Post Specific Location</th>
+                        </tr>
+                        {{-- posts --}}
+                        @php
+                            $numofpost = count($posts);
+                            // echo $numofpost;
+                        @endphp
+                        @foreach ($posts as $post)
+                        <tr>
+                            <td class="border flex flex-row">
+                                <span class="w-full underline ">
+                                    {{ $post->place}}
+                                </span>
+                            </td>
+                        </tr>
+                        @endforeach
+                        
+                       
                     </table>
                 </div>
                 <div class="pt-9 text-center font-bold text-lg">

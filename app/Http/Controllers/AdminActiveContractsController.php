@@ -52,7 +52,8 @@ class AdminActiveContractsController extends Controller
         // ->wherein('contracts.status',[1,2])
         // ->distinct('contracts.id')
         // ->groupBy('contracts.id')
-        ->where('users.id',$userid)
+        ->where('contracts.id',$contrid)
+
         ->get();
 
         // $loc_id = $contract_info->pluck('contrid');
@@ -69,6 +70,9 @@ class AdminActiveContractsController extends Controller
 
         // $curr_posts = Post::where('location_id',$id)
         // ->with('shift')
+
+
+        
 
 
         $curr_ddo = Ddo::where('id', $ddoid)->get();
