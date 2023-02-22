@@ -26,8 +26,8 @@
                 </table>
             </div>
 
-            <div class="p-4">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 text-center">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <p class="font-normal text-sm text-gray-700 dark:text-gray-600">
                         Requested Start Date :
                     </p>
@@ -51,8 +51,8 @@
                 </div> 
             </div>
 
-            <div class="p-4">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 text-center">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h1 class="text-center p-2 text-2xl font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                         Location
                     </h1>
@@ -73,8 +73,8 @@
                 </div> 
             </div>
 
-            <div class="p-4">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 text-center">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h1 class="text-center p-2 text-2xl font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                         Posts
                     </h1>
@@ -106,8 +106,8 @@
                 </div> 
             </div>
 
-            <div class="p-4">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-4 text-center">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h1 class="text-center p-2 text-2xl font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                         Client's Information
                     </h1>
