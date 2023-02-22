@@ -177,9 +177,8 @@
                 <div class="text-center font-bold text-lg">
                     <p class="py-3">Section 1</p>
                     <p class="py-3">Scope of Responsibilities</p>
-                    <p class="py-3">This AGREEMENT is made and entered into the Day of Aug. 10, 2022 by and between <span
-                            class="underline">{{ __(auth()->user()->name) }}</span> and SIKYUrity Agency, effective on Aug.
-                        20, 2022 until Aug. 20, 2028</p>
+                    <p class="py-3">This AGREEMENT is made and entered into the Day of {{date("F jS, Y", strtotime($contract->issued_date))}} by and between <span
+                            class="underline">{{ $user->name }}</span> and Security Agency, effective on {{date("F jS, Y", strtotime($contract->start_date))}} until {{date("F jS, Y", strtotime($contract->end_date))}}</p>
                 </div>
                 <div>
                     <ol class="px-12 list-decimal text-justify">
