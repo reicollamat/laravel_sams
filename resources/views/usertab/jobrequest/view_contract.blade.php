@@ -1,6 +1,16 @@
 @extends('layouts.masterapp')
 @section('content')
 
+@if ($contract->status == 0)
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <h1 class="text-center text-gray-500 dark:text-gray-400">
+            Please resume and complete job request form
+        </h1>
+    </div>
+</div>
+@endif
+
 {{-- display if status is 1(pending) --}}
 @if ($contract->status == 1)
     <div class="p-4 sm:ml-64">
@@ -141,6 +151,8 @@
     </div>
 @endif
 
+
+{{-- display if status is 2(approved by admin) --}}
 @if ($contract->status == 2)
     <div class="p-4 sm:ml-64 mt-14">
         <div class="border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-7">

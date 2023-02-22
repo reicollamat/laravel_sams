@@ -101,10 +101,10 @@
                             Contract ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Number of Posts
+                            Location
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Number of Guards
+                            Number of Post/s
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -123,24 +123,21 @@
                             </th>
                             <td class="px-6 py-4">
                                 {{-- fetch the number of post from its related models --}}
+                                {{$contract->location->locations_name}}
+                            </td>
+                            <td class="px-6 py-4">
                                 {{count($contract->location->post)}}
                             </td>
                             <td class="px-6 py-4">
-                                {{$contract->number_of_guards}}
-                            </td>
-                            <td class="px-6 py-4">
                                 {{-- display status depending on what status on database --}}
-                                @if ($contract->status == 1)
-                                    {{-- if request is finished --}}
-                                    @if ($contract->is_finished == 0)
-                                        <span class="text-red-600 dark:text-red-500">
-                                            Unfinished Request
-                                        </span>
-                                    @elseif ($contract->is_finished == 1)
-                                        <span class="text-blue-600 dark:text-blue-500">
-                                            Pending Request
-                                        </span>
-                                    @endif
+                                @if ($contract->status == 0)
+                                    <span class="text-red-600 dark:text-red-500">
+                                        Unfinished Request
+                                    </span>
+                                @elseif ($contract->is_finished == 1)
+                                    <span class="text-yellow-300 dark:text-blue-300">
+                                        Pending Request
+                                    </span>
                                 @elseif ($contract->status == 2)
                                     <span class="text-green-600 dark:text-green-500">
                                         Contract Proposed
