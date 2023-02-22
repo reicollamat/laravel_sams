@@ -48,6 +48,7 @@
                             </tr>
                         </thead>
                         @foreach ($all_contracts as $all_contract)
+
                         <tbody>
                             <tr class="bg-white text-md border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row"

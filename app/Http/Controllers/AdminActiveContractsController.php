@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ddo;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,9 +53,18 @@ class AdminActiveContractsController extends Controller
         ->where('users.id',$userid)
         ->get();
 
+        // $curr_loc = 
+
+
         $curr_ddo = Ddo::where('id', $ddoid)->get();
 
-        dd($contract_info->toArray(),$curr_ddo->toArray());
+        $curr_designation = Designation::where('ddo_id', $ddoid)
+        ->join('guards','designations.guard_id','=','guards.id')
+        ->join('firearms','designations.firearm_id','=','firearms.id')
+        ->get();
+
+        dd($contract_info->toArray(),$curr_ddo->toArray(),$curr_designation->toArray());
+
 
 
         return view('admintab.activecontract.contracttemplate', [
