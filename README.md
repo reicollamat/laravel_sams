@@ -1,6 +1,8 @@
-## Commands Used
-- to truncate a database and create the default user
-    - php artisan migrate:refresh --seed
+## To run the Web Application
+- Be sure to download all the prerequisite down below
+- All composer package & npm modules installed are in the composer.json and package.json respectively.
+- First install all requirements by running composer install and npm install inside the directory folder.
+- laravel breeze and backpack are to be configured after, if required so.
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
@@ -29,9 +31,10 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 ## Prerequisites
 
 # Installation Requirement
-- Nodejs (Preferably lts version)
+- Nodejs (Preferably LTS version)
 - Composer 
 - Php (8.1^)
+- Laravel
 
 
 # Breeze
